@@ -1,0 +1,70 @@
+@import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+// *:focus {
+//   outline: none;
+// }
+
+html {
+  font-size: 13px;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+
+.container {
+  padding: 50px;
+}
+
+%button {
+  text-transform: uppercase;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #fff;
+  padding: .7em 1em;
+  background: $primary-color;
+  border: {
+    top: 0;
+    right: 0;
+    bottom: solid 3px $primary-color--darken;
+    left: 0;
+  }
+  border-bottom-width: 3px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &_small {
+    @extend %button;
+    font-size: 1em;
+  }
+
+  &_large {
+    @extend %button;
+    font-size: 1.5em;
+    padding: 1.3em 3.3em;
+  }
+
+  &:hover {
+    background: $accent-color;
+    border-bottom-color: $accent-color--darken;
+  }
+}
+
+
+.button {
+  @extend %button;
+}
+
+.button_small {
+  @extend %button_small;
+}
+
+.button_large {
+  @extend %button_large;
+}
