@@ -14,7 +14,7 @@ html {
   padding: 50px;
 }
 
-.button_small, .button_large, .button {
+.btn {
   text-transform: uppercase;
   font-family: inherit;
   font-weight: 600;
@@ -31,16 +31,52 @@ html {
   cursor: pointer;
 }
 
-.button_small {
+.btn_accent {
+  background: #e8645a;
+  border-bottom-color: #e2534b;
+}
+
+.btn_secondary {
+  background: #98a3a3;
+  border-bottom-color: #7f8c8c;
+}
+
+.btn_small {
   font-size: 1em;
 }
 
-.button_large {
+.btn_large {
   font-size: 1.5em;
   padding: 1.3em 3.3em;
+  border-bottom-width: 4px;
 }
 
-.button_small:hover, .button_large:hover, .button:hover {
+.btn_icon {
+  font-size: 1.2em;
+  padding: .65em 1em .55em;
+}
+
+.btn:hover {
   background: #e8645a;
   border-bottom-color: #e2534b;
+}
+
+.btn:active {
+  background: #e2534b;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.title-h2 {
+  font-size: 2.8em;
+  text-align: center;
+  font-weight: 600;
+  color: #e8645a;
+}
+
+.title-h3 {
+  font-size: 1.23em;
+  color: #98a3a3;
 }

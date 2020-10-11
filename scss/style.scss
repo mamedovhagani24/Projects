@@ -21,7 +21,7 @@ html {
   padding: 50px;
 }
 
-%button {
+.btn {
   text-transform: uppercase;
   font-family: inherit;
   font-weight: 600;
@@ -39,32 +39,56 @@ html {
   border-radius: 4px;
   cursor: pointer;
 
+  &_accent {
+    background: $accent-color;
+    border-bottom-color: $accent-color--darken;
+  }
+
+  &_secondary {
+    background: $secondary-color;
+    border-bottom-color: $secondary-color--darken;
+  }
+
   &_small {
-    @extend %button;
     font-size: 1em;
   }
 
   &_large {
-    @extend %button;
     font-size: 1.5em;
     padding: 1.3em 3.3em;
+    border-bottom-width: 4px;
+  }
+
+  &_icon {
+    // line-height: 0.1;
+    font-size: 1.2em;
+    padding: .65em 1em .55em;
+
   }
 
   &:hover {
     background: $accent-color;
     border-bottom-color: $accent-color--darken;
   }
+
+  &:active {
+    background: $accent-color--darken;
+  }
+
+  &:focus {
+    outline: 0;
+  }
 }
 
-
-.button {
-  @extend %button;
-}
-
-.button_small {
-  @extend %button_small;
-}
-
-.button_large {
-  @extend %button_large;
+.title {
+  &-h2 {
+    font-size: 2.8em;
+    text-align: center;
+    font-weight: 600;
+    color: $accent-color;
+  }
+  &-h3 {
+    font-size: 1.23em;
+    color: $secondary-color;
+  }
 }
