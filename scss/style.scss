@@ -17,6 +17,11 @@ html {
 }
 
 
+/* 
+  используется в template.html
+  можно потом убрать
+*/
+
 .container {
   padding: 50px;
 }
@@ -84,6 +89,10 @@ html {
   }
 }
 
+/* 
+  используется в template.html
+  можно потом убрать
+*/
 .primary-wrapp {
   background: $primary-color;
 }
@@ -97,6 +106,6 @@ html {
   }
   &-h3 {
     font-size: 1.23em;
-    color: $secondary-color;
+    color: $secondary-color--darken;
   }
 }
