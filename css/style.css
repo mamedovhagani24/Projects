@@ -51,6 +51,12 @@ html {
   border-bottom-width: 4px;
 }
 
+.btn_link {
+  background: none;
+  border: none;
+  text-decoration: none;
+}
+
 .btn_icon {
   font-size: 1.2em;
   padding: .65em 1em .55em;
@@ -67,6 +73,10 @@ html {
 
 .btn:focus {
   outline: 0;
+}
+
+.primary-wrapp {
+  background: #76c7c0;
 }
 
 .title-h2 {

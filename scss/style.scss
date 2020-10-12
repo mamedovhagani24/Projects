@@ -59,11 +59,15 @@ html {
     border-bottom-width: 4px;
   }
 
+  &_link {
+    background: none;
+    border: none;
+    text-decoration: none;
+  }
+
   &_icon {
-    // line-height: 0.1;
     font-size: 1.2em;
     padding: .65em 1em .55em;
-
   }
 
   &:hover {
@@ -78,6 +82,10 @@ html {
   &:focus {
     outline: 0;
   }
+}
+
+.primary-wrapp {
+  background: $primary-color;
 }
 
 .title {
