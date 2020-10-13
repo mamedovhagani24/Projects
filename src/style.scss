@@ -109,3 +109,7 @@ html {
     color: $secondary-color--darken;
   }
 }
+
+// Подключать стили компонентов тут 
+
+@import 'components/slider/slider';
