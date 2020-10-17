@@ -1,22 +1,19 @@
 {
-  "name": "modus_versus",
+  "name": "ejs123",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "scss": "node-sass --watch scss -o css --output-style=expanded"
+    "dev": "watch --interval=1 \"npm run ejs & npm run sass\" src/",
+    "ejs": "ejs-cli --base-dir src/ \"**/*.ejs\" -e src/components --out public/",
+    "sass": "sass src/style.scss:public/css/style.css"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mamedovhagani24/Projects.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mamedovhagani24/Projects/issues"
-  },
-  "homepage": "https://github.com/mamedovhagani24/Projects#readme",
   "devDependencies": {
-    "node-sass": "^4.14.1"
+    "ejs-cli": "^2.2.1",
+    "sass": "^1.27.0",
+    "watch": "^1.0.2"
   }
 }

@@ -1,3 +1,6 @@
+<%
+    const _COMP = (arg) => 'components/'+arg+'/'+arg;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +13,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+<%- include(_COMP('slider')); %>
+
 </body>
 </html>

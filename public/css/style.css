@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +11,10 @@ html {
   font-family: "Open Sans", sans-serif;
 }
 
+/* 
+  используется в template.html
+  можно потом убрать
+*/
 .container {
   padding: 50px;
 }
@@ -20,7 +25,7 @@ html {
   font-weight: 600;
   font-size: 1.1em;
   color: #fff;
-  padding: .7em 1em;
+  padding: 0.7em 1em;
   background: #76c7c0;
   border-top: 0;
   border-right: 0;
@@ -30,51 +35,46 @@ html {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .btn_accent {
   background: #e8645a;
   border-bottom-color: #e2534b;
 }
-
 .btn_secondary {
   background: #98a3a3;
   border-bottom-color: #7f8c8c;
 }
-
 .btn_small {
   font-size: 1em;
 }
-
 .btn_large {
   font-size: 1.5em;
   padding: 1.3em 3.3em;
   border-bottom-width: 4px;
 }
-
 .btn_link {
   background: none;
   border: none;
   text-decoration: none;
 }
-
 .btn_icon {
   font-size: 1.2em;
-  padding: .65em 1em .55em;
+  padding: 0.65em 1em 0.55em;
 }
-
 .btn:hover {
   background: #e8645a;
   border-bottom-color: #e2534b;
 }
-
 .btn:active {
   background: #e2534b;
 }
-
 .btn:focus {
   outline: 0;
 }
 
+/* 
+  используется в template.html
+  можно потом убрать
+*/
 .primary-wrapp {
   background: #76c7c0;
 }
@@ -85,8 +85,34 @@ html {
   font-weight: 600;
   color: #e8645a;
 }
-
 .title-h3 {
   font-size: 1.23em;
-  color: #98a3a3;
+  color: #7f8c8c;
 }
+
+.slider {
+  display: block;
+}
+.slider__front, .slider__back {
+  height: 500px;
+}
+.slider__front {
+  margin-bottom: -500px;
+  display: flex;
+  justify-content: space-between;
+}
+.slider__info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.slider__title {
+  font-size: 3.85em;
+}
+.slider__images {
+  height: inherit;
+  background: #7f8c8c;
+}
+
+/*# sourceMappingURL=style.css.map */
