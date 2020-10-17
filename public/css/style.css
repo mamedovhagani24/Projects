@@ -93,5 +93,26 @@ html {
 .slider {
   display: block;
 }
+.slider__front, .slider__back {
+  height: 500px;
+}
+.slider__front {
+  margin-bottom: -500px;
+  display: flex;
+  justify-content: space-between;
+}
+.slider__info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.slider__title {
+  font-size: 3.85em;
+}
+.slider__images {
+  height: inherit;
+  background: #7f8c8c;
+}
 
 /*# sourceMappingURL=style.css.map */

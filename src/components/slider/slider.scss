@@ -1,3 +1,34 @@
+@import "../../variables";
+
+$slider-height: 500px;
+
 .slider {
-    display: block;
+  display: block;
+
+  &__front,
+  &__back {
+    height: $slider-height;
+  }
+
+  &__front {
+    margin-bottom: -$slider-height;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 3.85em;
+  }
+
+  &__images {
+    height: inherit;
+    background: $secondary-color--darken;
+  }
 }
