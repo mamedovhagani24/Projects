@@ -94,7 +94,7 @@ html {
   height: 500px;
 }
 
-.slider__front {
+.slider__bottom-controls, .slider__front {
   display: flex;
 }
 
@@ -147,6 +147,20 @@ html {
   padding-left: 0.4em;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+}
+.slider__bottom-controls {
+  justify-content: center;
+  padding: 1.5em;
+}
+.slider__control-item {
+  cursor: pointer;
+  width: 60px;
+  height: 5px;
+  margin: 0 5px;
+  background: #b0b8b9;
+}
+.slider__control-item_active {
+  background: #e8645a;
 }
 .slider__btn {
   font-size: 3em;
