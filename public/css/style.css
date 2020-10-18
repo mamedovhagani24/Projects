@@ -16,7 +16,8 @@ html {
   можно потом убрать
 */
 .container {
-  padding: 50px;
+  width: 1170px;
+  margin: 0 auto;
 }
 
 .btn {
@@ -113,6 +114,84 @@ html {
 .slider__images {
   height: inherit;
   background: #7f8c8c;
+}
+
+.services {
+  background-color: #f3f3f3;
+  padding: 20px 0 75px;
+}
+.services__top {
+  background: #ececec;
+  border-radius: 7px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.services__top .title-h3 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.services__top .description {
+  color: #777777;
+}
+.services__top .btn {
+  padding: 15px 45px;
+}
+.services__top .btn:hover {
+  background-color: #e2534b;
+  transition: all 0.3s;
+}
+.services__items-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.services__item {
+  background: #f8f8f8;
+  padding: 50px 25px;
+  text-align: center;
+  width: 270px;
+  height: 310px;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: solid 3px #e5e6e6;
+  border-left: 0;
+  border-bottom-width: 3px;
+  border-radius: 7px;
+  position: relative;
+}
+.services__item .icon {
+  font-size: 60px;
+  color: #76c7c0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.services__item:hover {
+  background: #fff;
+}
+.services__item:hover .icon {
+  color: #e8645a;
+}
+.services__item .title-h3 {
+  text-transform: uppercase;
+  margin-bottom: 35px;
+  color: #777777;
+  text-align: center;
+}
+.services__item .description {
+  line-height: 21px;
+  color: #777777;
+}
+.services__item .btn {
+  text-transform: lowercase;
+  padding: 15px 65px;
+  font-size: 14px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
 }
 
 /*# sourceMappingURL=style.css.map */

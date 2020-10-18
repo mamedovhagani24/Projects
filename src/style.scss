@@ -23,7 +23,8 @@ html {
 */
 
 .container {
-  padding: 50px;
+  width: 1170px;
+  margin: 0 auto;
 }
 
 .btn {
@@ -113,3 +114,4 @@ html {
 // Подключать стили компонентов тут 
 
 @import 'components/slider/slider';
+@import 'components/services/services';
