@@ -16,7 +16,8 @@ html {
   можно потом убрать
 */
 .container {
-  padding: 50px;
+  width: 1170px;
+  margin: 0 auto;
 }
 
 .btn {
@@ -167,6 +168,67 @@ html {
   padding: 0.3em;
   line-height: 0;
   border-radius: 5px;
+}
+
+.images {
+  background: #ececec url(../../src/img/Path.png) center top repeat-x;
+  height: 400px;
+  padding-top: 70px;
+}
+.images__inner .title-h2 {
+  color: #e1524b;
+}
+.images__inner .description {
+  text-align: center;
+}
+.images__wrapper {
+  position: relative;
+}
+.images__wrapper .img_lit {
+  display: flex;
+  justify-content: space-between;
+}
+.images__wrapper .img_lit .img {
+  background: url(../../src/img/mask.png);
+  width: 370px;
+  height: 259px;
+  padding: 40px 5px 5px;
+  transform: translateY(50%);
+  margin-bottom: 100px;
+}
+.images__wrapper .img_lit .img__wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 360px;
+  height: 213px;
+}
+.images__wrapper .img_lit .img__wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.images__wrapper .img_big {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+.images__wrapper .img_big .img {
+  background: url(../../src/img/bigmask.png);
+  width: 570px;
+  height: 360px;
+  padding: 44px 5px 5px;
+}
+.images__wrapper .img_big .img__wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 560px;
+  height: 310px;
+}
+.images__wrapper .img_big .img__wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=style.css.map */
