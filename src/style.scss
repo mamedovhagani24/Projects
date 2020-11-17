@@ -16,7 +16,14 @@ html {
   font-family: "Open Sans", sans-serif;
 }
 
+body {
+  background-color: #f3f3f3;
+}
 
+
+a {
+  color: $accent-color;
+}
 /* 
   используется в template.html
   можно потом убрать
@@ -111,7 +118,40 @@ html {
   }
 }
 
+$col-padding: 15px;
+
+%col-paddings {
+  padding: {
+    left: $col-padding;
+    right: $col-padding;
+  };
+}
+
+.row {
+  display: flex;
+  justify-content: sp;
+  margin: {
+    left: -$col-padding;
+    right: -$col-padding;
+  };
+
+  &__col {
+    @extend %col-paddings;
+    flex-grow: 1;
+  }
+
+  &__col-3 {
+    @extend %col-paddings;
+    width: 25%;
+  }
+  &__col-6 {
+    @extend %col-paddings;
+    width: 50%;
+  }
+}
+
 // Подключать стили компонентов тут 
 
 @import 'components/slider/slider';
 @import 'components/images_section/images_section';
+@import 'components/about_us/about_us';

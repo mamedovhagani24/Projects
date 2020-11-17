@@ -1,0 +1,82 @@
+.about-us {
+  color: $text-color--grey;
+
+  &__col-title {
+    margin-bottom: 1.5em;
+  }
+
+  &__list {
+    list-style: none;
+    line-height: 2em;
+
+    &-item::before {
+      content: "\f061";
+      color: $accent-color;
+      font-family: FontAwesome;
+      display: inline-block;
+      width: 1.3em;
+    }
+  }
+
+  &__p {
+    padding: 0 1.65em;
+  }
+
+  &__counter {
+    padding-top: 3em;
+
+    &-img {
+      height: 60px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    &-num {
+      display: block;
+      text-align: center;
+      font-size: 2em;
+      font-weight: 900;
+      margin-top: -32px;
+    }
+
+    &-sub-t {
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  &__circle {
+    width: 100%;
+
+    &_50 {
+      transform: rotate(90deg);
+    }
+
+    &_70 {
+      transform: rotate(130deg);
+    }
+
+    &_80 {
+      transform: rotate(150deg);
+    }
+
+    &_100 {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.blockquote {
+  &__text {
+    font-style: italic;
+    padding: 0 1.65em 1.5em;
+  }
+
+  &__author {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+}
