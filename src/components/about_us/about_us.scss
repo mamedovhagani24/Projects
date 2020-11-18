@@ -1,6 +1,10 @@
 .about-us {
   color: $text-color--grey;
 
+  &__row-padding  {
+    padding-bottom: 3em;
+  }
+
   &__col-title {
     margin-bottom: 1.5em;
   }
@@ -19,7 +23,7 @@
   }
 
   &__p {
-    padding: 0 1.65em;
+    padding: 0 1.4em;
   }
 
   &__counter {
@@ -64,12 +68,64 @@
       transform: rotate(180deg);
     }
   }
+
+  &__slider-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__slider-card {
+    padding: 2.3em;
+    background: #f8f8f8;
+    border-radius: 4px;
+  }
+  &__title-wrapp {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+  }
+  &__line-wrapp {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  $line-color: #e1e2e2;
+  &__line {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: $line-color;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: $line-color;
+      left: 0;
+      top: -3px;
+    }
+  }
+
+  &__nav-wrapp {
+    min-width: 115px;
+    padding-left: 15px;
+
+    .btn:last-child {
+      margin-left: 15px;
+    }
+  }
+
 }
 
 .blockquote {
   &__text {
     font-style: italic;
-    padding: 0 1.65em 1.5em;
+    padding: 0 1.4em 1.5em;
   }
 
   &__author {

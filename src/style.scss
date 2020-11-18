@@ -62,16 +62,6 @@ a {
     border-bottom-color: $secondary-color--darken;
   }
 
-  &_small {
-    font-size: 1em;
-  }
-
-  &_large {
-    font-size: 1.5em;
-    padding: 1.3em 3.3em;
-    border-bottom-width: 4px;
-  }
-
   &_link {
     background: none;
     border: none;
@@ -81,6 +71,16 @@ a {
   &_icon {
     font-size: 1.2em;
     padding: .65em 1em .55em;
+  }
+
+  &_small {
+    font-size: 1em;
+  }
+
+  &_large {
+    font-size: 1.5em;
+    padding: 1.3em 3.3em;
+    border-bottom-width: 4px;
   }
 
   &:hover {
@@ -139,11 +139,16 @@ $col-padding: 15px;
     @extend %col-paddings;
     flex-grow: 1;
   }
+  &__col-2 {
+    @extend %col-paddings;
+    width: 16.67%;
+  }
 
   &__col-3 {
     @extend %col-paddings;
     width: 25%;
   }
+  
   &__col-6 {
     @extend %col-paddings;
     width: 50%;

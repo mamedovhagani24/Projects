@@ -52,14 +52,6 @@ a {
   background: #98a3a3;
   border-bottom-color: #7f8c8c;
 }
-.btn_small {
-  font-size: 1em;
-}
-.btn_large {
-  font-size: 1.5em;
-  padding: 1.3em 3.3em;
-  border-bottom-width: 4px;
-}
 .btn_link {
   background: none;
   border: none;
@@ -68,6 +60,14 @@ a {
 .btn_icon {
   font-size: 1.2em;
   padding: 0.65em 1em 0.55em;
+}
+.btn_small {
+  font-size: 1em;
+}
+.btn_large {
+  font-size: 1.5em;
+  padding: 1.3em 3.3em;
+  border-bottom-width: 4px;
 }
 .btn:hover {
   background: #e8645a;
@@ -99,7 +99,7 @@ a {
   color: #7f8c8c;
 }
 
-.row__col-6, .row__col-3, .row__col {
+.row__col-6, .row__col-3, .row__col-2, .row__col {
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -112,6 +112,9 @@ a {
 }
 .row__col {
   flex-grow: 1;
+}
+.row__col-2 {
+  width: 16.67%;
 }
 .row__col-3 {
   width: 25%;
@@ -262,6 +265,9 @@ a {
 .about-us {
   color: #777777;
 }
+.about-us__row-padding {
+  padding-bottom: 3em;
+}
 .about-us__col-title {
   margin-bottom: 1.5em;
 }
@@ -277,7 +283,7 @@ a {
   width: 1.3em;
 }
 .about-us__p {
-  padding: 0 1.65em;
+  padding: 0 1.4em;
 }
 .about-us__counter {
   padding-top: 3em;
@@ -313,10 +319,55 @@ a {
 .about-us__circle_100 {
   transform: rotate(180deg);
 }
+.about-us__slider-header {
+  display: flex;
+  justify-content: space-between;
+}
+.about-us__slider-card {
+  padding: 2.3em;
+  background: #f8f8f8;
+  border-radius: 4px;
+}
+.about-us__title-wrapp {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-us__line-wrapp {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-us__line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: #e1e2e2;
+}
+.about-us__line::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #e1e2e2;
+  left: 0;
+  top: -3px;
+}
+.about-us__nav-wrapp {
+  min-width: 115px;
+  padding-left: 15px;
+}
+.about-us__nav-wrapp .btn:last-child {
+  margin-left: 15px;
+}
 
 .blockquote__text {
   font-style: italic;
-  padding: 0 1.65em 1.5em;
+  padding: 0 1.4em 1.5em;
 }
 .blockquote__author {
   display: inline-block;
