@@ -148,10 +148,20 @@ $col-padding: 15px;
     @extend %col-paddings;
     width: 25%;
   }
+
+  &__col-4 {
+    @extend %col-paddings;
+    width: 33.33%;
+  }
   
   &__col-6 {
     @extend %col-paddings;
     width: 50%;
+  }
+
+  &__col-9 {
+    @extend %col-paddings;
+    width: 75%;
   }
 }
 
@@ -159,4 +169,4 @@ $col-padding: 15px;
 
 @import 'components/slider/slider';
 @import 'components/images_section/images_section';
-@import 'components/about_us/about_us';
+@import 'components/footer/footer';
