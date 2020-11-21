@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^(.*)$ https://mamedovhagani24.github.io/Projects/public/$1 [L,QSA]
+RewriteRule ^(.*)$ /public/$1 [L,QSA]
