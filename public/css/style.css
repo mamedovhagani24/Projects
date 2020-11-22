@@ -266,6 +266,14 @@ a {
 .about-us {
   color: #777777;
 }
+.about-us__counters-row, .about-us__row-padding {
+  flex-wrap: nowrap;
+}
+@media screen and (max-width: 1024px) {
+  .about-us__counters-row, .about-us__row-padding {
+    flex-wrap: wrap;
+  }
+}
 .about-us__row-padding {
   padding-bottom: 3em;
 }
