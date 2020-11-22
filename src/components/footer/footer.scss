@@ -4,9 +4,12 @@ $base-padding: 20px;
   background: url("../img/ruller.png") repeat-x, $primary-color;
   color: #fff;
   line-height: 1.8em;
-  
+
   &__container {
-    padding: $base-padding + 20 0;
+    padding: {
+      top: $base-padding + 20;
+      bottom: $base-padding + 20;
+    }
   }
 
   &__logo {
@@ -67,11 +70,18 @@ $base-padding: 20px;
       div:first-child {
         padding-right: 0;
       }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     &-img {
       text-align: center;
-      padding: 26px 0;
+      padding: {
+        top: 25%;
+        bottom: 25%;
+      }
       font-size: 2.5em;
       color: rgba(255, 255, 255, 0.5);
       background-color: #5e9f9a;
@@ -90,7 +100,7 @@ $base-padding: 20px;
 
   &__wrapp {
     display: flex;
-    justify-content: space-between;  
+    justify-content: space-between;
     line-height: 20px;
   }
 
@@ -99,6 +109,34 @@ $base-padding: 20px;
 
     &-link {
       margin-left: 15px;
+    }
+  }
+
+  @media screen and (max-width: $media-window--tablet) {
+    &__col-1 {
+      order: 0;
+      width: 50%;
+    }
+    &__col-2 {
+      order: 2;
+      width: 50%;
+    }
+    &__col-3 {
+      order: 3;
+      width: 50%;
+    }
+    &__col-4 {
+      order: 1;
+      width: 50%;
+    }
+  }
+  @media screen and (max-width: $media-window--mobile-L) {
+    &__col-1,
+    &__col-2,
+    &__col-3,
+    &__col-4 {
+      width: 100%;
+      padding-bottom: 25px;
     }
   }
 

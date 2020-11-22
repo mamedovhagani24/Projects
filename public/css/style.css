@@ -24,7 +24,9 @@ a {
   можно потом убрать
 */
 .container {
-  width: 1170px;
+  max-width: 1170px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin: 0 auto;
 }
 
@@ -106,7 +108,8 @@ a {
 
 .row {
   display: flex;
-  justify-content: sp;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-left: -15px;
   margin-right: -15px;
 }
@@ -274,7 +277,8 @@ a {
   line-height: 1.8em;
 }
 .footer__container {
-  padding: 40px 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 .footer__logo, .footer__title {
   margin-bottom: 20px;
@@ -323,9 +327,13 @@ a {
 .footer__blog-row div:first-child {
   padding-right: 0;
 }
+.footer__blog-row:last-child {
+  margin-bottom: 0;
+}
 .footer__blog-img {
   text-align: center;
-  padding: 26px 0;
+  padding-top: 25%;
+  padding-bottom: 25%;
   font-size: 2.5em;
   color: rgba(255, 255, 255, 0.5);
   background-color: #5e9f9a;
@@ -348,6 +356,30 @@ a {
 }
 .footer__socials-link {
   margin-left: 15px;
+}
+@media screen and (max-width: 768px) {
+  .footer__col-1 {
+    order: 0;
+    width: 50%;
+  }
+  .footer__col-2 {
+    order: 2;
+    width: 50%;
+  }
+  .footer__col-3 {
+    order: 3;
+    width: 50%;
+  }
+  .footer__col-4 {
+    order: 1;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .footer__col-1, .footer__col-2, .footer__col-3, .footer__col-4 {
+    width: 100%;
+    padding-bottom: 25px;
+  }
 }
 .footer a {
   color: inherit;
