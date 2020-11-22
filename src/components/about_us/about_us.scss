@@ -1,12 +1,17 @@
 .about-us {
   color: $text-color--grey;
 
+  &__counters-row {
+    flex-wrap: nowrap;
+  }
+
   &__row-padding {
+    @extend .about-us__counters-row;
     padding-bottom: 3em;
   }
 
   &__middle-col .row {
-    @media screen and (max-width: $media-window--laptop){      
+    @media screen and (max-width: $media-window--laptop) {
       & .row__col-4 {
         width: 50%;
       }
@@ -33,7 +38,7 @@
   &__p {
     padding: 0 1.4em;
   }
-
+  
   &__counter {
     padding-top: 3em;
 
@@ -82,12 +87,14 @@
     &-img {
       width: 100%;
     }
+
     &-header {
       display: flex;
       justify-content: space-between;
     }
+
     &-body {
-      @media screen and (max-width: $media-window--tablet){
+      @media screen and (max-width: $media-window--tablet) {
         .row__col-2 {
           width: 33.33%;
         }
@@ -96,6 +103,7 @@
         }
       }
     }
+
     &-card {
       padding: 2.3em;
       background: #f8f8f8;
@@ -146,7 +154,7 @@
     }
   }
 
-  @media screen and (max-width: $media-window--mobile-L){
+  @media screen and (max-width: $media-window--mobile-L) {
     .row__col-3,
     .row__col-6 {
       padding-bottom: 30px;
