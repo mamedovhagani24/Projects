@@ -3,6 +3,10 @@
 
   &__counters-row {
     flex-wrap: nowrap;
+
+    @media screen and (max-width: $media-window--laptop) {
+      flex-wrap: wrap;
+    }
   }
 
   &__row-padding {
