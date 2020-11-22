@@ -478,6 +478,9 @@ a {
   margin-bottom: 20px;
   flex-wrap: nowrapp;
 }
+.footer__blog-row div:first-child {
+  padding-right: 0;
+}
 .footer__blog-row:last-child {
   margin-bottom: 0;
 }
