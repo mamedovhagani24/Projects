@@ -21,8 +21,9 @@ a {
 
 .container {
   max-width: 1170px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin: 0 auto;
-  padding: 15px;
 }
 
 .btn {
@@ -96,7 +97,7 @@ a {
   color: #7f8c8c;
 }
 
-.row__col-6, .row__col-4, .row__col-3, .row__col-2, .row__col {
+.row__col-9, .row__col-6, .row__col-4, .row__col-3, .row__col-2, .row__col {
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -122,6 +123,9 @@ a {
 }
 .row__col-6 {
   width: 50%;
+}
+.row__col-9 {
+  width: 75%;
 }
 
 .slider__back, .slider__front {

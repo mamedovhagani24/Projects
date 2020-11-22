@@ -23,8 +23,11 @@ a {
 
 .container {
   max-width: 1170px;
+  padding: {
+    left: 15px;
+    right: 15px;
+  }
   margin: 0 auto;
-  padding: 15px;
 }
 
 .btn {
@@ -133,7 +136,6 @@ $col-padding: 15px;
     @extend %col-paddings;
     flex-grow: 1;
   }
-
   &__col-2 {
     @extend %col-paddings;
     width: 16.67%;
@@ -152,6 +154,11 @@ $col-padding: 15px;
   &__col-6 {
     @extend %col-paddings;
     width: 50%;
+  }
+
+  &__col-9 {
+    @extend %col-paddings;
+    width: 75%;
   }
 }
 
