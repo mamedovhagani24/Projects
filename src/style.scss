@@ -25,10 +25,6 @@ a {
   max-width: 1170px;
   margin: 0 auto;
   padding: 15px;
-
-  // @media screen and (max-width: 1170px){
-  //   width: 100%;
-  // }
 }
 
 .btn {
@@ -162,3 +158,4 @@ $col-padding: 15px;
 // Подключать стили компонентов тут 
 
 @import 'components/slider/slider';
+@import 'components/images_section/images_section';
