@@ -1,0 +1,72 @@
+.images {
+    background: #ececec url(../../src/img/Path.png) center top repeat-x;
+    height: 400px;
+    padding-top: 70px;
+    
+
+    &__inner {
+        .title-h2 {
+            color: #e1524b;
+        }
+    
+        .description {
+            text-align: center;
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        .img_lit {
+            display: flex;
+            justify-content: space-between;
+            
+            .img {
+                background: url(../../src/img/mask.png);
+                width: 370px;
+                height: 259px;
+                padding: 40px 5px 5px;
+                transform: translateY(50%);
+                margin-bottom: 100px;
+                
+                &__wrapper {
+                    border-radius: 10px;
+                    overflow: hidden;
+                    width: 360px;
+                    height: 213px;
+    
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+
+        .img_big {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 20%);
+            .img {
+                background: url(../../src/img/bigmask.png);
+                width: 570px;
+                height: 360px;
+                padding: 44px 5px 5px;
+                
+                &__wrapper {
+                    border-radius: 10px;
+                    overflow: hidden;
+                    width: 560px;
+                    height: 310px;
+    
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }    
+            }
+        }   
+    }
+}
