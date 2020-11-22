@@ -417,4 +417,119 @@ a {
   font-size: 1.2em;
 }
 
+.footer {
+  background: url("../img/ruller.png") repeat-x, #76c7c0;
+  color: #fff;
+  line-height: 1.8em;
+}
+.footer__container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.footer__logo, .footer__title {
+  margin-bottom: 20px;
+  line-height: 20px;
+  font-size: 2em;
+}
+.footer__p {
+  padding-bottom: 20px;
+}
+.footer__contact {
+  display: block;
+}
+.footer__contact_big {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+.footer__title {
+  font-size: 1.5em;
+  color: #4b7e79;
+}
+.footer__title_italic {
+  color: white;
+  font-style: italic;
+  font-weight: normal;
+}
+.footer__title_italic span {
+  font-style: normal;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.footer__list {
+  list-style: none;
+  padding-left: 25px;
+}
+.footer__list-item::before {
+  content: "";
+  font-family: FontAwesome;
+  display: inline-block;
+  width: 1.3em;
+}
+.footer__blog-row {
+  margin-bottom: 20px;
+}
+.footer__blog-row div:first-child {
+  padding-right: 0;
+}
+.footer__blog-row:last-child {
+  margin-bottom: 0;
+}
+.footer__blog-img {
+  text-align: center;
+  padding-top: 25%;
+  padding-bottom: 25%;
+  font-size: 2.5em;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #5e9f9a;
+  border-radius: 4px;
+}
+.footer__blog-date {
+  color: rgba(0, 0, 0, 0.5);
+}
+.footer__footer {
+  padding: 20px;
+  background: #62b9b0;
+}
+.footer__wrapp {
+  display: flex;
+  justify-content: space-between;
+  line-height: 20px;
+}
+.footer__socials {
+  font-size: 2em;
+}
+.footer__socials-link {
+  margin-left: 15px;
+}
+@media screen and (max-width: 768px) {
+  .footer__col-1 {
+    order: 0;
+    width: 50%;
+  }
+  .footer__col-2 {
+    order: 2;
+    width: 50%;
+  }
+  .footer__col-3 {
+    order: 3;
+    width: 50%;
+  }
+  .footer__col-4 {
+    order: 1;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .footer__col-1, .footer__col-2, .footer__col-3, .footer__col-4 {
+    width: 100%;
+    padding-bottom: 25px;
+  }
+}
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=style.css.map */
