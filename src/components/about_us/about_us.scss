@@ -99,13 +99,21 @@
 
     &-body {
       @media screen and (max-width: $media-window--laptop) {
-        .row__col-2:last-child {
-          display: none;
+        .row__col-2{
+          width:25%;
+
+          &:nth-child(n+5) {
+            display: none;
+          }
         }
       }
       @media screen and (max-width: $media-window--tablet) {
         .row__col-2 {
           width: 33.33%;
+          
+          &:nth-child(n+5) {
+            display: block;
+          }
         }
         .row__col-2:nth-child(even) {
           display: none;
