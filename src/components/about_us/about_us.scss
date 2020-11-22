@@ -89,7 +89,11 @@
 
   &__slider {
     &-img {
-      width: 100%;
+      width: 70%;
+
+      @media screen and (max-width: $media-window--tablet) {
+        width: 80%;
+      }
     }
 
     &-header {
@@ -110,6 +114,7 @@
       @media screen and (max-width: $media-window--tablet) {
         .row__col-2 {
           width: 33.33%;
+
           &:nth-child(n+5) {
             display: block;
           }
@@ -121,7 +126,8 @@
     }
 
     &-card {
-      padding: 2.3em;
+      padding: 2.3em 0;
+      text-align: center;
       background: #f8f8f8;
       border-radius: 4px;
     }

@@ -335,7 +335,12 @@ a {
   transform: rotate(180deg);
 }
 .about-us__slider-img {
-  width: 100%;
+  width: 70%;
+}
+@media screen and (max-width: 768px) {
+  .about-us__slider-img {
+    width: 80%;
+  }
 }
 .about-us__slider-header {
   display: flex;
@@ -361,7 +366,8 @@ a {
   }
 }
 .about-us__slider-card {
-  padding: 2.3em;
+  padding: 2.3em 0;
+  text-align: center;
   background: #f8f8f8;
   border-radius: 4px;
 }
