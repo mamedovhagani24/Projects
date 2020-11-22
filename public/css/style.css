@@ -341,9 +341,20 @@ a {
   display: flex;
   justify-content: space-between;
 }
+@media screen and (max-width: 1024px) {
+  .about-us__slider-body .row__col-2 {
+    width: 25%;
+  }
+  .about-us__slider-body .row__col-2:nth-child(n+5) {
+    display: none;
+  }
+}
 @media screen and (max-width: 768px) {
   .about-us__slider-body .row__col-2 {
     width: 33.33%;
+  }
+  .about-us__slider-body .row__col-2:nth-child(n+5) {
+    display: block;
   }
   .about-us__slider-body .row__col-2:nth-child(even) {
     display: none;
