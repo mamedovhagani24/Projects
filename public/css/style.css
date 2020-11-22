@@ -278,4 +278,143 @@ a {
   object-fit: cover;
 }
 
+.about-us {
+  color: #777777;
+}
+.about-us__row-padding {
+  padding-bottom: 3em;
+}
+@media screen and (max-width: 1024px) {
+  .about-us__middle-col .row .row__col-4 {
+    width: 50%;
+  }
+}
+.about-us__col-title {
+  margin-bottom: 1.5em;
+}
+.about-us__list {
+  list-style: none;
+  line-height: 2em;
+}
+.about-us__list-item::before {
+  content: "";
+  color: #e8645a;
+  font-family: FontAwesome;
+  display: inline-block;
+  width: 1.3em;
+}
+.about-us__p {
+  padding: 0 1.4em;
+}
+.about-us__counter {
+  padding-top: 3em;
+}
+.about-us__counter-img {
+  height: 0;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 50%;
+}
+.about-us__counter-num {
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 900;
+  margin-top: -32px;
+}
+.about-us__counter-sub-t {
+  text-align: center;
+  text-transform: uppercase;
+}
+.about-us__circle {
+  width: 100%;
+}
+.about-us__circle_50 {
+  transform: rotate(90deg);
+}
+.about-us__circle_70 {
+  transform: rotate(130deg);
+}
+.about-us__circle_80 {
+  transform: rotate(150deg);
+}
+.about-us__circle_100 {
+  transform: rotate(180deg);
+}
+.about-us__slider-img {
+  width: 100%;
+}
+.about-us__slider-header {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .about-us__slider-body .row__col-2 {
+    width: 33.33%;
+  }
+  .about-us__slider-body .row__col-2:nth-child(even) {
+    display: none;
+  }
+}
+.about-us__slider-card {
+  padding: 2.3em;
+  background: #f8f8f8;
+  border-radius: 4px;
+}
+.about-us__title-wrapp {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-us__line-wrapp {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-us__line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: #e1e2e2;
+}
+.about-us__line::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #e1e2e2;
+  left: 0;
+  top: -3px;
+}
+.about-us__nav-wrapp {
+  min-width: 115px;
+  padding-left: 15px;
+}
+.about-us__nav-wrapp .btn:last-child {
+  margin-left: 15px;
+}
+@media screen and (max-width: 425px) {
+  .about-us .row__col-3,
+.about-us .row__col-6 {
+    padding-bottom: 30px;
+    width: 100%;
+  }
+}
+
+.blockquote__text {
+  font-style: italic;
+  padding: 0 1.4em 1.5em;
+}
+.blockquote__author {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 /*# sourceMappingURL=style.css.map */
