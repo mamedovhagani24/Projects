@@ -66,10 +66,7 @@ $base-padding: 20px;
   &__blog {
     &-row {
       margin-bottom: 20px;
-
-      div:first-child {
-        padding-right: 0;
-      }
+      flex-wrap: nowrapp;
 
       &:last-child {
         margin-bottom: 0;
