@@ -358,21 +358,21 @@ a {
   margin-left: 15px;
 }
 @media screen and (max-width: 768px) {
+  .footer__col-1, .footer__col-2, .footer__col-3, .footer__col-4 {
+    width: 50%;
+    padding-bottom: 25px;
+  }
   .footer__col-1 {
     order: 0;
-    width: 50%;
   }
   .footer__col-2 {
     order: 2;
-    width: 50%;
   }
   .footer__col-3 {
     order: 3;
-    width: 50%;
   }
   .footer__col-4 {
     order: 1;
-    width: 50%;
   }
 }
 @media screen and (max-width: 425px) {
