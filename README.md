@@ -49,8 +49,8 @@ ejs:
 const emails = ['123@gmail.com','456@gmail.com','789@gmail.com','101@gmail.com'];
 %>
 <ul>
-    <% for (var i = 0; i < emails.length; i++) {%>
-        <li>{%= emails[i] %}</li>
+    <% for (var i = 0; i < emails.length; i++) { %>
+        <li><%= emails[i] %></li>
     <% } %>
 </ul>
 ```
