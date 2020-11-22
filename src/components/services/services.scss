@@ -5,11 +5,24 @@
     &__top {
         background: #ececec;
         border-radius: 7px;
-        padding: 30px; 
+        padding: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 50px;
+
+        @media (max-width:630px) {
+          flex-direction: column;
+        }
+
+        &__left {
+            margin-right: 20px;
+
+            @media (max-width:630px) {
+                margin: 0;
+                text-align: center;
+              }
+        }
 
         .title-h3 {
             font-size: 30px;
@@ -19,10 +32,27 @@
 
         .description {
             color: #777777;
+
+            @media (max-width:630px) {
+                margin-bottom: 15px;
+              }
         }
 
         .btn {
-            padding: 15px 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            width: 100%;
+            min-width: 200px;
+            padding: 0;
+
+            @media (max-width:732px) {
+                height: 50px;
+                min-width: 150px;
+                font-size: 1.2em;
+                
+            }
         }
 
         .btn:hover {
@@ -34,6 +64,17 @@
     &__items-wrapper {
         display: flex;
         justify-content: space-between;
+
+        @media (max-width:1152px) {
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+          }
+
+        @media (max-width:602px) {
+            flex-direction: column;
+            align-items: center;
+          }
     }
 
     &__item {
@@ -42,16 +83,28 @@
         text-align: center;
         width: 270px;
         height: 310px;
+        margin-bottom: 50px;
+
         border: {
             top: 0;
             right: 0;
             bottom: solid 3px #e5e6e6;
             left: 0;
-          }
+        }
+
         border-bottom-width: 3px;
         border-radius: 7px;
         position: relative;
-        
+
+        @media (max-width:1152px) {
+            width: 40%;
+
+          }
+
+        @media (max-width:602px) {
+            width: 80%;
+          }
+
         .icon {
             font-size: 60px;
             color: $primary-color;
@@ -63,6 +116,7 @@
             .icon {
                 color: $accent-color;
             }
+
             background: #fff;
         }
 

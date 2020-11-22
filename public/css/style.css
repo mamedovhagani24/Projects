@@ -16,7 +16,7 @@ html {
   можно потом убрать
 */
 .container {
-  width: 1170px;
+  max-width: 1170px;
   margin: 0 auto;
 }
 
@@ -129,6 +129,20 @@ html {
   align-items: center;
   margin-bottom: 50px;
 }
+@media (max-width: 630px) {
+  .services__top {
+    flex-direction: column;
+  }
+}
+.services__top__left {
+  margin-right: 20px;
+}
+@media (max-width: 630px) {
+  .services__top__left {
+    margin: 0;
+    text-align: center;
+  }
+}
 .services__top .title-h3 {
   font-size: 30px;
   font-weight: 600;
@@ -137,8 +151,26 @@ html {
 .services__top .description {
   color: #777777;
 }
+@media (max-width: 630px) {
+  .services__top .description {
+    margin-bottom: 15px;
+  }
+}
 .services__top .btn {
-  padding: 15px 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  min-width: 200px;
+  padding: 0;
+}
+@media (max-width: 732px) {
+  .services__top .btn {
+    height: 50px;
+    min-width: 150px;
+    font-size: 1.2em;
+  }
 }
 .services__top .btn:hover {
   background-color: #e2534b;
@@ -148,12 +180,25 @@ html {
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 1152px) {
+  .services__items-wrapper {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 602px) {
+  .services__items-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .services__item {
   background: #f8f8f8;
   padding: 50px 25px;
   text-align: center;
   width: 270px;
   height: 310px;
+  margin-bottom: 50px;
   border-top: 0;
   border-right: 0;
   border-bottom: solid 3px #e5e6e6;
@@ -161,6 +206,16 @@ html {
   border-bottom-width: 3px;
   border-radius: 7px;
   position: relative;
+}
+@media (max-width: 1152px) {
+  .services__item {
+    width: 40%;
+  }
+}
+@media (max-width: 602px) {
+  .services__item {
+    width: 80%;
+  }
 }
 .services__item .icon {
   font-size: 60px;
