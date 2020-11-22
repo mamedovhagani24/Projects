@@ -6,10 +6,6 @@
   box-sizing: inherit;
 }
 
-// *:focus {
-//   outline: none;
-// }
-
 html {
   font-size: 13px;
   box-sizing: border-box;
@@ -24,18 +20,11 @@ body {
 a {
   color: $accent-color;
 }
-/* 
-  используется в template.html
-  можно потом убрать
-*/
 
 .container {
   max-width: 1170px;
-  padding: {
-    left: 15px;
-    right: 15px;
-  }
   margin: 0 auto;
+  padding: 15px;
 }
 
 .btn {
@@ -144,6 +133,7 @@ $col-padding: 15px;
     @extend %col-paddings;
     flex-grow: 1;
   }
+
   &__col-2 {
     @extend %col-paddings;
     width: 16.67%;
@@ -163,15 +153,11 @@ $col-padding: 15px;
     @extend %col-paddings;
     width: 50%;
   }
-
-  &__col-9 {
-    @extend %col-paddings;
-    width: 75%;
-  }
 }
 
 // Подключать стили компонентов тут 
 
 @import 'components/slider/slider';
 @import 'components/images_section/images_section';
+@import 'components/about_us/about_us';
 @import 'components/footer/footer';
