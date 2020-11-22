@@ -6,25 +6,25 @@
   box-sizing: inherit;
 }
 
-// *:focus {
-//   outline: none;
-// }
-
 html {
   font-size: 13px;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
 }
 
+body {
+  background-color: #f3f3f3;
+}
 
-/* 
-  используется в template.html
-  можно потом убрать
-*/
+
+a {
+  color: $accent-color;
+}
 
 .container {
-  width: 1170px;
+  max-width: 1170px;
   margin: 0 auto;
+  padding: 15px;
 }
 
 .btn {
@@ -55,16 +55,6 @@ html {
     border-bottom-color: $secondary-color--darken;
   }
 
-  &_small {
-    font-size: 1em;
-  }
-
-  &_large {
-    font-size: 1.5em;
-    padding: 1.3em 3.3em;
-    border-bottom-width: 4px;
-  }
-
   &_link {
     background: none;
     border: none;
@@ -74,6 +64,16 @@ html {
   &_icon {
     font-size: 1.2em;
     padding: .65em 1em .55em;
+  }
+
+  &_small {
+    font-size: 1em;
+  }
+
+  &_large {
+    font-size: 1.5em;
+    padding: 1.3em 3.3em;
+    border-bottom-width: 4px;
   }
 
   &:hover {
@@ -108,6 +108,50 @@ html {
   &-h3 {
     font-size: 1.23em;
     color: $secondary-color--darken;
+  }
+}
+
+$col-padding: 15px;
+
+%col-paddings {
+  padding: {
+    left: $col-padding;
+    right: $col-padding;
+  };
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: {
+    left: -$col-padding;
+    right: -$col-padding;
+  };
+
+  &__col {
+    @extend %col-paddings;
+    flex-grow: 1;
+  }
+
+  &__col-2 {
+    @extend %col-paddings;
+    width: 16.67%;
+  }
+
+  &__col-3 {
+    @extend %col-paddings;
+    width: 25%;
+  }
+
+  &__col-4 {
+    @extend %col-paddings;
+    width: 33.33%;
+  }
+  
+  &__col-6 {
+    @extend %col-paddings;
+    width: 50%;
   }
 }
 
