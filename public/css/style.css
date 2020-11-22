@@ -11,12 +11,18 @@ html {
   font-family: "Open Sans", sans-serif;
 }
 
-/* 
-  используется в template.html
-  можно потом убрать
-*/
+body {
+  background-color: #f3f3f3;
+}
+
+a {
+  color: #e8645a;
+}
+
 .container {
-  padding: 50px;
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 .btn {
@@ -43,14 +49,6 @@ html {
   background: #98a3a3;
   border-bottom-color: #7f8c8c;
 }
-.btn_small {
-  font-size: 1em;
-}
-.btn_large {
-  font-size: 1.5em;
-  padding: 1.3em 3.3em;
-  border-bottom-width: 4px;
-}
 .btn_link {
   background: none;
   border: none;
@@ -59,6 +57,14 @@ html {
 .btn_icon {
   font-size: 1.2em;
   padding: 0.65em 1em 0.55em;
+}
+.btn_small {
+  font-size: 1em;
+}
+.btn_large {
+  font-size: 1.5em;
+  padding: 1.3em 3.3em;
+  border-bottom-width: 4px;
 }
 .btn:hover {
   background: #e8645a;
@@ -88,6 +94,34 @@ html {
 .title-h3 {
   font-size: 1.23em;
   color: #7f8c8c;
+}
+
+.row__col-6, .row__col-4, .row__col-3, .row__col-2, .row__col {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.row__col {
+  flex-grow: 1;
+}
+.row__col-2 {
+  width: 16.67%;
+}
+.row__col-3 {
+  width: 25%;
+}
+.row__col-4 {
+  width: 33.33%;
+}
+.row__col-6 {
+  width: 50%;
 }
 
 .slider__back, .slider__front {
