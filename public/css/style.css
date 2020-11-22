@@ -134,7 +134,6 @@ a {
 
 .header {
   background-color: #76c7c0;
-  background-position: center;
   padding: 25px 0;
 }
 .header__body {
@@ -252,29 +251,33 @@ a {
 @media screen and (max-width: 1500px) {
   .header__column:first-child, .header__column:last-child {
     width: 100%;
-    text-align: center;
+    padding: 0px 9px;
   }
   .header__column:last-child {
     display: flex;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end;
   }
   .header__column:last-child .burger {
     display: block;
     margin-top: 10px;
+    justify-self: end;
   }
   .header__column:last-child .header__menu {
     display: none;
   }
 }
 .header__logo {
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 700;
   color: white;
   text-transform: uppercase;
+  margin: 4px;
 }
 .header__logo span {
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 100;
+  text-transform: lowercase;
 }
 
 .slider__back, .slider__front {
