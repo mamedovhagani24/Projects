@@ -7,7 +7,6 @@ a {
 .header{
 
     background-color: $primary-color;
-    background-position: center;
     
     padding: 25px 0;
 
@@ -153,18 +152,20 @@ a {
         @media screen and (max-width: 1500px) {
             &:first-child, &:last-child {
                 width: 100%;
-                text-align: center;
+                padding: 0px 9px;
             }
 
             &:last-child {
 
                 display: flex;
-                justify-content: center;
+                display: flex;
+                justify-content: flex-end;
 
 
                 .burger {
                     display: block;
-                    margin-top: 10px;    
+                    margin-top: 10px;  
+                    justify-self: end;
                 }
 
                 .header__menu {
@@ -176,14 +177,16 @@ a {
     }
 
     &__logo {
-        font-size: 23px;
+        font-size: 20px;
         font-weight: 700;
         color: white;
         text-transform: uppercase;
+        margin: 6px;
 
         & span {
-            font-size: 10px;
-            font-weight: 100;
+            font-size: 18px;
+            font-weight: 400;
+            text-transform: lowercase;
         }
     }
     
