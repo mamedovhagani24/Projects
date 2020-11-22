@@ -113,21 +113,25 @@ $base-padding: 20px;
   }
 
   @media screen and (max-width: $media-window--tablet) {
+    &__col-1,
+    &__col-2,
+    &__col-3,
+    &__col-4 {
+      width: 50%;
+      padding-bottom: 25px;
+    }
+
     &__col-1 {
       order: 0;
-      width: 50%;
     }
     &__col-2 {
       order: 2;
-      width: 50%;
     }
     &__col-3 {
       order: 3;
-      width: 50%;
     }
     &__col-4 {
       order: 1;
-      width: 50%;
     }
   }
 
