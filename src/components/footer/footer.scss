@@ -1,0 +1,153 @@
+$base-padding: 20px;
+
+.footer {
+  background: url("../img/ruller.png") repeat-x, $primary-color;
+  color: #fff;
+  line-height: 1.8em;
+
+  &__container {
+    padding: {
+      top: $base-padding + 20;
+      bottom: $base-padding + 20;
+    }
+  }
+
+  &__logo {
+    margin-bottom: $base-padding;
+    line-height: 20px;
+    font-size: 2em;
+  }
+
+  &__p {
+    padding-bottom: $base-padding;
+  }
+
+  &__contact {
+    display: block;
+
+    &_big {
+      font-weight: 600;
+      font-style: italic;
+      font-size: 1.5em;
+      margin-left: 10px;
+    }
+  }
+
+  &__title {
+    @extend .footer__logo;
+    font-size: 1.5em;
+    color: #4b7e79;
+
+    &_italic {
+      color: white;
+      font-style: italic;
+      font-weight: normal;
+
+      span {
+        font-style: normal;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 25px;
+
+    &-item::before {
+      content: "\f105";
+      font-family: FontAwesome;
+      display: inline-block;
+      width: 1.3em;
+    }
+  }
+
+  &__blog {
+    &-row {
+      margin-bottom: 20px;
+      flex-wrap: nowrapp;
+
+      div:first-child {
+        padding-right: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &-img {
+      text-align: center;
+      padding: {
+        top: 25%;
+        bottom: 25%;
+      }
+      font-size: 2.5em;
+      color: rgba(255, 255, 255, 0.5);
+      background-color: #5e9f9a;
+      border-radius: 4px;
+    }
+
+    &-date {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &__footer {
+    padding: $base-padding;
+    background: $primary-color--darken;
+  }
+
+  &__wrapp {
+    display: flex;
+    justify-content: space-between;
+    line-height: 20px;
+  }
+
+  &__socials {
+    font-size: 2em;
+
+    &-link {
+      margin-left: 15px;
+    }
+  }
+
+  @media screen and (max-width: $media-window--tablet) {
+    &__col-1,
+    &__col-2,
+    &__col-3,
+    &__col-4 {
+      width: 50%;
+      padding-bottom: 25px;
+    }
+
+    &__col-1 {
+      order: 0;
+    }
+    &__col-2 {
+      order: 2;
+    }
+    &__col-3 {
+      order: 3;
+    }
+    &__col-4 {
+      order: 1;
+    }
+  }
+
+  @media screen and (max-width: $media-window--mobile-L) {
+    &__col-1,
+    &__col-2,
+    &__col-3,
+    &__col-4 {
+      width: 100%;
+      padding-bottom: 25px;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
