@@ -6,10 +6,7 @@ $base-padding: 20px;
   line-height: 1.8em;
 
   &__container {
-    padding: {
-      top: $base-padding + 20;
-      bottom: $base-padding + 20;
-    }
+    padding-top: $base-padding + 20;
   }
 
   &__logo {
