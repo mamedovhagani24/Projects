@@ -16,11 +16,6 @@ body {
 }
 
 a {
-  color: #e8645a;
-}
-
-.container {
-  max-width: 1170px;
 }
 
 .btn {
@@ -378,8 +373,19 @@ a {
 .images__inner .title-h2 {
   color: #e1524b;
 }
+@media (max-width: 400px) {
+  .images__inner .title-h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+}
 .images__inner .description {
   text-align: center;
+}
+@media (max-width: 590px) {
+  .images__inner .description {
+    margin-bottom: 50px;
+  }
 }
 .images__wrapper {
   position: relative;
@@ -407,23 +413,66 @@ a {
   height: 100%;
   object-fit: cover;
 }
+@media (max-width: 769px) {
+  .images__wrapper .img_lit {
+    display: none !important;
+  }
+}
 .images__wrapper .img_big {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 20%);
 }
+@media (max-width: 769px) {
+  .images__wrapper .img_big {
+    position: static;
+    transform: translate(0, 20%);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 59px;
+  }
+}
+@media (max-width: 590px) {
+  .images__wrapper .img_big {
+    transform: translate(0, 0);
+  }
+}
 .images__wrapper .img_big .img {
-  background: url(../../src/img/bigmask.png);
+  background: url(../../src/img/bigmask.png) top center no-repeat;
   width: 570px;
-  height: 360px;
   padding: 44px 5px 5px;
+}
+@media (max-width: 590px) {
+  .images__wrapper .img_big .img {
+    background-size: contain;
+    width: 392px;
+    padding: 32px 6px 6px;
+  }
+}
+@media (max-width: 400px) {
+  .images__wrapper .img_big .img {
+    background: none;
+    width: 300px;
+    padding: 0;
+  }
 }
 .images__wrapper .img_big .img__wrapper {
   border-radius: 10px;
   overflow: hidden;
   width: 560px;
   height: 310px;
+}
+@media (max-width: 590px) {
+  .images__wrapper .img_big .img__wrapper {
+    width: 380px;
+    height: 210px;
+  }
+}
+@media (max-width: 400px) {
+  .images__wrapper .img_big .img__wrapper {
+    width: 100%;
+  }
 }
 .images__wrapper .img_big .img__wrapper img {
   width: 100%;
