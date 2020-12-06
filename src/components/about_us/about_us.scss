@@ -14,14 +14,6 @@
     padding-bottom: 3em;
   }
 
-  &__middle-col .row {
-    @media screen and (max-width: $media-window--laptop) {
-      & .row__col-4 {
-        width: 50%;
-      }
-    }
-  }
-
   &__col-title {
     margin-bottom: 1.5em;
   }
@@ -42,10 +34,9 @@
   &__p {
     padding: 0 1.4em;
   }
-  
+
   &__counter {
     padding-top: 3em;
-
     &-img {
       height: 0;
       width: 100%;
@@ -61,9 +52,15 @@
       margin-top: -32px;
     }
 
-    &-sub-t {
+    &-sub-title {
       text-align: center;
       text-transform: uppercase;
+    }
+
+    &_col-md {
+      @media screen and (max-width: $media-window--laptop) {
+        width: 50%;
+      }
     }
   }
 
@@ -103,10 +100,10 @@
 
     &-body {
       @media screen and (max-width: $media-window--laptop) {
-        .row__col-2{
-          width:25%;
+        .row__col-2 {
+          width: 25%;
 
-          &:nth-child(n+5) {
+          &:nth-child(n + 5) {
             display: none;
           }
         }
@@ -115,7 +112,7 @@
         .row__col-2 {
           width: 33.33%;
 
-          &:nth-child(n+5) {
+          &:nth-child(n + 5) {
             display: block;
           }
         }
