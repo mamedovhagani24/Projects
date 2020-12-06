@@ -635,11 +635,6 @@ a {
 .about-us__row-padding {
   padding-bottom: 3em;
 }
-@media screen and (max-width: 1024px) {
-  .about-us__middle-col .row .row__col-4 {
-    width: 50%;
-  }
-}
 .about-us__col-title {
   margin-bottom: 1.5em;
 }
@@ -673,9 +668,14 @@ a {
   font-weight: 900;
   margin-top: -32px;
 }
-.about-us__counter-sub-t {
+.about-us__counter-sub-title {
   text-align: center;
   text-transform: uppercase;
+}
+@media screen and (max-width: 1024px) {
+  .about-us__counter_col-md {
+    width: 50%;
+  }
 }
 .about-us__circle {
   width: 100%;
