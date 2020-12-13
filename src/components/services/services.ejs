@@ -1,3 +1,28 @@
+<% 
+    const services = [
+        {
+            icon: 'fa-thumbs-up',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+        {
+            icon: 'fa-key',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+        {
+            icon: 'fa-flag',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+        {
+            icon: 'fa-flask',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+    ]; 
+%>
+
 <div class="services">
     <div class="container">
 
@@ -14,33 +39,14 @@
 
         <div class="services__items-wrapper">
 
-            <div class="services__item">
-                <i class="fa fa-thumbs-up icon"></i>
-                <h3 class="title-h3">SUSPENDISSE</h3>
-                <p class="description"> Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc. </p>
-                <button class="btn btn_large">read more</button>
-            </div>
-
-            <div class="services__item">
-                <i class="fa fa-key icon"></i>
-                <h3 class="title-h3">SUSPENDISSE</h3>
-                <p class="description"> Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc. </p>
-                <button class="btn btn_large">read more</button>
-            </div>
-
-            <div class="services__item">
-                <i class="fa fa-flag icon"></i>
-                <h3 class="title-h3">SUSPENDISSE</h3>
-                <p class="description"> Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc. </p>
-                <button class="btn btn_large">read more</button>
-            </div>
-
-            <div class="services__item">
-                <i class="fa fa-flask icon"></i>
-                <h3 class="title-h3">SUSPENDISSE</h3>
-                <p class="description"> Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc. </p>
-                <button class="btn btn_large">read more</button>
-            </div>
+            <% for (let service of services) { %>
+                <div class="services__item">
+                    <i class="fa <%= service.icon %> icon"></i>
+                    <h3 class="title-h3"><%= service.title %></h3>
+                    <p class="description"><%= service.description %></p>
+                    <button class="btn btn_large">read more</button>
+                </div>
+            <% } %>
 
         </div>
 
