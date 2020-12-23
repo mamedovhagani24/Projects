@@ -9,6 +9,12 @@ $accent-color--darken: #e2534b;
 
 $text-color--grey: #777777;
 
+
+// About Us component's colors:
+$about_us__slider-card-bg-color: #f8f8f8;
+$about_us__line-color: #e1e2e2;
+
+
 // Footer component's variables
 $footer__base-padding: 20px;
 $footer__title-color: #4b7e79;
@@ -16,9 +22,12 @@ $footer__blog-img-bg-color: #5e9f9a;
 $footer__blog-img-icon-color: rgba(255, 255, 255, 0.5);
 
 
-$icon--angle-right: "\f105";
+// Font Awesome Unicode Icons:
+$icon--arrow-left: '\f060';
+$icon--arrow-right: '\f061'; 
+$icon--angle-right: "\f105"; 
 
-
+// Media screens values
 $media-window--laptop: 1024px;
 $media-window--tablet: 768px;
 $media-window--mobile-L: 425px;

@@ -1,0 +1,10 @@
+<% 
+  const LIST_ITEMS = ['Quisque at massa ipsum','Maecenas a lorem augue, egestas','Cras vitae felis at lacus eleifend', 'Etiam auctor diam pellentesque','Nulla ac massa at dolor','Condimentum eleifend vitae vitae'];
+%> 
+
+<div class="row__col-3">
+  <h3 class="about-us__col-title title-h3">Why choose us?</h3>
+  <ul class="about-us__list">
+    <% for (let item of LIST_ITEMS) { %><li class="about-us__list-item"> <%= item %>  </li> <% } %> 
+  </ul>
+</div>
