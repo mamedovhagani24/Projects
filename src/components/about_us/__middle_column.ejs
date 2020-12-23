@@ -1,0 +1,41 @@
+<% 
+  const COUNTERS = [
+    {
+      number: 50,
+      title: 'Suspendisse'
+    },
+    {
+      number: 70,
+      title: 'Maecenas'
+    },
+    {
+      number: 80,
+      title: 'Aliquam'
+    },
+    {
+      number: 100,
+      title: 'Habitasse'
+    }
+  ];
+%> 
+
+<div class="about-us__middle-col row__col-6">
+  <p class="about-us__p">
+    Curabitur quis nisl in leo euismod venenatis eu in diam. Etiam auctor
+    diam pellentesque lectus <a href="#">vehicula mattis</a>. Nulla ac
+    massa at dolor condimentum eleifend vitae vitae urna.
+  </p>
+  <div class="about-us__counters-row row">
+    <% for (let counter of COUNTERS) { %> 
+    <div class="row__col-4 about-us__counter_col-md">
+      <div class="about-us__counter">
+        <div class="about-us__counter-img">
+          <img class="about-us__circle about-us__circle_<%= counter.number %>" src="img/diagram.svg">
+        </div>
+        <span class="about-us__counter-num"> <%= counter.number %> </span>
+        <h3 class="about-us__counter-sub-title title-h3"> <%= counter.title %> </h3>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
