@@ -839,9 +839,6 @@ a {
   margin-bottom: 20px;
   flex-wrap: nowrapp;
 }
-.footer__blog-row div:first-child {
-  padding-right: 0;
-}
 .footer__blog-row:last-child {
   margin-bottom: 0;
 }
@@ -853,6 +850,9 @@ a {
   color: rgba(255, 255, 255, 0.5);
   background-color: #5e9f9a;
   border-radius: 4px;
+}
+.footer__blog-img-wrapp {
+  padding-right: 0;
 }
 .footer__blog-date {
   color: rgba(0, 0, 0, 0.5);
@@ -896,8 +896,8 @@ a {
     padding-bottom: 25px;
   }
 }
-.footer a {
-  color: inherit;
+.footer__link {
+  color: #fff;
   text-decoration: none;
 }
 
