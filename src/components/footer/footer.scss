@@ -1,25 +1,21 @@
-$base-padding: 20px;
-
 .footer {
   background: url("../img/ruller.png") repeat-x, $primary-color;
   color: #fff;
   line-height: 1.8em;
 
+  &__logo-wrapp {
+    margin-bottom: $footer__base-padding + 3;
+  }
+
   &__container {
     padding: {
-      top: $base-padding + 20;
-      bottom: $base-padding + 20;
+      top: $footer__base-padding + 30;
+      bottom: $footer__base-padding + 20;
     }
-  }
-
-  &__logo {
-    margin-bottom: $base-padding;
-    line-height: 20px;
-    font-size: 2em;
-  }
+  }  
 
   &__p {
-    padding-bottom: $base-padding;
+    padding-bottom: $footer__base-padding;
   }
 
   &__contact {
@@ -34,9 +30,9 @@ $base-padding: 20px;
   }
 
   &__title {
-    @extend .footer__logo;
+    margin-bottom: $footer__base-padding;
     font-size: 1.5em;
-    color: #4b7e79;
+    color: $footer__title-color;
 
     &_italic {
       color: white;
@@ -56,7 +52,7 @@ $base-padding: 20px;
     padding-left: 25px;
 
     &-item::before {
-      content: "\f105";
+      content: $icon--angle-right;
       font-family: FontAwesome;
       display: inline-block;
       width: 1.3em;
@@ -81,8 +77,8 @@ $base-padding: 20px;
         bottom: 25%;
       }
       font-size: 2.5em;
-      color: rgba(255, 255, 255, 0.5);
-      background-color: #5e9f9a;
+      color: $footer__blog-img-icon-color;
+      background-color: $footer__blog-img-bg-color;
       border-radius: 4px;
 
       &-wrapp  {
@@ -96,7 +92,7 @@ $base-padding: 20px;
   }
 
   &__footer {
-    padding: $base-padding;
+    padding: $footer__base-padding;
     background: $primary-color--darken;
   }
 

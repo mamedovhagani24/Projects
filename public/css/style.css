@@ -128,6 +128,19 @@ a {
   width: 75%;
 }
 
+.logo {
+  line-height: 20px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+.logo__sub {
+  font-size: 25px;
+  text-transform: lowercase;
+  font-weight: normal;
+  padding-left: 5px;
+}
+
 a {
   text-decoration: none;
 }
@@ -791,14 +804,12 @@ a {
   color: #fff;
   line-height: 1.8em;
 }
-.footer__container {
-  padding-top: 40px;
-  padding-bottom: 40px;
+.footer__logo-wrapp {
+  margin-bottom: 23px;
 }
-.footer__logo, .footer__title {
-  margin-bottom: 20px;
-  line-height: 20px;
-  font-size: 2em;
+.footer__container {
+  padding-top: 50px;
+  padding-bottom: 40px;
 }
 .footer__p {
   padding-bottom: 20px;
@@ -813,6 +824,7 @@ a {
   margin-left: 10px;
 }
 .footer__title {
+  margin-bottom: 20px;
   font-size: 1.5em;
   color: #4b7e79;
 }

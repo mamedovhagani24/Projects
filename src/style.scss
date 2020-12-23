@@ -163,7 +163,7 @@ $col-padding: 15px;
 }
 
 // Подключать стили компонентов тут 
-
+@import 'components/logo/logo';
 @import 'components/header/header';
 @import 'components/slider/slider';
 @import 'components/services/services';
