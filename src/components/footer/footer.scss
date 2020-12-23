@@ -64,20 +64,17 @@ $base-padding: 20px;
   }
 
   &__blog {
+
     &-row {
       margin-bottom: 20px;
       flex-wrap: nowrapp;
-
-      div:first-child {
-        padding-right: 0;
-      }
 
       &:last-child {
         margin-bottom: 0;
       }
     }
 
-    &-img {
+    &-img {      
       text-align: center;
       padding: {
         top: 25%;
@@ -87,6 +84,10 @@ $base-padding: 20px;
       color: rgba(255, 255, 255, 0.5);
       background-color: #5e9f9a;
       border-radius: 4px;
+
+      &-wrapp  {
+        padding-right: 0;
+      }
     }
 
     &-date {
@@ -146,8 +147,8 @@ $base-padding: 20px;
     }
   }
 
-  a {
-    color: inherit;
+  &__link {
+    color: #fff;
     text-decoration: none;
   }
 }
