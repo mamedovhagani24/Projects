@@ -1,3 +1,15 @@
+<% 
+    const imgLit = [
+        {
+            url: "https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+            alt: "your image1",
+        },
+        {
+            url: "https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+            alt: "your image2",
+        },
+    ]; 
+%>
 <div class="images">
     <div class="container">
 
@@ -8,29 +20,28 @@
 
             <div class="images__wrapper">
                 <div class="img_lit">
-                    <div class="img">
-                        <div class="img__wrapper">
-                            <img src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                                alt="your image">
+
+                    <% for (let img of imgLit) { %>
+                        <div class="img">
+                            <div class="img__wrapper">
+                                <img class="img__wrapper__inner" 
+                                    src="<%= img.url %>"
+                                    alt="<%= img.alt %>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="img">
-                        <div class="img__wrapper">
-                            <img src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                                alt="your image">
-                        </div>
-                    </div>
+                    <% } %>
+
                 </div>
                 <div class="img_big">
                     <div class="img">
                         <div class="img__wrapper">
-                            <img src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                            <img class="img__wrapper__inner" 
+                                src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                                 alt="your image">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
