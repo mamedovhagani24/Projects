@@ -146,7 +146,7 @@ a {
 }
 
 .header {
-  background-color: #76c7c0;
+  background: url("../img/ruller_bottom.png") repeat-x bottom, #76c7c0;
   padding: 25px 0;
 }
 .header__body {
@@ -154,7 +154,6 @@ a {
   width: 1170px;
   max-width: 100%;
   display: flex;
-  flex-wrap: wrap;
 }
 .header__column {
   max-width: 100%;
@@ -168,7 +167,7 @@ a {
 .header__column:last-child .burger {
   display: none;
 }
-.header__column:last-child .burger div {
+.header__column:last-child .burger__line {
   background-color: white;
   width: 37px;
   height: 6px;
@@ -180,7 +179,7 @@ a {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.header__column:last-child .header__menu li {
+.header__column:last-child .header__menu .menu__item {
   list-style-type: none;
   display: inline-block;
 }
@@ -194,11 +193,11 @@ a {
   border-radius: 4px;
   cursor: pointer;
 }
-.header__column:last-child .header__menu .Portfolio {
+.header__column:last-child .header__menu .portfolio {
   position: relative;
   padding: 10px 16px 0px 28px;
 }
-.header__column:last-child .header__menu .Portfolio .header__submenu {
+.header__column:last-child .header__menu .portfolio .header__submenu {
   position: absolute;
   display: block;
   visibility: hidden;
@@ -210,8 +209,9 @@ a {
   left: 1px;
   border-radius: 8px;
   transition: all 3s, 3s, linear;
+  list-style-type: none;
 }
-.header__column:last-child .header__menu .Portfolio .header__submenu li {
+.header__column:last-child .header__menu .portfolio .header__submenu .submenu__item {
   margin-bottom: 4px;
   padding: 6px 12px 7px 23px;
   border-radius: 3px;
@@ -219,10 +219,10 @@ a {
   background-color: #e8645a;
   text-transform: capitalize;
 }
-.header__column:last-child .header__menu .Portfolio .header__submenu li:hover {
+.header__column:last-child .header__menu .portfolio .header__submenu .submenu__item:hover {
   background-color: #62b9b0;
 }
-.header__column:last-child .header__menu .Portfolio .header__submenu li::before {
+.header__column:last-child .header__menu .portfolio .header__submenu .submenu__item::before {
   content: "";
   display: block;
   width: 4px;
@@ -234,7 +234,7 @@ a {
   border-top: 2px solid;
   transform: rotate(45deg);
 }
-.header__column:last-child .header__menu .Portfolio .header__submenu::before {
+.header__column:last-child .header__menu .portfolio .header__submenu::before {
   position: absolute;
   content: "";
   display: block;
@@ -246,7 +246,7 @@ a {
   left: 14px;
   transform: rotate(45deg);
 }
-.header__column:last-child .header__menu .Portfolio::before {
+.header__column:last-child .header__menu .portfolio::before {
   content: "";
   display: block;
   width: 5px;
@@ -258,7 +258,8 @@ a {
   top: 14px;
   transform: rotate(45deg);
 }
-.header__column:last-child .header__menu .Portfolio:active .header__submenu, .header__column:last-child .header__menu .Portfolio:focus .header__submenu {
+.header__column:last-child .header__menu .portfolio:active .header__submenu,
+.header__column:last-child .header__menu .portfolio:focus .header__submenu {
   visibility: visible;
 }
 @media screen and (max-width: 1500px) {
@@ -268,26 +269,23 @@ a {
   }
   .header__column:last-child {
     display: flex;
-    display: flex;
     justify-content: flex-end;
   }
   .header__column:last-child .burger {
     display: block;
-    margin-top: 10px;
-    justify-self: end;
   }
   .header__column:last-child .header__menu {
     display: none;
   }
 }
-.header__logo {
-  font-size: 20px;
+.header .logo {
+  font-size: 28px;
   font-weight: 700;
   color: white;
   text-transform: uppercase;
   margin: 6px;
 }
-.header__logo span {
+.header .logo span {
   font-size: 18px;
   font-weight: 400;
   text-transform: lowercase;
@@ -562,7 +560,7 @@ a {
   width: 360px;
   height: 213px;
 }
-.images__wrapper .img_lit .img__wrapper img {
+.images__wrapper .img_lit .img__wrapper__inner {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -628,7 +626,7 @@ a {
     width: 100%;
   }
 }
-.images__wrapper .img_big .img__wrapper img {
+.images__wrapper .img_big .img__wrapper__inner {
   width: 100%;
   height: 100%;
   object-fit: cover;
