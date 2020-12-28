@@ -18,7 +18,9 @@ module.exports = class Slider {
       `<div style="height:${this.height}px; width:${this._calcImagesWrappWidth()}px">${this._createImages()}</div>`;
   }
 
-
+  next() {
+    
+  }
 
   _createImages() {
     return this.slides.map((el) =>
