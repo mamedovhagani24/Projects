@@ -1,5 +1,3 @@
 'use strict';
 
-const hello = require('./components/slider/slider.js');
-
-hello();
+// const module = require('./scripts/script.js'); <-- пример подключения скрипта из папки scripts
