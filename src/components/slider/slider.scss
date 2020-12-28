@@ -1,0 +1,124 @@
+@import "../../variables";
+
+$slider-height: 500px;
+$border-radius: 5px;
+
+%block-height {
+  height: $slider-height;
+}
+
+%flex {
+  display: flex;
+}
+
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider {
+  display: block;
+
+  &__front {
+    @extend %block-height;
+    @extend %flex;
+    margin-bottom: -$slider-height;
+    justify-content: space-between;
+  }
+
+  &__info {
+    @extend %flex-column;
+    text-align: center;
+  }
+
+  &__title {
+    display: inline-block;
+    font-size: 3.846em;
+    color: #fff;
+    background: $accent-color;
+    text-transform: uppercase;
+    border-radius: $border-radius;
+    line-height: 1;
+    font-weight: 900;
+    padding: 0 .3em .07em;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: $media-window--tablet){
+      font-size: 3em;
+    }
+    @media screen and (max-width: $media-window--mobile-L){
+      font-size: 9vw;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.23em;
+    padding: .6em 2.6em .7em;
+    background: rgba(0,0,0,.5);
+    border-radius: $border-radius;
+    line-height: 1.7;
+    color: #fff;
+
+    @media screen and (max-width: $media-window--tablet){
+      font-size: 1em;
+    }
+  }
+
+  &__images {
+    height: inherit;
+    background: $secondary-color--darken;
+  }
+
+  &__control {
+    &_left {
+      @extend %flex-column;
+
+      .slider__btn {
+        padding-right: .4em;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      } 
+    }
+
+    &_right {
+      @extend %flex-column;
+
+      .slider__btn {
+        padding-left: .4em;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  &__bottom-controls {
+    @extend %flex;
+    justify-content: center;
+    padding: 1.5em;
+  }
+
+  &__control-item {
+    cursor: pointer;
+    width: 60px;
+    height: 5px;
+    margin: 0 5px;
+    background: #b0b8b9;
+
+    &_active {
+      background: $accent-color;
+    }
+  }
+
+  &__btn {
+    font-size: 3em;
+    padding: .3em;
+    line-height: 0;
+    border-radius: $border-radius;
+  }
+
+  &__back {
+    @extend %block-height;
+  }
+}

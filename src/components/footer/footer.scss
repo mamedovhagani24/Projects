@@ -1,0 +1,150 @@
+.footer {
+  background: url("../img/ruller.png") repeat-x, $primary-color;
+  color: #fff;
+  line-height: 1.8em;
+
+  &__logo-wrapp {
+    margin-bottom: $footer__base-padding + 3;
+  }
+
+  &__container {
+    padding: {
+      top: $footer__base-padding + 30;
+      bottom: $footer__base-padding + 20;
+    }
+  }  
+
+  &__p {
+    padding-bottom: $footer__base-padding;
+  }
+
+  &__contact {
+    display: block;
+
+    &_big {
+      font-weight: 600;
+      font-style: italic;
+      font-size: 1.5em;
+      margin-left: 10px;
+    }
+  }
+
+  &__title {
+    margin-bottom: $footer__base-padding;
+    font-size: 1.5em;
+    color: $footer__title-color;
+
+    &_italic {
+      color: white;
+      font-style: italic;
+      font-weight: normal;
+
+      span {
+        font-style: normal;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 25px;
+
+    &-item::before {
+      content: $icon--angle-right;
+      font-family: FontAwesome;
+      display: inline-block;
+      width: 1.3em;
+    }
+  }
+
+  &__blog {
+
+    &-row {
+      margin-bottom: 20px;
+      flex-wrap: nowrapp;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &-img {      
+      text-align: center;
+      padding: {
+        top: 25%;
+        bottom: 25%;
+      }
+      font-size: 2.5em;
+      color: $footer__blog-img-icon-color;
+      background-color: $footer__blog-img-bg-color;
+      border-radius: 4px;
+
+      &-wrapp  {
+        padding-right: 0;
+      }
+    }
+
+    &-date {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &__footer {
+    padding: $footer__base-padding;
+    background: $primary-color--darken;
+  }
+
+  &__wrapp {
+    display: flex;
+    justify-content: space-between;
+    line-height: 20px;
+  }
+
+  &__socials {
+    font-size: 2em;
+
+    &-link {
+      margin-left: 15px;
+    }
+  }
+
+  @media screen and (max-width: $media-window--tablet) {
+    &__col-1,
+    &__col-2,
+    &__col-3,
+    &__col-4 {
+      width: 50%;
+      padding-bottom: 25px;
+    }
+
+    &__col-1 {
+      order: 0;
+    }
+    &__col-2 {
+      order: 2;
+    }
+    &__col-3 {
+      order: 3;
+    }
+    &__col-4 {
+      order: 1;
+    }
+  }
+
+  @media screen and (max-width: $media-window--mobile-L) {
+    &__col-1,
+    &__col-2,
+    &__col-3,
+    &__col-4 {
+      width: 100%;
+      padding-bottom: 25px;
+    }
+  }
+
+  &__link {
+    color: #fff;
+    text-decoration: none;
+  }
+}

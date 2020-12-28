@@ -1,0 +1,181 @@
+@import "../../variables";
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
+
+    padding: 25px 0;
+
+    &__body {
+        margin: 0 auto;
+        width: 1170px;
+        max-width: 100%;
+        display: flex;
+    }
+
+    &__column {
+        max-width: 100%;
+        &:first-child {
+            width: 30%;
+        }
+
+        &:last-child {
+            width: 70%;
+
+            .burger {
+                display: none;
+
+                &__line {
+                    background-color: white;
+                    width: 37px;
+                    height: 6px;
+                    margin-bottom: 4px;
+                }
+            }
+
+            .header__menu {
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                & .menu__item {
+                    list-style-type: none;
+                    display: inline-block;
+                }
+
+                .btn {
+                    &:hover {
+                        background: $accent-color--darken;
+                        border: {
+                            top: 0;
+                            right: 0;
+                            bottom: 3px solid $accent-color--darken;
+                            left: 0;
+                        }
+                        border-bottom-width: 3px;
+                        border-radius: 4px;
+                        cursor: pointer;
+                    }
+                }
+
+                .portfolio {
+                    position: relative;
+                    padding: 10px 16px 0px 28px;
+
+                    & .header__submenu {
+                        position: absolute;
+                        display: block;
+                        visibility: hidden;
+                        width: 198px;
+                        background-color: #e2534b;
+                        font-size: 13px;
+                        padding: 6px 5px 3px 5px;
+                        top: 53px;
+                        left: 1px;
+                        border-radius: 8px;
+                        transition: all 3s, 3s, linear;
+                        list-style-type: none;
+
+                        & .submenu__item {
+                            margin-bottom: 4px;
+                            padding: 6px 12px 7px 23px;
+                            border-radius: 3px;
+                            position: relative;
+                            background-color: #e8645a;
+                            text-transform: capitalize;
+
+                            &:hover {
+                                background-color: $primary-color--darken;
+                            }
+
+                            &::before {
+                                content: "";
+                                display: block;
+                                width: 4px;
+                                height: 4px;
+                                position: absolute;
+                                top: 11px;
+                                left: 8px;
+                                border-right: 2px solid;
+                                border-top: 2px solid;
+                                transform: rotate(45deg);
+                            }
+                        }
+
+                        &::before {
+                            position: absolute;
+                            content: "";
+                            display: block;
+                            border-radius: 0px 0px 23px 0px;
+                            width: 10px;
+                            height: 10px;
+                            background-color: $accent-color--darken;
+                            top: -4px;
+                            left: 14px;
+                            transform: rotate(45deg);
+                        }
+                    }
+
+                    &::before {
+                        content: "";
+                        display: block;
+                        width: 5px;
+                        height: 5px;
+                        position: absolute;
+                        border-right: 2px solid white;
+                        border-bottom: 2px solid white;
+                        left: 15px;
+                        top: 14px;
+                        transform: rotate(45deg);
+                    }
+                }
+
+                .portfolio:active,
+                .portfolio:focus {
+                    .header__submenu {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 1500px) {
+            &:first-child,
+            &:last-child {
+                width: 100%;
+                padding: 0px 9px;
+            }
+
+            &:last-child {
+                display: flex;
+                justify-content: flex-end;
+
+                .burger {
+                    display: block;
+                }
+
+                .header__menu {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .logo {
+        font-size: 28px;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        margin: 6px;
+
+        & span {
+            font-size: 18px;
+            font-weight: 400;
+            text-transform: lowercase;
+        }
+    }
+}

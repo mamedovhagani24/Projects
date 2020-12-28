@@ -1,0 +1,54 @@
+<% 
+    const services = [
+        {
+            icon: 'fa-thumbs-up',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+        {
+            icon: 'fa-key',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+        {
+            icon: 'fa-flag',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+        {
+            icon: 'fa-flask',
+            title: 'SUSPENDISSE',
+            description: 'Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.',
+        },
+    ]; 
+%>
+
+<div class="services">
+    <div class="container">
+
+        <div class="services__top">
+            <div class="services__top__left">
+                <h3 class="title-h3">Some of our top services</h3>
+                <p class="description">Ut eleifend libero sed neque rhoncus consequat. Maecenas tincidunt, augue et rutrum condimentum, libero lectus mattis orci, ut commodo. </p>
+            </div>
+
+            <div class="services__top__right">
+                <button class="btn btn_accent btn_large">view more</button>
+            </div>
+        </div>
+
+        <div class="services__items-wrapper">
+
+            <% for (let service of services) { %>
+                <div class="services__item">
+                    <i class="fa <%= service.icon %> icon"></i>
+                    <h3 class="title-h3"><%= service.title %></h3>
+                    <p class="description"><%= service.description %></p>
+                    <button class="btn btn_large">read more</button>
+                </div>
+            <% } %>
+
+        </div>
+
+    </div>
+</div>
