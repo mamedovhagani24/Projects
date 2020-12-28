@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "watch --interval=1 \"npm run ejs & npm run sass\" src/",
-    "ejs": "ejs-cli --base-dir src/ \"**/*.ejs\" -e src/components --out public/",
-    "sass": "sass src/style.scss:public/css/style.css"
+    "dev": "npm run ejs | npm run sass | npm run js",
+    "ejs": "watch --interval=1 \"ejs-cli --base-dir src/ \"**/*.ejs\" -e src/components --out public/\" src/",
+    "js": "watchify src/index.js -o public/js/index.js",
+    "sass": "sass --watch src/style.scss:public/css/style.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^17.0.0",
     "ejs-cli": "^2.2.1",
     "sass": "^1.27.0",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "watchify": "^3.11.1"
   }
 }
