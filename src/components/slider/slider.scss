@@ -3,7 +3,8 @@
 $slider-height: 500px;
 $border-radius: 5px;
 
-%block-height {
+%block-slides {
+  position: relative;
   height: $slider-height;
 }
 
@@ -22,8 +23,9 @@ $border-radius: 5px;
   display: block;
 
   &__front {
-    @extend %block-height;
+    @extend %block-slides;
     @extend %flex;
+    z-index: 2;
     margin-bottom: -$slider-height;
     justify-content: space-between;
   }
@@ -119,6 +121,8 @@ $border-radius: 5px;
   }
 
   &__back {
-    @extend %block-height;
+    @extend %block-slides;
+    z-index: 1;
+    background: $secondary-color--darken;
   }
 }
