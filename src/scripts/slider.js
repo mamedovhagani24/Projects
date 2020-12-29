@@ -1,9 +1,10 @@
 "use strict";
 
 module.exports = class Slider {
-  constructor(container, slides, slidesOnScreen = 1) {
+  constructor(container, slides, slidesOnScreen = 1, speed = 1) {
     this.container = container;
     this.slidesOnScreen = slidesOnScreen;
+    this.speed = speed;
     
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -48,7 +49,7 @@ module.exports = class Slider {
 
     this.currentSlide = index;
 
-    this._updateSlides();
+    this._updateSlidesPosition();
   }
 
   _updateSizes() {
@@ -72,29 +73,39 @@ module.exports = class Slider {
     this.container.style.overflow = "hidden";
     this.container.style.position = 'relative';
     this.container.style.height = this.height;
-    this.container.style.width = this._calcImagesWrappWidth();
+    this.container.style.width = '100%';
     
     this.container.append(...this.slidesElements);
   }
 
-  _updateSlides() {
+  _updateSlidesPosition() {
     this.slidesElements.forEach((el, i) => 
       el.style.left = this.slides[i].position + 'px');
   }
 
-  _returnSlideElement({imgUrl, position}) {
-    const img = document.createElement('img');
-    img.src = imgUrl;
+  _returnSlideElement({imgUrl, position, heading, description}) {
+    const slide = document.createElement('div');
 
-    img.style.position = 'absolute';
-    img.style.top = 0;
-    img.style.objectFit = 'none';
-    img.style.height = 'inherit';
-    img.style.left = position + 'px';
-    img.style.transition = 'all 1s ease';
-    img.style.width = this._calcImagesWidth()+'px';
+    slide.style.background = 'url('+imgUrl+') no-repeat center';
+    slide.style.position = 'absolute';
+    slide.style.top = 0;
+    slide.style.backgroundSize = 'cover';
+    slide.style.height = 'inherit';
+    slide.style.left = position + 'px';
+    slide.style.transition = 'all '+this.speed+'s ease';
+    slide.style.width = this._calcImagesWidth()+'px';
     
-    return img;
+    if (heading && description) 
+      slide.innerHTML = this._createSlideInfoElements(heading, description);
+
+    return slide;
+  }
+
+  _createSlideInfoElements(title, desc) {
+    return `<div class="slider__info">
+      <h1 class="slider__title">${title}</h1>
+      <div class="slider__subtitle">${desc}</div>
+    </div>`;
   }
 
   _calcImagesWidth() {
