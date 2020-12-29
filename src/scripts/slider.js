@@ -33,7 +33,6 @@ module.exports = class Slider {
     return this.currentSlide;
   }
 
-
   setSlide(index) {
     if (index < 0 || index > this.slides.length-1) return;
     
@@ -110,9 +109,5 @@ module.exports = class Slider {
 
   _calcImagesWidth() {
     return this.width / this.slidesOnScreen;
-  }
-
-  _calcImagesWrappWidth() {
-    return this.width * this.slides.length;
   }
 };

@@ -10,9 +10,16 @@ const SLIDES_ARR = [
     imgUrl: "https://look.com.ua/pic/201806/2560x1600/look.com.ua-286462.jpg",
   },
   {
-    heading: "Vestibulium",
+    heading: "Vestibulium1",
     description:
       "Maecenas tincidunt, augue et rutrum condimentum, libero lectus mattis orci, ut commodo.",
+    imgUrl:
+      "https://canadalifechurch.com/wp-content/uploads/2017/06/2017.02.05.jpg",
+  },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
     imgUrl:
       "https://canadalifechurch.com/wp-content/uploads/2017/06/2017.02.05.jpg",
   },
