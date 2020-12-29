@@ -14,29 +14,22 @@ module.exports = class Slider {
   }
 
   init(slides) {
-    this._updateSizes()
+    this._updateSizes();
     this.slides = this._returnSlidesData(slides);
-    // this._updateCurrentSlide();
-    this._createImages();
+    this.slidesElements = this._createImages();
     this._drawSlides();
-   
-  }
-
-  _updateSizes() {
-    this.width = this.container.clientWidth;
-    this.height = this.container.clientHeight;
-  }
-
-  _updateCurrentSlide() {
-    this.currentSlide = this.slides.findIndex((el)=>el.isOnScreen);
   }
 
   next() {
-    this.setSlide(this.currentSlide + 1);    
-  }
+    this.setSlide(this.currentSlide + 1);
 
+    return this.currentSlide;
+  }
+  
   prev() {
     this.setSlide(this.currentSlide - 1);
+    
+    return this.currentSlide;
   }
 
 
@@ -50,7 +43,6 @@ module.exports = class Slider {
         el.position -= scrollWidth;
       } else el.position -= scrollWidth;
 
-      el.isOnScreen = false;
       return el;
     });
 
@@ -59,21 +51,21 @@ module.exports = class Slider {
     this._updateSlides();
   }
 
+  _updateSizes() {
+    this.width = this.container.clientWidth;
+    this.height = this.container.clientHeight;
+  }
+
   _returnSlidesData(slidesArr) {
     return slidesArr.map((el, i)=> {
       el.position = i * this.width;
-      el.isOnScreen = (i === 0);
       
       return el;
     });
   }
 
   _createImages() {
-    this.slides.forEach((el)=>{
-      this.slidesElements.push(
-        this._returnSlideElement(el)
-      );
-    });
+    return this.slides.map((el)=> this._returnSlideElement(el));
   }
 
   _drawSlides() {
@@ -89,7 +81,6 @@ module.exports = class Slider {
     this.slidesElements.forEach((el, i) => 
       el.style.left = this.slides[i].position + 'px');
   }
-
 
   _returnSlideElement({imgUrl, position}) {
     const img = document.createElement('img');
