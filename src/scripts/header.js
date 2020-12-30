@@ -14,7 +14,7 @@ window.addEventListener('scroll', () => {
 
 
 
-let toggle = document.querySelector(".burger");
+const toggle = document.querySelector(".burger");
 toggleHandler(toggle)
 
 
