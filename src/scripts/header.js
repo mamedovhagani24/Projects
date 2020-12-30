@@ -1,6 +1,7 @@
 'use strict'
 
-window.onscroll = function headerSmall() {
+
+window.addEventListener('scroll', () => {
     const header = document.querySelector('.header')
 
     if (window.pageYOffset > 200) {
@@ -8,26 +9,23 @@ window.onscroll = function headerSmall() {
     } else {
         header.classList.remove('header__small')
     }
-}
-
-
-
-
-let toggles = document.querySelectorAll(".burger");
-
-toggles.forEach((elem) => {
-    let toggle = elem
-    toggleHandler(toggle)
 })
+
+
+
+
+let toggle = document.querySelector(".burger");
+toggleHandler(toggle)
 
 
 function toggleHandler(toggle) {
     toggle.addEventListener("click", function (e) {
         e.preventDefault();
 
-
-
-        this.classList.contains("active") ? this.classList.toggle("active")
-            : this.classList.toggle("active");
-    });
+            if (this.classList.contains('active')) {
+                this.classList.remove("active")
+            } else {
+                this.classList.add("active");
+            }
+     });
 }
