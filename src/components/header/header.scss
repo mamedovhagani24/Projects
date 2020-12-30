@@ -6,8 +6,15 @@ a {
 
 .header {
     background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
-
     padding: 25px 0;
+    z-index: 1;
+    position: sticky;
+    top: 0;
+    transition: all 0.8s ease-out;
+
+    &.header__small {
+        padding: 15px 0;
+    }
 
     &__body {
         margin: 0 auto;
@@ -25,14 +32,52 @@ a {
         &:last-child {
             width: 70%;
 
-            .burger {
+            & .burger {
                 display: none;
+                margin-top: 10px;
 
                 &__line {
                     background-color: white;
-                    width: 37px;
-                    height: 6px;
-                    margin-bottom: 4px;
+                    width: 40px;
+                    height: 2px;
+                    position: relative;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        background-color: white;
+                        width: 40px;
+                        height: 2px;
+                        top: 11px;
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        background-color: white;
+                        width: 40px;
+                        height: 2px;
+                        bottom: 11px;
+                    }
+                }
+
+                &.active {
+                    transition: all 0.3s ease linear;
+                    & .burger__line {
+                        background: none;
+
+                        &::before {
+                            top: 0;
+                            transform: rotate(45deg);
+                            transition: all 0.3s linear;
+                        }
+
+                        &::after {
+                            bottom: 0;
+                            transform: rotate(-45deg);
+                            transition: all 0.3s linear;
+                        }
+                    }
                 }
             }
 
