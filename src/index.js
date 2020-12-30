@@ -59,9 +59,7 @@ function createMainSliderMarkers(slides) {
 }
 
 function updateMainSliderMarkers(index) {
-  mainSliderMarkers.forEach((el) =>
-    el.classList.remove("slider__control-item_active");
-  );
+  mainSliderMarkers.forEach((el) => el.classList.remove("slider__control-item_active"));
 
   mainSliderMarkers[index].classList.add("slider__control-item_active");
 }
