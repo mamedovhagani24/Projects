@@ -54,7 +54,7 @@ function createMainSliderMarkers(slides) {
     marker.setAttribute("data-index", i);
 
     marker.classList.add("slider__control-item");
-    
+
     if (i === 0) marker.classList.add("slider__control-item_active");
 
     return marker;
