@@ -16,10 +16,8 @@ window.addEventListener('scroll', () => {
 
 
 
-const toggle = document.querySelector(".burger");
-
-
-toggle.addEventListener("click", function (e) {
+const toggle = document.querySelector(".burger")
+    .addEventListener("click", function (e) {
     e.preventDefault();
 
     if (this.classList.contains('active')) {
