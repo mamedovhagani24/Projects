@@ -1,6 +1,6 @@
+'use strict'
 const Slider = require("./scripts/slider");
 
-const sliderContainer = document.getElementById("slider__container");
 
 const SLIDES_ARR = [
   {
@@ -24,6 +24,8 @@ const SLIDES_ARR = [
       "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
   },
 ];
+
+const sliderContainer = document.getElementById("slider__container");
 
 const mainSlider = new Slider(sliderContainer, SLIDES_ARR);
 
@@ -58,7 +60,7 @@ function createMainSliderMarkers(slides) {
 
 function updateMainSliderMarkers(index) {
   mainSliderMarkers.forEach((el) =>
-    el.classList.remove("slider__control-item_active")
+    el.classList.remove("slider__control-item_active");
   );
 
   mainSliderMarkers[index].classList.add("slider__control-item_active");
@@ -74,4 +76,26 @@ sliderButtonPrev.addEventListener("click", () => {
   const currSlide = mainSlider.prev();
 
   updateMainSliderMarkers(currSlide);
+});
+
+
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+
+    if (window.pageYOffset > 200) {
+        header.classList.add('header__small');
+    } else {
+        header.classList.remove('header__small');
+    }
+});
+
+const toggle = document.querySelector(".burger")
+    .addEventListener("click", function (e) {
+    e.preventDefault();
+
+    if (this.classList.contains('active')) {
+        this.classList.remove("active")
+    } else {
+        this.classList.add("active");
+    }
 });
