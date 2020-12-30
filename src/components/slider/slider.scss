@@ -3,7 +3,8 @@
 $slider-height: 500px;
 $border-radius: 5px;
 
-%block-height {
+%block-slides {
+  position: relative;
   height: $slider-height;
 }
 
@@ -11,9 +12,8 @@ $border-radius: 5px;
   display: flex;
 }
 
-
 %flex-column {
-  display: flex;
+  @extend %flex;
   flex-direction: column;
   justify-content: center;
 }
@@ -22,15 +22,18 @@ $border-radius: 5px;
   display: block;
 
   &__front {
-    @extend %block-height;
+    @extend %block-slides;
     @extend %flex;
+    z-index: 2;
     margin-bottom: -$slider-height;
     justify-content: space-between;
   }
 
   &__info {
     @extend %flex-column;
-    text-align: center;
+    align-items: center;
+    padding: 0 60px;
+    height: inherit;
   }
 
   &__title {
@@ -42,26 +45,28 @@ $border-radius: 5px;
     border-radius: $border-radius;
     line-height: 1;
     font-weight: 900;
-    padding: 0 .3em .07em;
+    padding: 0 0.3em 0.07em;
     margin-bottom: 10px;
 
-    @media screen and (max-width: $media-window--tablet){
+    @media screen and (max-width: $media-window--tablet) {
       font-size: 3em;
     }
-    @media screen and (max-width: $media-window--mobile-L){
+    @media screen and (max-width: $media-window--mobile-L) {
       font-size: 9vw;
     }
   }
 
   &__subtitle {
     font-size: 1.23em;
-    padding: .6em 2.6em .7em;
-    background: rgba(0,0,0,.5);
+    padding: 0.6em 2.6em 0.7em;
+    background: rgba(0, 0, 0, 0.5);
     border-radius: $border-radius;
     line-height: 1.7;
     color: #fff;
+    max-width: 500px;
+    text-align: center;
 
-    @media screen and (max-width: $media-window--tablet){
+    @media screen and (max-width: $media-window--tablet) {
       font-size: 1em;
     }
   }
@@ -76,17 +81,17 @@ $border-radius: 5px;
       @extend %flex-column;
 
       .slider__btn {
-        padding-right: .4em;
+        padding-right: 0.4em;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-      } 
+      }
     }
 
     &_right {
       @extend %flex-column;
 
       .slider__btn {
-        padding-left: .4em;
+        padding-left: 0.4em;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
@@ -113,12 +118,14 @@ $border-radius: 5px;
 
   &__btn {
     font-size: 3em;
-    padding: .3em;
+    padding: 0.3em;
     line-height: 0;
     border-radius: $border-radius;
   }
 
   &__back {
-    @extend %block-height;
+    @extend %block-slides;
+    z-index: 1;
+    background: $secondary-color--darken;
   }
 }
