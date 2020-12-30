@@ -12,7 +12,7 @@ const SLIDES_ARR = [
   {
     heading: "Vestibulium1",
     description:
-      "Maecenas tincidunt, augue et rutrum condimentum, libero lectus mattis orci, ut commodo.",
+      "Maecenas tincidunt, augue et rutrum condimentum, ut commodo.",
     imgUrl:
       "https://canadalifechurch.com/wp-content/uploads/2017/06/2017.02.05.jpg",
   },
@@ -21,7 +21,7 @@ const SLIDES_ARR = [
     description:
       "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
     imgUrl:
-      "https://canadalifechurch.com/wp-content/uploads/2017/06/2017.02.05.jpg",
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
   },
 ];
 
