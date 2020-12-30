@@ -21,9 +21,7 @@
         </div>
         <div class="header__column">
             <div class="burger">
-                <div class="burger__line"></div>
-                <div class="burger__line"></div>
-                <div class="burger__line"></div>
+                <span class="burger__line"></span>
             </div>
             <nav class="header__menu">
                 <li class="menu__item btn btn_secondary">Home</li>
@@ -48,39 +46,21 @@
 
   <div class="slider__front">
     <div class="slider__control_left">
-      <button class="slider__btn btn btn_icon btn_accent">
+      <button id="slider__prev" class="slider__btn btn btn_icon btn_accent">
         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
       </button>
     </div>
-    <div class="slider__info">
-      <div class="slider__info_wrapp">
-
-        <h1 class="slider__title">Vestibulium</h1>
-        <div class="slider__subtitle">Maecenas tincidunt, augue et rutrum condimentum,<br> libero lectus mattis orci, ut commodo.</div>
-
-      </div>
-    </div>
     <div class="slider__control_right">
-      <button class="slider__btn btn btn_icon btn_accent btn-large">
+      <button id="slider__next" class="slider__btn btn btn_icon btn_accent btn-large">
         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
       </button>
     </div>
   </div>
 
-  <div class="slider__back">
-    <div class="slider__images">
-      <img src="#" alt="#" class="slider__image">
-    </div>
-  </div>
+  <div class="slider__back" id="slider__container"></div>
 
-  <div class="slider__bottom-controls">
-    <div class="slider__control-item slider__control-item_active"></div>
-    <div class="slider__control-item"></div>
-    <div class="slider__control-item"></div>
-  </div>
-
+  <div class="slider__bottom-controls"></div>
 </div>
-
 
 
 <div class="services">

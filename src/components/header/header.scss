@@ -7,7 +7,7 @@ a {
 .header {
     background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
     padding: 25px 0;
-    z-index: 1;
+    z-index: 3;
     position: sticky;
     top: 0;
     transition: all 0.8s ease-out;
