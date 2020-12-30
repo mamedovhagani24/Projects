@@ -1,9 +1,5 @@
-// const module = require('./scripts/script.js'); <-- пример подключения скрипта из папки scripts
-
-// const module = require('./scripts/script.js'); <-- пример подключения скрипта из папки scripts
-
-
 'use strict'
+
 const Slider = require("./scripts/slider");
 require("./scripts/services-drag-n-drop.js");
 
@@ -48,8 +44,8 @@ mainSliderMarkersWrapp.addEventListener("click", (e) => {
 
   if (markerIndex === undefined) return;
 
-  mainSlider.setSlide(markerIndex);
-  updateMainSliderMarkers(markerIndex);
+  mainSlider.setSlide(+markerIndex);
+  updateMainSliderMarkers(+markerIndex);
 });
 
 function createMainSliderMarkers(slides) {
@@ -58,6 +54,7 @@ function createMainSliderMarkers(slides) {
     marker.setAttribute("data-index", i);
 
     marker.classList.add("slider__control-item");
+    
     if (i === 0) marker.classList.add("slider__control-item_active");
 
     return marker;
@@ -73,13 +70,13 @@ function updateMainSliderMarkers(index) {
 sliderButtonNext.addEventListener("click", () => {
   const currSlide = mainSlider.next();
 
-  updateMainSliderMarkers(currSlide);
+  updateMainSliderMarkers(+currSlide);
 });
 
 sliderButtonPrev.addEventListener("click", () => {
   const currSlide = mainSlider.prev();
 
-  updateMainSliderMarkers(currSlide);
+  updateMainSliderMarkers(+currSlide);
 });
 
 

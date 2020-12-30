@@ -63,7 +63,7 @@ a {
                 }
 
                 &.active {
-                    transition: all 0.3s ease linear;
+                    transition: all 0.3s ease;
                     & .burger__line {
                         background: none;
 

@@ -176,9 +176,10 @@ a {
   margin-top: 10px;
 }
 .header__column:last-child .burger__line {
+  display: block;
   background-color: white;
   width: 40px;
-  height: 2px;
+  height: 4px;
   position: relative;
 }
 .header__column:last-child .burger__line::before {
@@ -186,7 +187,7 @@ a {
   position: absolute;
   background-color: white;
   width: 40px;
-  height: 2px;
+  height: inherit;
   top: 11px;
 }
 .header__column:last-child .burger__line::after {
@@ -194,11 +195,11 @@ a {
   position: absolute;
   background-color: white;
   width: 40px;
-  height: 2px;
+  height: inherit;
   bottom: 11px;
 }
 .header__column:last-child .burger.active {
-  transition: all 0.3s ease linear;
+  transition: all 0.3s ease;
 }
 .header__column:last-child .burger.active .burger__line {
   background: none;
