@@ -157,7 +157,7 @@ module.exports = class Slider {
     this.container = container;
     this.slides = slides;
     this.slidesOnScreen = slidesOnScreen;
-    this.speed = speed;
+    this.transitionValue = 'all '+speed+'s ease';
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -176,7 +176,17 @@ module.exports = class Slider {
   }
 
   onResize(e) {
+    this.slidesElements.forEach((el) => {
+      el.style.transition = 'none';
+      return el;
+    });
+
     this.setSlide(this.currentSlide);
+
+    this.slidesElements.forEach((el) => {
+      el.style.transition = this.transitionValue;
+      return el;
+    });
   }
 
   next() {
@@ -251,7 +261,7 @@ module.exports = class Slider {
     slide.style.backgroundSize = "cover";
     slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
-    slide.style.transition = "all " + this.speed + "s ease";
+    slide.style.transition = this.transitionValue;
     slide.style.width = "inherit";
 
     if (heading && description)
