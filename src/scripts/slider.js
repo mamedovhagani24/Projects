@@ -5,7 +5,7 @@ module.exports = class Slider {
     this.container = container;
     this.slides = slides;
     this.slidesOnScreen = slidesOnScreen;
-    this.transitionValue = 'all '+speed+'s ease';
+    this.transitionValue = "all " + speed + "s ease";
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -25,16 +25,18 @@ module.exports = class Slider {
 
   onResize(e) {
     this.slidesElements.forEach((el) => {
-      el.style.transition = 'none';
+      el.style.transition = "none";
       return el;
     });
 
     this.setSlide(this.currentSlide);
-
-    this.slidesElements.forEach((el) => {
-      el.style.transition = this.transitionValue;
-      return el;
-    });
+    
+    setTimeout(() => {
+      this.slidesElements.forEach((el) => {
+        el.style.transition = this.transitionValue;
+        return el;
+      });
+    }, 100);
   }
 
   next() {

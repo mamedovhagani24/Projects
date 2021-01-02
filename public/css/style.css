@@ -77,6 +77,16 @@ a {
 .btn:focus {
   outline: 0;
 }
+.btn_disabled {
+  cursor: default;
+  background: #98a3a3;
+  border: none;
+  color: #7f8c8c;
+  opacity: 0.8;
+}
+.btn_disabled:hover, .btn_disabled:focus, .btn_disabled:active {
+  background: #98a3a3;
+}
 
 /* 
   используется в template.html
@@ -332,16 +342,16 @@ a {
   text-transform: lowercase;
 }
 
-.slider__back, .slider__front {
+.slider__images, .slider__wrapp {
   position: relative;
   height: 500px;
 }
 
-.slider__bottom-controls, .slider__front, .slider__control_right, .slider__control_left, .slider__info {
+.slider__bottom-controls, .slider__control, .slider__info {
   display: flex;
 }
 
-.slider__control_right, .slider__control_left, .slider__info {
+.slider__control, .slider__info {
   flex-direction: column;
   justify-content: center;
 }
@@ -349,13 +359,13 @@ a {
 .slider {
   display: block;
 }
-.slider__front {
+.slider__wrapp {
   z-index: 2;
-  margin-bottom: -500px;
   justify-content: space-between;
 }
 .slider__info {
   align-items: center;
+  text-align: center;
   padding: 0 60px;
   height: inherit;
 }
@@ -389,26 +399,24 @@ a {
   line-height: 1.7;
   color: #fff;
   max-width: 500px;
-  text-align: center;
 }
 @media screen and (max-width: 768px) {
   .slider__subtitle {
     font-size: 1em;
   }
 }
-.slider__images {
-  height: inherit;
-  background: #7f8c8c;
+.slider__control {
+  height: 500px;
+  z-index: 3;
+  position: relative;
 }
-.slider__control_left .slider__btn {
-  padding-right: 0.4em;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+.slider__control_left {
+  float: left;
+  margin-bottom: -500px;
 }
-.slider__control_right .slider__btn {
-  padding-left: 0.4em;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+.slider__control_right {
+  float: right;
+  margin-top: -500px;
 }
 .slider__bottom-controls {
   justify-content: center;
@@ -430,7 +438,17 @@ a {
   line-height: 0;
   border-radius: 5px;
 }
-.slider__back {
+.slider__btn_left {
+  padding-right: 0.4em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.slider__btn_right {
+  padding-left: 0.4em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.slider__images {
   z-index: 1;
   background: #7f8c8c;
 }

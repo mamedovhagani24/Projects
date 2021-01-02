@@ -91,6 +91,19 @@ a {
   &:focus {
     outline: 0;
   }
+  
+  &_disabled {
+    cursor: default;
+    background: $secondary-color;
+    border: none;
+    color: $secondary-color--darken;
+    opacity: .8;
+    &:hover,
+    &:focus,
+    &:active {
+      background: $secondary-color;
+    }
+  }
 }
 
 /* 
@@ -114,7 +127,6 @@ a {
   }
 }
 
-$col-padding: 15px;
 
 %col-paddings {
   padding: {

@@ -28,9 +28,9 @@ const SLIDES_ARR = [
   },
 ];
 
-const sliderContainer = document.getElementById("slider__container");
+const mainSliderContainer = document.getElementById("main-slider__container");
 
-const mainSlider = new Slider(sliderContainer, SLIDES_ARR);
+const mainSlider = new Slider(mainSliderContainer, SLIDES_ARR);
 
 const sliderButtonNext = document.getElementById("slider__next");
 const sliderButtonPrev = document.getElementById("slider__prev");
@@ -40,6 +40,9 @@ const mainSliderMarkers = createMainSliderMarkers(SLIDES_ARR);
 
 mainSliderMarkersWrapp.append(...mainSliderMarkers);
 
+checkButtonsActivity([sliderButtonNext, sliderButtonPrev], 0, SLIDES_ARR.length);
+
+
 mainSliderMarkersWrapp.addEventListener("click", (e) => {
   const markerIndex = e.target.closest('.slider__control-item')?.dataset.index;
 
@@ -48,6 +51,23 @@ mainSliderMarkersWrapp.addEventListener("click", (e) => {
   mainSlider.setSlide(+markerIndex);
   updateMainSliderMarkers(+markerIndex);
 });
+
+sliderButtonNext.addEventListener("click", () => {
+  if (sliderButtonNext.classList.contains('btn_disabled')) return;
+
+  const currSlide = mainSlider.next();
+
+  updateMainSliderMarkers(+currSlide);
+});
+
+sliderButtonPrev.addEventListener("click", () => {
+  if (sliderButtonPrev.classList.contains('btn_disabled')) return;
+
+  const currSlide = mainSlider.prev();
+
+  updateMainSliderMarkers(+currSlide);
+});
+
 
 function createMainSliderMarkers(slides) {
   return slides.map((el, i) => {
@@ -66,20 +86,16 @@ function updateMainSliderMarkers(index) {
   mainSliderMarkers.forEach((el) => el.classList.remove("slider__control-item_active"));
 
   mainSliderMarkers[index].classList.add("slider__control-item_active");
+
+  checkButtonsActivity([sliderButtonNext, sliderButtonPrev], index, SLIDES_ARR.length);
 }
 
-sliderButtonNext.addEventListener("click", () => {
-  const currSlide = mainSlider.next();
 
-  updateMainSliderMarkers(+currSlide);
-});
-
-sliderButtonPrev.addEventListener("click", () => {
-  const currSlide = mainSlider.prev();
-
-  updateMainSliderMarkers(+currSlide);
-});
-
+function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
+  if (currSlide === 0) buttonsArr[1].classList.add('btn_disabled');
+  else if (currSlide === slidesAmount-1) buttonsArr[0].classList.add('btn_disabled');
+  else buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
+}
 
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
@@ -157,7 +173,7 @@ module.exports = class Slider {
     this.container = container;
     this.slides = slides;
     this.slidesOnScreen = slidesOnScreen;
-    this.transitionValue = 'all '+speed+'s ease';
+    this.transitionValue = "all " + speed + "s ease";
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -177,16 +193,18 @@ module.exports = class Slider {
 
   onResize(e) {
     this.slidesElements.forEach((el) => {
-      el.style.transition = 'none';
+      el.style.transition = "none";
       return el;
     });
 
     this.setSlide(this.currentSlide);
-
-    this.slidesElements.forEach((el) => {
-      el.style.transition = this.transitionValue;
-      return el;
-    });
+    
+    setTimeout(() => {
+      this.slidesElements.forEach((el) => {
+        el.style.transition = this.transitionValue;
+        return el;
+      });
+    }, 100);
   }
 
   next() {
