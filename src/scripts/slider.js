@@ -30,7 +30,7 @@ module.exports = class Slider {
     });
 
     this.setSlide(this.currentSlide);
-    
+
     setTimeout(() => {
       this.slidesElements.forEach((el) => {
         el.style.transition = this.transitionValue;
@@ -38,6 +38,7 @@ module.exports = class Slider {
       });
     }, 100);
   }
+
 
   next() {
     this.setSlide(this.currentSlide + 1);
