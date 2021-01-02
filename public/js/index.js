@@ -55,7 +55,7 @@ function createMainSliderMarkers(slides) {
     marker.setAttribute("data-index", i);
 
     marker.classList.add("slider__control-item");
-    
+
     if (i === 0) marker.classList.add("slider__control-item_active");
 
     return marker;
@@ -155,104 +155,112 @@ function handleDrop(item) {
 module.exports = class Slider {
   constructor(container, slides, slidesOnScreen = 1, speed = 1) {
     this.container = container;
+    this.slides = slides;
     this.slidesOnScreen = slidesOnScreen;
     this.speed = speed;
-    
+
     this.slidesElements = [];
     this.currentSlide = 0;
     this.width = 0;
     this.height = 0;
 
-    this.init(slides);
+    this.init();
   }
 
-  init(slides) {
+  init() {
     this._updateSizes();
-    this.slides = this._returnSlidesData(slides);
     this.slidesElements = this._createImages();
     this._drawSlides();
+
+    window.addEventListener("resize", this.onResize.bind(this));
+  }
+
+  onResize(e) {
+    this.setSlide(this.currentSlide);
   }
 
   next() {
     this.setSlide(this.currentSlide + 1);
-
     return this.currentSlide;
   }
-  
+
   prev() {
     this.setSlide(this.currentSlide - 1);
-    
     return this.currentSlide;
   }
 
   setSlide(index) {
-    if (index < 0 || index > this.slides.length-1) return;
-    
+    this._updateSizes();
+
+    if (index < 0 || index > this.slides.length - 1) return;
+
     const scrollWidth = this.slides[index].position;
 
-    this.slides = this.slides.map((el) => {
-      if (this.currentSlide > index) {
-        el.position -= scrollWidth;
-      } else el.position -= scrollWidth;
-
+    this.slides.forEach((el) => {
+      el.position -= scrollWidth;
       return el;
     });
 
     this.currentSlide = index;
 
-    this._updateSlidesPosition();
+    this._updateSlidesTransform();
   }
 
-  _updateSizes() {
+  _updateSizes(width) {
     this.width = this.container.clientWidth;
     this.height = this.container.clientHeight;
+
+    this._updateSlidesPosition(width);
   }
 
-  _returnSlidesData(slidesArr) {
-    return slidesArr.map((el, i)=> {
-      el.position = i * this.width;
-      
+  _updateSlidesPosition(width) {
+    this.slides.forEach((el, i) => {
+      el.position = width ? el.position + (width - this.width) : i * this.width;
+
       return el;
     });
   }
 
   _createImages() {
-    return this.slides.map((el)=> this._returnSlideElement(el));
+    return this.slides.map((el) => this._returnSlideElement(el));
   }
 
   _drawSlides() {
     this.container.style.overflow = "hidden";
-    this.container.style.position = 'relative';
+    this.container.style.position = "relative";
     this.container.style.height = this.height;
-    this.container.style.width = '100%';
-    
+    this.container.style.width = "100%";
+
     this.container.append(...this.slidesElements);
   }
 
-  _updateSlidesPosition() {
-    this.slidesElements.forEach((el, i) => 
-      el.style.left = this.slides[i].position + 'px');
+  _updateSlidesTransform() {
+    this.slidesElements.forEach((el, i) => {
+      el.style.transform = "translateX(" + this.slides[i].position + "px)";
+
+      return el;
+    });
   }
 
-  _returnSlideElement({imgUrl, position, heading, description}) {
-    const slide = document.createElement('div');
+  _returnSlideElement({ imgUrl, position, heading, description }) {
+    const slide = document.createElement("div");
 
-    slide.style.background = 'url('+imgUrl+') no-repeat center';
-    slide.style.position = 'absolute';
+    slide.style.background = "url(" + imgUrl + ") no-repeat center";
+    slide.style.position = "absolute";
     slide.style.top = 0;
-    slide.style.backgroundSize = 'cover';
-    slide.style.height = 'inherit';
-    slide.style.left = position + 'px';
-    slide.style.transition = 'all '+this.speed+'s ease';
-    slide.style.width = this._calcImagesWidth()+'px';
-    
-    if (heading && description) 
-      slide.innerHTML = this._createSlideInfoElements(heading, description);
+    slide.style.backgroundSize = "cover";
+    slide.style.height = "inherit";
+    slide.style.transform = "translateX(" + position + "px)";
+    slide.style.transition = "all " + this.speed + "s ease";
+    slide.style.width = "inherit";
+
+    if (heading && description)
+      slide.innerHTML = this._createSlideInfoElementsHTML(heading, description);
 
     return slide;
   }
 
-  _createSlideInfoElements(title, desc) {
+  _createSlideInfoElementsHTML(title, desc) {
     return `<div class="slider__info">
       <h1 class="slider__title">${title}</h1>
       <div class="slider__subtitle">${desc}</div>
