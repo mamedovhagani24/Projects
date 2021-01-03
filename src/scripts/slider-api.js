@@ -19,14 +19,16 @@ module.exports = class Slider {
     this.width = 0;
     this.height = 0;
 
-    this.events = [];
+    this.events = {
+      changeSlide: null,
+      touchEnabled: null,
+      touchDisabled: null
+    };
 
     this.touch = {
       startX: 0,
       moveX: 0,
     };
-
-    this.init();
   }
 
   init() {
@@ -39,14 +41,12 @@ module.exports = class Slider {
   }
 
   onEvent(type, callback) {
-    this.events.push({
-      type,
-      callback,
-    });
+    this.events[type] = callback;
   }
 
   _onResize(e) {
     const width = e.currentTarget.innerWidth;
+    console.log(width)
     this._initTouchEvents(width);
 
     this.slidesElements.forEach((el) => {
@@ -65,8 +65,15 @@ module.exports = class Slider {
   _initTouchEvents(width) {
     if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
       this._addTouchEvents();
+      console.log(true)
+      if (this.events.touchEnabled !== null)
+      this.events.touchEnabled();
     } else {
       this._removeTouchEvents();
+      console.log(false)
+
+      if (this.events.touchDisabled !== null)
+        this.events.touchDisabled();
     }
   }
 
@@ -153,9 +160,8 @@ module.exports = class Slider {
 
     this._updateSlidesTransform();
 
-    this.events.forEach((el) => {
-      if (el.type === "changeSlide") el.callback(this.currentSlide);
-    });
+    if (this.events.changeSlide !== null)
+      this.events.changeSlide(index);
   }
 
   _updateSizes(width) {

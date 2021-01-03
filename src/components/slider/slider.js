@@ -40,6 +40,22 @@ checkButtonsActivity([sliderButtonNext, sliderButtonPrev], 0, SLIDES_ARR.length)
 
 mainSlider.onEvent('changeSlide', updateMainSliderMarkers);
 
+mainSlider.onEvent('touchEnabled', () => {
+  sliderButtonPrev.style.display = 'none';
+  sliderButtonNext.style.display = 'none';
+
+  mainSliderMarkers.forEach(el=> el.style.height = '10px');
+});
+
+mainSlider.onEvent('touchDisabled', () => {
+  sliderButtonPrev.style.display = 'block';
+  sliderButtonNext.style.display = 'block';
+
+  mainSliderMarkers.forEach(el=> el.style.height = '5px');
+});
+
+mainSlider.init();
+
 
 mainSliderMarkersWrapp.addEventListener("click", (e) => {
   const markerIndex = e.target.closest('.slider__control-item')?.dataset.index;
@@ -82,7 +98,6 @@ function updateMainSliderMarkers(index) {
 
   checkButtonsActivity([sliderButtonNext, sliderButtonPrev], index, SLIDES_ARR.length);
 }
-
 
 function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
   if (currSlide === 0) 
