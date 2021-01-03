@@ -1,9 +1,75 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-'use strict'
 
-const Slider = require("./scripts/slider");
-require("./scripts/services-drag-n-drop.js");
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('.header');
 
+  if (window.pageYOffset > 200) {
+      header.classList.add('header__small');
+  } else {
+      header.classList.remove('header__small');
+  }
+});
+
+const toggle = document.querySelector(".burger")
+  .addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (this.classList.contains('active')) {
+      this.classList.remove("active")
+  } else {
+      this.classList.add("active");
+  }
+});
+
+},{}],2:[function(require,module,exports){
+function enableDragSort(listClass) {
+  const sortableLists = document.getElementsByClassName(listClass);
+  Array.prototype.map.call(sortableLists, (list) => {
+    enableDragList(list);
+  });
+}
+
+function enableDragList(list) {
+  Array.prototype.map.call(list.children, (item) => {
+    enableDragItem(item);
+  });
+}
+
+function enableDragItem(item) {
+  item.setAttribute("draggable", true);
+  item.ondrag = handleDrag;
+  item.ondragend = handleDrop;
+}
+
+function handleDrag(item) {
+  const selectedItem = item.target,
+    list = selectedItem.parentNode,
+    x = event.clientX,
+    y = event.clientY;
+
+  selectedItem.classList.add("drag-sort-active");
+  let swapItem =
+    document.elementFromPoint(x, y) === null
+      ? selectedItem
+      : document.elementFromPoint(x, y);
+
+  if (list === swapItem.parentNode) {
+    swapItem =
+      swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
+    list.insertBefore(selectedItem, swapItem);
+  }
+}
+
+function handleDrop(item) {
+  item.target.classList.remove("drag-sort-active");
+}
+
+(() => {
+  enableDragSort("services__items-wrapper");
+})();
+
+},{}],3:[function(require,module,exports){
+const Slider = require("../../scripts/slider-api");
 
 const SLIDES_ARR = [
   {
@@ -98,75 +164,12 @@ function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
     buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
 }
 
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
+},{"../../scripts/slider-api":5}],4:[function(require,module,exports){
+require("./components/services/services-drag-n-drop");
+require("./components/header/header");
+require("./components/slider/slider");
 
-    if (window.pageYOffset > 200) {
-        header.classList.add('header__small');
-    } else {
-        header.classList.remove('header__small');
-    }
-});
-
-const toggle = document.querySelector(".burger")
-    .addEventListener("click", function (e) {
-    e.preventDefault();
-
-    if (this.classList.contains('active')) {
-        this.classList.remove("active")
-    } else {
-        this.classList.add("active");
-    }
-});
-
-},{"./scripts/services-drag-n-drop.js":2,"./scripts/slider":3}],2:[function(require,module,exports){
-function enableDragSort(listClass) {
-  const sortableLists = document.getElementsByClassName(listClass);
-  Array.prototype.map.call(sortableLists, (list) => {
-    enableDragList(list);
-  });
-}
-
-function enableDragList(list) {
-  Array.prototype.map.call(list.children, (item) => {
-    enableDragItem(item);
-  });
-}
-
-function enableDragItem(item) {
-  item.setAttribute("draggable", true);
-  item.ondrag = handleDrag;
-  item.ondragend = handleDrop;
-}
-
-function handleDrag(item) {
-  const selectedItem = item.target,
-    list = selectedItem.parentNode,
-    x = event.clientX,
-    y = event.clientY;
-
-  selectedItem.classList.add("drag-sort-active");
-  let swapItem =
-    document.elementFromPoint(x, y) === null
-      ? selectedItem
-      : document.elementFromPoint(x, y);
-
-  if (list === swapItem.parentNode) {
-    swapItem =
-      swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
-    list.insertBefore(selectedItem, swapItem);
-  }
-}
-
-function handleDrop(item) {
-  item.target.classList.remove("drag-sort-active");
-}
-
-(() => {
-  enableDragSort("services__items-wrapper");
-})();
-
-},{}],3:[function(require,module,exports){
+},{"./components/header/header":1,"./components/services/services-drag-n-drop":2,"./components/slider/slider":3}],5:[function(require,module,exports){
 "use strict";
 
 module.exports = class Slider {
@@ -389,4 +392,4 @@ module.exports = class Slider {
   }
 };
 
-},{}]},{},[1]);
+},{}]},{},[4]);
