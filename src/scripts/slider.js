@@ -1,20 +1,29 @@
 "use strict";
 
 module.exports = class Slider {
-  constructor(container, slides, slidesOnScreen = 1, speed = 1) {
+  constructor(
+    container,
+    slides,
+    slidesOnScreen = 1,
+    speed = 1,
+    touchActiveBreakpoint
+  ) {
     this.container = container;
     this.slides = slides;
     this.slidesOnScreen = slidesOnScreen;
     this.transitionValue = "all " + speed + "s ease";
+    this.touchActiveBreakpoint = touchActiveBreakpoint;
 
     this.slidesElements = [];
     this.currentSlide = 0;
     this.width = 0;
     this.height = 0;
 
+    this.events = [];
+
     this.touch = {
       startX: 0,
-      moveX: 0
+      moveX: 0,
     };
 
     this.init();
@@ -24,19 +33,24 @@ module.exports = class Slider {
     this._updateSizes();
     this.slidesElements = this._createImages();
     this._drawSlides();
-    this._initTouchEvents();
-    window.addEventListener("resize", this.onResize.bind(this));
+    this._initTouchEvents(this.width);
+
+    window.addEventListener("resize", this._onResize.bind(this));
   }
 
-  onResize(e) {
+  onEvent(type, callback) {
+    this.events.push({
+      type,
+      callback,
+    });
+  }
+
+  _onResize(e) {
     const width = e.currentTarget.innerWidth;
-    
-    if (width <= 425) this._initTouchEvents();
-    else this._removeTouchEvents();
+    this._initTouchEvents(width);
 
     this.slidesElements.forEach((el) => {
       el.style.transition = "none";
-      return el;
     });
 
     this.setSlide(this.currentSlide);
@@ -44,55 +58,72 @@ module.exports = class Slider {
     setTimeout(() => {
       this.slidesElements.forEach((el) => {
         el.style.transition = this.transitionValue;
-        return el;
       });
     }, 100);
   }
 
-  _initTouchEvents() {
-    this.container.addEventListener('touchstart', this._touchStart.bind(this));
-    this.container.addEventListener('touchmove', this._touchMove.bind(this));
-    this.container.addEventListener('touchend', this._touchEnd.bind(this));
+  _initTouchEvents(width) {
+    if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
+      this._addTouchEvents();
+    } else {
+      this._removeTouchEvents();
+    }
+  }
+
+  _addTouchEvents() {
+    this.container.addEventListener("touchstart", this._touchStart.bind(this));
+    this.container.addEventListener("touchmove", this._touchMove.bind(this));
+    this.container.addEventListener("touchend", this._touchEnd.bind(this));
   }
 
   _touchStart(e) {
     this.slidesElements.forEach((el) => {
       el.style.transition = "none";
-      return el;
     });
 
     this.touch.startX = e.changedTouches[0].pageX;
   }
 
-  _touchMove(e){
+  _touchMove(e) {
     this.touch.moveX = e.changedTouches[0].pageX - this.touch.startX;
-    
-    console.log(this.touch.moveX)
-    this.slideMove(this.touch.moveX)
-    // this.touch.moveX = 0;
+    const swipeLength = Math.abs(this.touch.moveX);
+
+    if (swipeLength < 20) return;
+
+    this.touch.slidesPosition =
+      this.touch.slidesPosition ?? this.slides.map((el) => el.position);
+
+    this.slideMove(this.touch.moveX);
+
+    if (swipeLength > this.width / 2) {
+      this.touch.nextSlide =
+        this.touch.moveX < 0 ? this.currentSlide + 1 : this.currentSlide - 1;
+    }
   }
 
-  _touchEnd(e){
-    this.touch = {
-      startX: 0,
-      moveX: 0
-    }
-
+  _touchEnd(e) {
     this.slidesElements.forEach((el) => {
       el.style.transition = this.transitionValue;
-      return el;
     });
+
+    if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
+    else this.setSlide(this.currentSlide);
+
+    this.touch = {
+      startX: 0,
+      moveX: 0,
+    };
   }
 
   _removeTouchEvents() {
-
+    this.container.removeEventListener("touchstart", this._touchStart);
+    this.container.removeEventListener("touchmove", this._touchMove);
+    this.container.removeEventListener("touchend", this._touchEnd);
   }
 
   slideMove(positionX) {
-    this.slides.forEach((el) => {
-      el.position += positionX;
-
-      return el;
+    this.slides.forEach((el, i) => {
+      el.position = this.touch.slidesPosition[i] + positionX;
     });
 
     this._updateSlidesTransform();
@@ -100,29 +131,31 @@ module.exports = class Slider {
 
   next() {
     this.setSlide(this.currentSlide + 1);
-    return this.currentSlide;
   }
 
   prev() {
     this.setSlide(this.currentSlide - 1);
-    return this.currentSlide;
   }
 
   setSlide(index) {
     this._updateSizes();
 
-    if (index < 0 || index > this.slides.length - 1) return;
+    if (index < 0) index = 0;
+    else if (index > this.slides.length - 1) index = this.slides.length - 1;
 
     const scrollWidth = this.slides[index].position;
 
     this.slides.forEach((el) => {
       el.position -= scrollWidth;
-      return el;
     });
 
     this.currentSlide = index;
 
     this._updateSlidesTransform();
+
+    this.events.forEach((el) => {
+      if (el.type === "changeSlide") el.callback(this.currentSlide);
+    });
   }
 
   _updateSizes(width) {
@@ -135,8 +168,6 @@ module.exports = class Slider {
   _updateSlidesPosition(width) {
     this.slides.forEach((el, i) => {
       el.position = width ? el.position + (width - this.width) : i * this.width;
-
-      return el;
     });
   }
 
@@ -156,8 +187,6 @@ module.exports = class Slider {
   _updateSlidesTransform() {
     this.slidesElements.forEach((el, i) => {
       el.style.transform = "translateX(" + this.slides[i].position + "px)";
-
-      return el;
     });
   }
 

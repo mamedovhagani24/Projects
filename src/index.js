@@ -29,7 +29,7 @@ const SLIDES_ARR = [
 
 const mainSliderContainer = document.getElementById("main-slider__container");
 
-const mainSlider = new Slider(mainSliderContainer, SLIDES_ARR);
+const mainSlider = new Slider(mainSliderContainer, SLIDES_ARR, 1, 1, 425);
 
 const sliderButtonNext = document.getElementById("slider__next");
 const sliderButtonPrev = document.getElementById("slider__prev");
@@ -37,9 +37,12 @@ const mainSliderMarkersWrapp = document.querySelector(".slider__bottom-controls"
 
 const mainSliderMarkers = createMainSliderMarkers(SLIDES_ARR);
 
+
 mainSliderMarkersWrapp.append(...mainSliderMarkers);
 
 checkButtonsActivity([sliderButtonNext, sliderButtonPrev], 0, SLIDES_ARR.length);
+
+mainSlider.onEvent('changeSlide', updateMainSliderMarkers);
 
 
 mainSliderMarkersWrapp.addEventListener("click", (e) => {
@@ -48,23 +51,18 @@ mainSliderMarkersWrapp.addEventListener("click", (e) => {
   if (markerIndex === undefined) return;
 
   mainSlider.setSlide(+markerIndex);
-  updateMainSliderMarkers(+markerIndex);
 });
 
 sliderButtonNext.addEventListener("click", () => {
   if (sliderButtonNext.classList.contains('btn_disabled')) return;
 
-  const currSlide = mainSlider.next();
-
-  updateMainSliderMarkers(+currSlide);
+  mainSlider.next();
 });
 
 sliderButtonPrev.addEventListener("click", () => {
   if (sliderButtonPrev.classList.contains('btn_disabled')) return;
 
-  const currSlide = mainSlider.prev();
-
-  updateMainSliderMarkers(+currSlide);
+  mainSlider.prev();
 });
 
 
@@ -91,9 +89,12 @@ function updateMainSliderMarkers(index) {
 
 
 function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
-  if (currSlide === 0) buttonsArr[1].classList.add('btn_disabled');
-  else if (currSlide === slidesAmount-1) buttonsArr[0].classList.add('btn_disabled');
-  else buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
+  if (currSlide === 0) 
+    buttonsArr[1].classList.add('btn_disabled');
+  else if (currSlide === slidesAmount-1) 
+    buttonsArr[0].classList.add('btn_disabled');
+  else 
+    buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
 }
 
 window.addEventListener('scroll', () => {
