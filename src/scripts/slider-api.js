@@ -46,7 +46,7 @@ module.exports = class Slider {
 
   _onResize(e) {
     const width = e.currentTarget.innerWidth;
-    console.log(width)
+    
     this._initTouchEvents(width);
 
     this.slidesElements.forEach((el) => {
@@ -65,12 +65,11 @@ module.exports = class Slider {
   _initTouchEvents(width) {
     if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
       this._addTouchEvents();
-      console.log(true)
+      
       if (this.events.touchEnabled !== null)
       this.events.touchEnabled();
     } else {
       this._removeTouchEvents();
-      console.log(false)
 
       if (this.events.touchDisabled !== null)
         this.events.touchDisabled();
@@ -164,16 +163,16 @@ module.exports = class Slider {
       this.events.changeSlide(index);
   }
 
-  _updateSizes(width) {
+  _updateSizes() {
     this.width = this.container.clientWidth;
     this.height = this.container.clientHeight;
 
-    this._updateSlidesPosition(width);
+    this._updateSlidesPosition();
   }
 
-  _updateSlidesPosition(width) {
+  _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
-      el.position = width ? el.position + (width - this.width) : i * this.width;
+      el.position = (i * this.width) / this.slidesOnScreen;
     });
   }
 
@@ -196,21 +195,31 @@ module.exports = class Slider {
     });
   }
 
-  _returnSlideElement({ imgUrl, position, heading, description }) {
-    const slide = document.createElement("div");
+  _returnSlideElement({ imgUrl, position, heading, description, className }) {
+    let slide = document.createElement("div");
 
-    slide.style.background = "url(" + imgUrl + ") no-repeat center";
-    slide.style.position = "absolute";
-    slide.style.top = 0;
-    slide.style.backgroundSize = "cover";
-    slide.style.height = "inherit";
-    slide.style.transform = "translateX(" + position + "px)";
-    slide.style.transition = this.transitionValue;
-    slide.style.width = "inherit";
+    slide = this._setStyles(slide, imgUrl, position, className);
 
     if (heading && description)
       slide.innerHTML = this._createSlideInfoElementsHTML(heading, description);
 
+    return slide;
+  }
+
+  _setStyles(slide, imgUrl, position, className) {
+    if (className) slide.classList.add(className);
+
+    slide.style.backgroundImage = "url(" + imgUrl + ")";
+    slide.style.backgroundRepeat = 'no-repeat';
+    slide.style.backgroundPosition = 'center center';
+    slide.style.transform = "translateX(" + position + "px)";
+    slide.style.position = "absolute";
+    slide.style.width = this._calcImagesWidth();
+    slide.style.top = 0;
+    // slide.style.backgroundSize = "cover";
+    slide.style.height = "inherit";
+    slide.style.transition = this.transitionValue;
+    
     return slide;
   }
 
@@ -222,6 +231,6 @@ module.exports = class Slider {
   }
 
   _calcImagesWidth() {
-    return this.width / this.slidesOnScreen;
+    return this.slidesOnScreen === 1 ? 'inherit' : (this.width / this.slidesOnScreen) + 'px';
   }
 };

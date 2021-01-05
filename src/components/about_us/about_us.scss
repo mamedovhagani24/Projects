@@ -90,11 +90,11 @@
 
   &__slider {
     &-img {
-      width: 70%;
-
-      @media screen and (max-width: $media-window--tablet) {
-        width: 80%;
-      }
+      background-size: 60%;
+      padding: 2.3em 0;
+      text-align: center;
+      background: $about_us__slider-card-bg-color;
+      border-radius: 4px;
     }
 
     &-header {
@@ -103,34 +103,8 @@
     }
 
     &-body {
-      @media screen and (max-width: $media-window--laptop) {
-        .row__col-2 {
-          width: 25%;
-
-          &:nth-child(n + 5) {
-            display: none;
-          }
-        }
-      }
-      @media screen and (max-width: $media-window--tablet) {
-        .row__col-2 {
-          width: 33.33%;
-
-          &:nth-child(n + 5) {
-            display: block;
-          }
-        }
-        .row__col-2:nth-child(even) {
-          display: none;
-        }
-      }
-    }
-
-    &-card {
-      padding: 2.3em 0;
-      text-align: center;
-      background: $about_us__slider-card-bg-color;
-      border-radius: 4px;
+      height: 110px;
+      padding: 5px;
     }
   }
 
