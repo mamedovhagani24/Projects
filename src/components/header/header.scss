@@ -6,7 +6,7 @@ a {
 
 .header {
     background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
-    padding: 25px 0;
+    padding: 32px 0;
     width: 100%;
     z-index: 3;
     position: fixed;
@@ -211,7 +211,6 @@ a {
                     background-color: $primary-color;
                     width: 300px;
                     height: auto;
-                    top: -100%;
                     transition: all 0.4s linear;
 
                     & .menu__item {
@@ -225,6 +224,7 @@ a {
                     &.active {
                         display: block;
                         position: absolute;
+                        width: 100%;
                         top: 50px;
                         padding: 10px;
                     }
