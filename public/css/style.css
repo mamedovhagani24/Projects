@@ -150,7 +150,7 @@ a {
   padding: 25px 0;
   width: 100%;
   z-index: 3;
-  position: absolute;
+  position: fixed;
   top: 0;
   transition: all 0.8s ease-out;
 }
@@ -321,17 +321,21 @@ a {
     display: none;
     background-color: #76c7c0;
     width: 300px;
-    height: 1000px;
+    height: auto;
     top: -100%;
     transition: all 0.4s linear;
   }
   .header__column:last-child .header__menu .menu__item {
     display: block;
   }
+  .header__column:last-child .header__menu .menu__item.portfolio {
+    padding: 10px 16px 8px 28px;
+  }
   .header__column:last-child .header__menu.active {
     display: block;
     position: absolute;
-    top: 51px;
+    top: 50px;
+    padding: 10px;
   }
 }
 .header .logo {

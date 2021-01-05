@@ -210,18 +210,23 @@ a {
                     display: none;
                     background-color: $primary-color;
                     width: 300px;
-                    height: 1000px;
+                    height: auto;
                     top: -100%;
                     transition: all 0.4s linear;
 
                     & .menu__item {
                         display: block;
+
+                        &.portfolio {
+                            padding: 10px 16px 8px 28px;
+                        }
                     }
 
                     &.active {
                         display: block;
                         position: absolute;
-                        top: 51px;
+                        top: 50px;
+                        padding: 10px;
                     }
                 }
             }
