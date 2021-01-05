@@ -7,8 +7,9 @@ a {
 .header {
     background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
     padding: 25px 0;
+    width: 100%;
     z-index: 3;
-    position: sticky;
+    position: absolute;
     top: 0;
     transition: all 0.8s ease-out;
 
@@ -199,6 +200,7 @@ a {
             &:last-child {
                 display: flex;
                 justify-content: flex-end;
+                position: relative;
 
                 .burger {
                     display: block;
@@ -206,6 +208,21 @@ a {
 
                 .header__menu {
                     display: none;
+                    background-color: $primary-color;
+                    width: 300px;
+                    height: 1000px;
+                    top: -100%;
+                    transition: all 0.4s linear;
+
+                    & .menu__item {
+                        display: block;
+                    }
+
+                    &.active {
+                        display: block;
+                        position: absolute;
+                        top: 51px;
+                    }
                 }
             }
         }
