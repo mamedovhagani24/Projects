@@ -790,7 +790,7 @@ a {
 }
 .about-us__slider-body {
   height: 110px;
-  padding: 5px;
+  padding: 5px 0;
 }
 .about-us__range {
   -webkit-appearance: none;

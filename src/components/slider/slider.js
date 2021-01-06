@@ -25,7 +25,13 @@ const SLIDES_ARR = [
 
 const mainSliderContainer = document.getElementById("main-slider__container");
 
-const mainSlider = new Slider(mainSliderContainer, SLIDES_ARR, 1, 1, 425);
+const mainSlider = new Slider({
+  container: mainSliderContainer,
+  slides: SLIDES_ARR,
+  slidesOnScreen: 1,
+  speed: 1,
+  touchActiveBreakpoint: 425
+});
 
 const sliderButtonNext = document.getElementById("slider__next");
 const sliderButtonPrev = document.getElementById("slider__prev");
