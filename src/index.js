@@ -99,3 +99,12 @@ const toggle = document.querySelector(".burger")
     header__burger.classList.toggle('active');
 
   });
+
+
+const portfolio = document.querySelector('.portfolio')
+
+portfolio.addEventListener('click', (e) => {
+  const header__submenu = document.querySelector('.header__submenu')
+
+  header__submenu.classList.toggle('active')
+})

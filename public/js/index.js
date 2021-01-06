@@ -101,6 +101,14 @@ const toggle = document.querySelector(".burger")
 
   });
 
+
+const portfolio = document.querySelector('.portfolio')
+
+portfolio.addEventListener('click', (e) => {
+  const header__submenu = document.querySelector('.header__submenu')
+
+  header__submenu.classList.toggle('active')
+})
 },{"./scripts/services-drag-n-drop.js":2,"./scripts/slider":3}],2:[function(require,module,exports){
 function enableDragSort(listClass) {
   const sortableLists = document.getElementsByClassName(listClass);

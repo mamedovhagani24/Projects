@@ -127,6 +127,10 @@ a {
                         transition: all 3s, 3s, linear;
                         list-style-type: none;
 
+                        &.active {
+                            visibility: visible;
+                        }
+
                         & .submenu__item {
                             margin-bottom: 4px;
                             padding: 6px 12px 7px 23px;
@@ -199,6 +203,12 @@ a {
 
             &:last-child {
                 display: flex;
+                flex-wrap: wrap;
+                max-width: 100%;
+            }
+
+            &:last-child {
+                display: flex;
                 justify-content: flex-end;
                 position: relative;
 
@@ -206,14 +216,18 @@ a {
                     display: block;
                 }
 
+                .header__submenu {
+                }
+
                 .header__menu {
                     display: none;
                     background-color: $primary-color;
                     width: 300px;
+                    min-width: 160px;
                     height: auto;
                     transition: all 0.4s linear;
-                    border-bottom-left-radius: $footer__base-padding;
-                    border-bottom-right-radius: $footer__base-padding;
+                    border-bottom-left-radius: $main-border-radius;
+                    border-bottom-right-radius: $main-border-radius;
 
                     & .menu__item {
                         display: block;
@@ -234,19 +248,26 @@ a {
                 }
             }
         }
-    }
 
-    .logo {
-        font-size: 28px;
-        font-weight: 700;
-        color: white;
-        text-transform: uppercase;
-        margin: 6px;
+        @media screen and (max-width: 300px) {
+            .header__menu.active {
+                max-width: 100%;
+                width: 800px;
+            }
+        }
 
-        & span {
-            font-size: 18px;
-            font-weight: 400;
-            text-transform: lowercase;
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            margin: 6px;
+
+            & span {
+                font-size: 18px;
+                font-weight: 400;
+                text-transform: lowercase;
+            }
         }
     }
 }
