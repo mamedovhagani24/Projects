@@ -11,17 +11,16 @@
         <div class="about-us__title-wrapp">
           <h3 class="title-h3">Our Happy Clients</h3>
         </div>
-        <div class="about-us__line-wrapp">
-          <div class="about-us__line"></div>
+        <div class="about-us__range-wrapp">
+<!--          <div class="about-us__line"></div>-->
+          <input type="range" id="clientsSlider__range" class="about-us__range" min="0" max="100" value="0">
         </div>
         <div class="about-us__nav-wrapp">
-          <button class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-left"></i></i></button>
-          <button class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
+          <button id="clientSlider__prev" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-left"></i></button>
+          <button id="clientSlider__next" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
         </div>
       </div>
-      <div class="about-us__slider-body">
-        <%- include('__slider_row'); %> 
-      </div>
+      <div class="about-us__slider-body"></div>
     </div>
   </div>
 </div>
