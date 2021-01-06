@@ -212,9 +212,12 @@ a {
                     width: 300px;
                     height: auto;
                     transition: all 0.4s linear;
+                    border-bottom-left-radius: $footer__base-padding;
+                    border-bottom-right-radius: $footer__base-padding;
 
                     & .menu__item {
                         display: block;
+                        margin-top: 10px;
 
                         &.portfolio {
                             padding: 10px 16px 8px 28px;

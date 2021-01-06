@@ -323,9 +323,12 @@ a {
     width: 300px;
     height: auto;
     transition: all 0.4s linear;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
   .header__column:last-child .header__menu .menu__item {
     display: block;
+    margin-top: 10px;
   }
   .header__column:last-child .header__menu .menu__item.portfolio {
     padding: 10px 16px 8px 28px;
