@@ -1,4 +1,25 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+<<<<<<< HEAD
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+
+    if (window.pageYOffset > 200) {
+        header.classList.add('header__small');
+    } else {
+        header.classList.remove('header__small');
+    }
+});
+
+const toggle = document.querySelector(".burger")
+    .addEventListener("click", function (e) {
+        const header__burger = document.querySelector('.header__menu')
+
+        e.preventDefault();
+        this.classList.toggle("active");
+        header__burger.classList.toggle('active');
+
+    });
+=======
 const Slider = require("../../scripts/slider-api");
 
 // const clientsSlider = new Slider(mainSliderContainer, SLIDES_ARR, 1, 1, 425);
@@ -302,6 +323,7 @@ module.exports = class Slider {
 
     window.addEventListener("resize", this._onResize.bind(this));
   }
+>>>>>>> develop
 
   onEvent(type, callback) {
     this.events[type] = callback;
@@ -312,11 +334,34 @@ module.exports = class Slider {
     
     this._initTouchEvents(width);
 
+<<<<<<< HEAD
+portfolio.addEventListener('click', (e) => {
+    const header__submenu = document.querySelector('.header__submenu')
+
+    header__submenu.classList.toggle('active')
+})
+},{}],2:[function(require,module,exports){
+'use strict'
+
+const Slider = require("./scripts/slider");
+require("./scripts/services-drag-n-drop.js");
+require('./components/header/header.js')
+
+
+},{"./components/header/header.js":1,"./scripts/services-drag-n-drop.js":3,"./scripts/slider":4}],3:[function(require,module,exports){
+function enableDragSort(listClass) {
+  const sortableLists = document.getElementsByClassName(listClass);
+  Array.prototype.map.call(sortableLists, (list) => {
+    enableDragList(list);
+  });
+}
+=======
     this.slidesElements.forEach((el) => {
       el.style.transition = "none";
     });
 
     this.setSlide(this.currentSlide);
+>>>>>>> develop
 
     setTimeout(() => {
       this.slidesElements.forEach((el) => {
@@ -359,8 +404,13 @@ module.exports = class Slider {
 
     if (swipeLength < 20) return;
 
+<<<<<<< HEAD
+},{}],4:[function(require,module,exports){
+"use strict";
+=======
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
+>>>>>>> develop
 
     this.slideMove(this.touch.moveX);
 
@@ -500,4 +550,8 @@ module.exports = class Slider {
   }
 };
 
+<<<<<<< HEAD
+},{}]},{},[2]);
+=======
 },{}]},{},[5]);
+>>>>>>> develop
