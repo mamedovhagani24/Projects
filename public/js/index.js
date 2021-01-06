@@ -29,10 +29,14 @@ const clientsSlider = new Slider({
 });
 
 clientsSliderButton_prev.addEventListener('click', () => {
+  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
+  
   clientsSlider.prev();
 });
 
 clientsSliderButton_next.addEventListener('click', () => {
+  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
+
   clientsSlider.next();
 });
 

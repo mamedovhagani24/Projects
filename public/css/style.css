@@ -359,6 +359,7 @@ a {
 
 .slider {
   display: block;
+  margin-top: 65px;
 }
 .slider__wrapp {
   z-index: 2;
