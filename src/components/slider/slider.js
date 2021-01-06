@@ -100,10 +100,10 @@ function updateMainSliderMarkers(index) {
 }
 
 function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
+  buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
+  
   if (currSlide === 0) 
     buttonsArr[1].classList.add('btn_disabled');
   else if (currSlide === slidesAmount-1) 
     buttonsArr[0].classList.add('btn_disabled');
-  else 
-    buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
 }

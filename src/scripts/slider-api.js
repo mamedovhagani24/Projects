@@ -216,7 +216,7 @@ module.exports = class Slider {
     slide.style.position = "absolute";
     slide.style.width = this._calcImagesWidth();
     slide.style.top = 0;
-    // slide.style.backgroundSize = "cover";
+    slide.style.top = 0;
     slide.style.height = "inherit";
     slide.style.transition = this.transitionValue;
     
