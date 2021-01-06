@@ -55,7 +55,7 @@ function createMainSliderMarkers(slides) {
     marker.setAttribute("data-index", i);
 
     marker.classList.add("slider__control-item");
-    
+
     if (i === 0) marker.classList.add("slider__control-item_active");
 
     return marker;
@@ -82,26 +82,33 @@ sliderButtonPrev.addEventListener("click", () => {
 
 
 window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
+  const header = document.querySelector('.header');
 
-    if (window.pageYOffset > 200) {
-        header.classList.add('header__small');
-    } else {
-        header.classList.remove('header__small');
-    }
+  if (window.pageYOffset > 200) {
+    header.classList.add('header__small');
+  } else {
+    header.classList.remove('header__small');
+  }
 });
 
 const toggle = document.querySelector(".burger")
-    .addEventListener("click", function (e) {
+  .addEventListener("click", function (e) {
+    const header__burger = document.querySelector('.header__menu')
+
     e.preventDefault();
+    this.classList.toggle("active");
+    header__burger.classList.toggle('active');
 
-    if (this.classList.contains('active')) {
-        this.classList.remove("active")
-    } else {
-        this.classList.add("active");
-    }
-});
+  });
 
+
+const portfolio = document.querySelector('.portfolio')
+
+portfolio.addEventListener('click', (e) => {
+  const header__submenu = document.querySelector('.header__submenu')
+
+  header__submenu.classList.toggle('active')
+})
 },{"./scripts/services-drag-n-drop.js":2,"./scripts/slider":3}],2:[function(require,module,exports){
 function enableDragSort(listClass) {
   const sortableLists = document.getElementsByClassName(listClass);
