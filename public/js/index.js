@@ -475,9 +475,6 @@ module.exports = class Slider {
     slide.style.backgroundRepeat = 'no-repeat';
     slide.style.backgroundPosition = 'center center';
     slide.style.height = "inherit";
-    
-    
-    slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
     slide.style.position = "absolute";
     slide.style.width = this._calcImagesWidth();
