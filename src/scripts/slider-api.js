@@ -1,18 +1,20 @@
 "use strict";
 
 module.exports = class Slider {
-  constructor(
+  constructor({
     container,
     slides,
     slidesOnScreen = 1,
     speed = 1,
-    touchActiveBreakpoint
-  ) {
+    touchActiveBreakpoint,
+    slidesGap = 0
+  }) {
     this.container = container;
     this.slides = slides;
     this.slidesOnScreen = slidesOnScreen;
     this.transitionValue = "all " + speed + "s ease";
     this.touchActiveBreakpoint = touchActiveBreakpoint;
+    this.slidesGap = slidesGap;
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -128,6 +130,9 @@ module.exports = class Slider {
   }
 
   slideMove(positionX) {
+    this.touch.slidesPosition =
+      this.touch.slidesPosition ?? this.slides.map((el) => el.position);
+    
     this.slides.forEach((el, i) => {
       el.position = this.touch.slidesPosition[i] + positionX;
     });
@@ -158,7 +163,7 @@ module.exports = class Slider {
     this.currentSlide = index;
 
     this._updateSlidesTransform();
-
+    
     if (this.events.changeSlide !== null)
       this.events.changeSlide(index);
   }
@@ -172,7 +177,7 @@ module.exports = class Slider {
 
   _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
-      el.position = (i * this.width) / this.slidesOnScreen;
+      el.position = ((i * this.width) / this.slidesOnScreen);
     });
   }
 
@@ -212,17 +217,19 @@ module.exports = class Slider {
     slide.style.backgroundImage = "url(" + imgUrl + ")";
     slide.style.backgroundRepeat = 'no-repeat';
     slide.style.backgroundPosition = 'center center';
+    slide.style.height = "inherit";
+    
+    
+    slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
     slide.style.position = "absolute";
     slide.style.width = this._calcImagesWidth();
-    slide.style.top = 0;
-    // slide.style.backgroundSize = "cover";
-    slide.style.height = "inherit";
     slide.style.transition = this.transitionValue;
+    slide.style.top = 0;
     
     return slide;
   }
-
+  
   _createSlideInfoElementsHTML(title, desc) {
     return `<div class="slider__info">
       <h1 class="slider__title">${title}</h1>
@@ -231,6 +238,6 @@ module.exports = class Slider {
   }
 
   _calcImagesWidth() {
-    return this.slidesOnScreen === 1 ? 'inherit' : (this.width / this.slidesOnScreen) + 'px';
+    return this.slidesOnScreen === 1 ? 'inherit' : (this.width / this.slidesOnScreen) - this.slidesGap + 'px';
   }
 };
