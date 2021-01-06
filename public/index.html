@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MODUS versus</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -44,20 +43,19 @@
 </header>
 <div class="slider">
 
-  <div class="slider__front">
-    <div class="slider__control_left">
-      <button id="slider__prev" class="slider__btn btn btn_icon btn_accent">
+  <div class="slider__wrapp">
+    <div class="slider__control slider__control_left">
+      <button id="slider__prev" class="slider__btn slider__btn_left btn btn_icon btn_accent">
         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
       </button>
     </div>
-    <div class="slider__control_right">
-      <button id="slider__next" class="slider__btn btn btn_icon btn_accent btn-large">
+    <div class="slider__images" id="main-slider__container"></div>
+    <div class="slider__control slider__control_right">
+      <button id="slider__next" class="slider__btn slider__btn_right btn btn_icon btn_accent btn-large">
         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
       </button>
     </div>
   </div>
-
-  <div class="slider__back" id="slider__container"></div>
 
   <div class="slider__bottom-controls"></div>
 </div>
@@ -238,55 +236,16 @@
         <div class="about-us__title-wrapp">
           <h3 class="title-h3">Our Happy Clients</h3>
         </div>
-        <div class="about-us__line-wrapp">
-          <div class="about-us__line"></div>
+        <div class="about-us__range-wrapp">
+<!--          <div class="about-us__line"></div>-->
+          <input type="range" id="clientsSlider__range" class="about-us__range" min="0" max="100" value="0">
         </div>
         <div class="about-us__nav-wrapp">
-          <button class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-left"></i></i></button>
-          <button class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
+          <button id="clientSlider__prev" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-left"></i></button>
+          <button id="clientSlider__next" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
         </div>
       </div>
-      <div class="about-us__slider-body">
-        <div class="about-us__row-padding row">
-  
-    <div class="row__col-2">
-      <div class="about-us__slider-card">
-        <img class="about-us__slider-img" src="./img/jquery.png">
-      </div>
-    </div>
-  
-    <div class="row__col-2">
-      <div class="about-us__slider-card">
-        <img class="about-us__slider-img" src="./img/jquery.png">
-      </div>
-    </div>
-  
-    <div class="row__col-2">
-      <div class="about-us__slider-card">
-        <img class="about-us__slider-img" src="./img/jquery.png">
-      </div>
-    </div>
-  
-    <div class="row__col-2">
-      <div class="about-us__slider-card">
-        <img class="about-us__slider-img" src="./img/jquery.png">
-      </div>
-    </div>
-  
-    <div class="row__col-2">
-      <div class="about-us__slider-card">
-        <img class="about-us__slider-img" src="./img/jquery.png">
-      </div>
-    </div>
-  
-    <div class="row__col-2">
-      <div class="about-us__slider-card">
-        <img class="about-us__slider-img" src="./img/jquery.png">
-      </div>
-    </div>
-   
-</div> 
-      </div>
+      <div class="about-us__slider-body"></div>
     </div>
   </div>
 </div>
