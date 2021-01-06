@@ -1,33 +1,29 @@
-function enableDragSort(listClass) {
-  const sortableLists = document.getElementsByClassName(listClass);
-  Array.prototype.map.call(sortableLists, (list) => {
+function enableDragSort() {
+  const sortableLists = document.querySelectorAll(".services__items-wrapper");
+  sortableLists.forEach((list) => {
     enableDragList(list);
   });
 }
 
 function enableDragList(list) {
-  Array.prototype.map.call(list.children, (item) => {
+  list.querySelectorAll(".services__item").forEach((item) => {
     enableDragItem(item);
   });
 }
 
 function enableDragItem(item) {
   item.setAttribute("draggable", true);
-  item.ondrag = handleDrag;
-  item.ondragend = handleDrop;
+  item.addEventListener('dragend', handleDrop);
 }
 
-function handleDrag(item) {
-  const selectedItem = item.target,
-    list = selectedItem.parentNode,
-    x = event.clientX,
-    y = event.clientY;
+function handleDrop(item) {
+  const selectedItem = item.target;
+  const list = selectedItem.parentNode;
 
-  selectedItem.classList.add("drag-sort-active");
   let swapItem =
-    document.elementFromPoint(x, y) === null
+    document.elementFromPoint(item.clientX, item.clientY) === null
       ? selectedItem
-      : document.elementFromPoint(x, y);
+      : document.elementFromPoint(item.clientX, item.clientY);
 
   if (list === swapItem.parentNode) {
     swapItem =
@@ -36,10 +32,4 @@ function handleDrag(item) {
   }
 }
 
-function handleDrop(item) {
-  item.target.classList.remove("drag-sort-active");
-}
-
-(() => {
-  enableDragSort("services__items-wrapper");
-})();
+enableDragSort();
