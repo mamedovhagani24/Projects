@@ -1,36 +1,36 @@
 @import "../../variables";
 
-$slider-height: 500px;
-$border-radius: 5px;
-
-%block-height {
-  height: $slider-height;
+%block-slides {
+  position: relative;
+  height: $slider__height;
 }
 
 %flex {
   display: flex;
 }
 
-
 %flex-column {
-  display: flex;
+  @extend %flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .slider {
   display: block;
+  margin-top: 65px;
 
-  &__front {
-    @extend %block-height;
-    @extend %flex;
-    margin-bottom: -$slider-height;
+  &__wrapp {
+    @extend %block-slides;
+    z-index: 2;
     justify-content: space-between;
   }
 
   &__info {
     @extend %flex-column;
+    align-items: center;
     text-align: center;
+    padding: 0 25px;
+    height: inherit;
   }
 
   &__title {
@@ -39,57 +39,49 @@ $border-radius: 5px;
     color: #fff;
     background: $accent-color;
     text-transform: uppercase;
-    border-radius: $border-radius;
+    border-radius: $main-border-radius;
     line-height: 1;
     font-weight: 900;
-    padding: 0 .3em .07em;
+    padding: 0 0.3em 0.07em;
     margin-bottom: 10px;
 
-    @media screen and (max-width: $media-window--tablet){
+    @media screen and (max-width: $media-window--tablet) {
       font-size: 3em;
     }
-    @media screen and (max-width: $media-window--mobile-L){
+    @media screen and (max-width: $media-window--mobile-L) {
       font-size: 9vw;
     }
   }
 
   &__subtitle {
     font-size: 1.23em;
-    padding: .6em 2.6em .7em;
-    background: rgba(0,0,0,.5);
-    border-radius: $border-radius;
+    padding: 0.6em 2.6em 0.7em;
+    background: $slider__subtitle-bg-color;
+    border-radius: $main-border-radius;
     line-height: 1.7;
     color: #fff;
+    max-width: 500px;
 
-    @media screen and (max-width: $media-window--tablet){
+    @media screen and (max-width: $media-window--tablet) {
       font-size: 1em;
     }
   }
 
-  &__images {
-    height: inherit;
-    background: $secondary-color--darken;
-  }
 
   &__control {
-    &_left {
-      @extend %flex-column;
+    @extend %flex-column;
+    height: $slider__height;
+    z-index: 3;
+    position: relative;
 
-      .slider__btn {
-        padding-right: .4em;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      } 
+    &_left {
+      float: left;
+      margin-bottom: -$slider__height;
     }
 
     &_right {
-      @extend %flex-column;
-
-      .slider__btn {
-        padding-left: .4em;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
+      float: right;
+      margin-top: -$slider__height;
     }
   }
 
@@ -113,12 +105,26 @@ $border-radius: 5px;
 
   &__btn {
     font-size: 3em;
-    padding: .3em;
+    padding: 0.3em;
     line-height: 0;
-    border-radius: $border-radius;
+    border-radius: $main-border-radius;
+
+    &_left {
+      padding-right: 0.4em;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    &_right {
+      padding-left: 0.4em;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 
-  &__back {
-    @extend %block-height;
+  &__images {
+    @extend %block-slides;
+    z-index: 1;
+    background: $secondary-color--darken;
   }
 }

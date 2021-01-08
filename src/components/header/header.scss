@@ -6,8 +6,16 @@ a {
 
 .header {
     background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
+    padding: 32px 0;
+    width: 100%;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    transition: all 0.1s ease-out;
 
-    padding: 25px 0;
+    &.header__small {
+        padding: 15px 0;
+    }
 
     &__body {
         margin: 0 auto;
@@ -25,14 +33,53 @@ a {
         &:last-child {
             width: 70%;
 
-            .burger {
+            & .burger {
                 display: none;
+                margin-top: 10px;
 
                 &__line {
+                    display: block;
                     background-color: white;
-                    width: 37px;
-                    height: 6px;
-                    margin-bottom: 4px;
+                    width: 40px;
+                    height: 4px;
+                    position: relative;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        background-color: white;
+                        width: 40px;
+                        height: inherit;
+                        top: 11px;
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        background-color: white;
+                        width: 40px;
+                        height: inherit;
+                        bottom: 11px;
+                    }
+                }
+
+                &.active {
+                    transition: all 0.3s ease;
+                    & .burger__line {
+                        background: none;
+
+                        &::before {
+                            top: 0;
+                            transform: rotate(45deg);
+                            transition: all 0.3s linear;
+                        }
+
+                        &::after {
+                            bottom: 0;
+                            transform: rotate(-45deg);
+                            transition: all 0.3s linear;
+                        }
+                    }
                 }
             }
 
@@ -79,6 +126,10 @@ a {
                         border-radius: 8px;
                         transition: all 3s, 3s, linear;
                         list-style-type: none;
+
+                        &.active {
+                            visibility: visible;
+                        }
 
                         & .submenu__item {
                             margin-bottom: 4px;
@@ -152,30 +203,71 @@ a {
 
             &:last-child {
                 display: flex;
+                flex-wrap: wrap;
+                max-width: 100%;
+            }
+
+            &:last-child {
+                display: flex;
                 justify-content: flex-end;
+                position: relative;
 
                 .burger {
                     display: block;
                 }
 
+                .header__submenu {
+                }
+
                 .header__menu {
                     display: none;
+                    background-color: $primary-color;
+                    width: 300px;
+                    min-width: 160px;
+                    height: auto;
+                    transition: all 0.4s linear;
+                    border-bottom-left-radius: $main-border-radius;
+                    border-bottom-right-radius: $main-border-radius;
+
+                    & .menu__item {
+                        display: block;
+                        margin-top: 10px;
+
+                        &.portfolio {
+                            padding: 10px 16px 8px 28px;
+                        }
+                    }
+
+                    &.active {
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        top: 50px;
+                        padding: 10px;
+                    }
                 }
             }
         }
-    }
 
-    .logo {
-        font-size: 28px;
-        font-weight: 700;
-        color: white;
-        text-transform: uppercase;
-        margin: 6px;
+        @media screen and (max-width: 300px) {
+            .header__menu.active {
+                max-width: 100%;
+                width: 800px;
+            }
+        }
 
-        & span {
-            font-size: 18px;
-            font-weight: 400;
-            text-transform: lowercase;
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            margin: 6px;
+
+            & span {
+                font-size: 18px;
+                font-weight: 400;
+                text-transform: lowercase;
+            }
         }
     }
 }
