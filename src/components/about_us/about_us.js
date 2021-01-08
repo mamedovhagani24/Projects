@@ -1,6 +1,6 @@
-const Slider = require("../../scripts/slider-api");
+const Slider = require("../../scripts/slider-multi-items");
 
-// const clientsSlider = new Slider(mainSliderContainer, SLIDES_ARR, 1, 1, 425);
+
 const clientsSliderWrapper = document.querySelector('.about-us__slider-body');
 
 const clientsSliderButton_prev = document.getElementById('clientSlider__prev');

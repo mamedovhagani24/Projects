@@ -4,17 +4,13 @@ module.exports = class Slider {
   constructor({
     container,
     slides,
-    slidesOnScreen = 1,
     speed = 1,
-    touchActiveBreakpoint,
-    slidesGap = 0
+    touchActiveBreakpoint
   }) {
     this.container = container;
     this.slides = slides;
-    this.slidesOnScreen = slidesOnScreen;
     this.transitionValue = "all " + speed + "s ease";
     this.touchActiveBreakpoint = touchActiveBreakpoint;
-    this.slidesGap = slidesGap;
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -47,14 +43,17 @@ module.exports = class Slider {
   }
 
   _onResize(e) {
+    this._updateSizes();
+    
+    this.slidesElements.forEach((el) => {
+      el.style.transition = "none";
+      el.style.width = this.width+'px';
+    });
+    
     const width = e.currentTarget.innerWidth;
     
     this._initTouchEvents(width);
-
-    this.slidesElements.forEach((el) => {
-      el.style.transition = "none";
-    });
-
+    
     this.setSlide(this.currentSlide);
 
     setTimeout(() => {
@@ -67,7 +66,7 @@ module.exports = class Slider {
   _initTouchEvents(width) {
     if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
       this._addTouchEvents();
-      
+
       if (this.events.touchEnabled !== null)
       this.events.touchEnabled();
     } else {
@@ -177,7 +176,7 @@ module.exports = class Slider {
 
   _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
-      el.position = ((i * this.width) / this.slidesOnScreen);
+      el.position = i * this.width;
     });
   }
 
@@ -188,7 +187,7 @@ module.exports = class Slider {
   _drawSlides() {
     this.container.style.overflow = "hidden";
     this.container.style.position = "relative";
-    this.container.style.height = this.height;
+    this.container.style.height = this.height + 'px';
     this.container.style.width = "100%";
 
     this.container.append(...this.slidesElements);
@@ -220,7 +219,7 @@ module.exports = class Slider {
     slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
     slide.style.position = "absolute";
-    slide.style.width = this._calcImagesWidth();
+    slide.style.width = this.width + 'px';
     slide.style.transition = this.transitionValue;
     slide.style.top = 0;
     
@@ -234,7 +233,4 @@ module.exports = class Slider {
     </div>`;
   }
 
-  _calcImagesWidth() {
-    return this.slidesOnScreen === 1 ? 'inherit' : (this.width / this.slidesOnScreen) - this.slidesGap + 'px';
-  }
 };

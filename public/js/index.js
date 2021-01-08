@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const Slider = require("../../scripts/slider-api");
+const Slider = require("../../scripts/slider-multi-items");
 
-// const clientsSlider = new Slider(mainSliderContainer, SLIDES_ARR, 1, 1, 425);
+
 const clientsSliderWrapper = document.querySelector('.about-us__slider-body');
 
 const clientsSliderButton_prev = document.getElementById('clientSlider__prev');
@@ -65,7 +65,7 @@ function updateClientsSliderButtons(currSlide) {
     clientsSliderButton_next.classList.add('btn_disabled');
 }
 
-},{"../../scripts/slider-api":6}],2:[function(require,module,exports){
+},{"../../scripts/slider-multi-items":7}],2:[function(require,module,exports){
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
 
@@ -262,17 +262,13 @@ module.exports = class Slider {
   constructor({
     container,
     slides,
-    slidesOnScreen = 1,
     speed = 1,
-    touchActiveBreakpoint,
-    slidesGap = 0
+    touchActiveBreakpoint
   }) {
     this.container = container;
     this.slides = slides;
-    this.slidesOnScreen = slidesOnScreen;
     this.transitionValue = "all " + speed + "s ease";
     this.touchActiveBreakpoint = touchActiveBreakpoint;
-    this.slidesGap = slidesGap;
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -305,14 +301,17 @@ module.exports = class Slider {
   }
 
   _onResize(e) {
+    this._updateSizes();
+    
+    this.slidesElements.forEach((el) => {
+      el.style.transition = "none";
+      el.style.width = this.width+'px';
+    });
+    
     const width = e.currentTarget.innerWidth;
     
     this._initTouchEvents(width);
-
-    this.slidesElements.forEach((el) => {
-      el.style.transition = "none";
-    });
-
+    
     this.setSlide(this.currentSlide);
 
     setTimeout(() => {
@@ -325,7 +324,7 @@ module.exports = class Slider {
   _initTouchEvents(width) {
     if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
       this._addTouchEvents();
-      
+
       if (this.events.touchEnabled !== null)
       this.events.touchEnabled();
     } else {
@@ -435,7 +434,7 @@ module.exports = class Slider {
 
   _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
-      el.position = ((i * this.width) / this.slidesOnScreen);
+      el.position = i * this.width;
     });
   }
 
@@ -446,7 +445,7 @@ module.exports = class Slider {
   _drawSlides() {
     this.container.style.overflow = "hidden";
     this.container.style.position = "relative";
-    this.container.style.height = this.height;
+    this.container.style.height = this.height + 'px';
     this.container.style.width = "100%";
 
     this.container.append(...this.slidesElements);
@@ -478,7 +477,7 @@ module.exports = class Slider {
     slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
     slide.style.position = "absolute";
-    slide.style.width = this._calcImagesWidth();
+    slide.style.width = this.width + 'px';
     slide.style.transition = this.transitionValue;
     slide.style.top = 0;
     
@@ -492,9 +491,45 @@ module.exports = class Slider {
     </div>`;
   }
 
-  _calcImagesWidth() {
-    return this.slidesOnScreen === 1 ? 'inherit' : (this.width / this.slidesOnScreen) - this.slidesGap + 'px';
-  }
 };
 
-},{}]},{},[5]);
+},{}],7:[function(require,module,exports){
+const Slider = require('./slider-api');
+
+module.exports = class multiSlider extends Slider {
+  constructor(args) {
+    super(args);
+    
+    this.slidesOnScreen = args.slidesOnScreen;
+    this.slidesGap = args.slidesGap ?? 0;
+  }
+  
+  setSlide(index) {
+    const isLastSlideOnScreen = !this.slides.some((el) => el.position + this._calcImagesWidth() >= this.width);
+    
+    if (!isLastSlideOnScreen) super.setSlide(index);
+  }
+  
+  _lastSlideIndex(index) {
+    return (this.width / this._calcImagesWidth());
+  }
+  
+  _updateSlidesPosition() {
+    this.slides.forEach((el, i) => {
+      el.position = ((i * this.width) / this.slidesOnScreen);
+    });
+  }
+  
+  _setStyles(slide, imgUrl, position, className) {
+    super._setStyles(slide, imgUrl, position, className);
+    
+    slide.style.width = this._calcImagesWidth() + 'px';
+    
+    return slide;
+  }
+  
+  _calcImagesWidth() {
+    return (this.width / this.slidesOnScreen) - this.slidesGap;
+  }
+}
+},{"./slider-api":6}]},{},[5]);
