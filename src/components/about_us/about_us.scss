@@ -41,6 +41,7 @@
 
   &__counter {
     padding-top: 3em;
+
     &-img {
       height: 0;
       width: 100%;
@@ -90,13 +91,29 @@
 
   &__slider {
     padding-bottom: 30px;
-    
+
+    &-wrapp {
+      margin: {
+        left: -$about_us__slider-padding;
+        right: -$about_us__slider-padding;
+      }
+      height: inherit;
+    }
+
     &-img {
       background-size: 60%;
-      padding: 2.3em 0;
-      text-align: center;
-      background: $about_us__slider-card-bg-color;
+      height: inherit;
+      background-color: $about_us__slider-card-bg-color;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 60%;
       border-radius: $main-border-radius;
+
+      &-wrapp {
+        height: inherit;
+        display: inline-block;
+        padding-left: $about_us__slider-padding;
+      }
     }
 
     &-header {

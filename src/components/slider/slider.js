@@ -21,6 +21,34 @@ const SLIDES_ARR = [
     imgUrl:
       "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
   },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
+  },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
+  },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
+  },
+  {
+    heading: "AAAAA 21",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://canadalifechurch.com/wp-content/uploads/2017/06/2017.02.05.jpg",
+  },
 ];
 
 const mainSliderContainer = document.getElementById("main-slider__container");
@@ -28,8 +56,9 @@ const mainSliderContainer = document.getElementById("main-slider__container");
 const mainSlider = new Slider({
   container: mainSliderContainer,
   slides: SLIDES_ARR,
-  slidesOnScreen: 1,
+  slidesOnScreen: 2,
   speed: 1,
+  slidesToScroll: 1,
   touchActiveBreakpoint: 425
 });
 

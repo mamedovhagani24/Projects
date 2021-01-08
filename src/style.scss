@@ -92,7 +92,8 @@ a {
     outline: 0;
   }
   
-  &_disabled {
+  &_disabled,
+  &:disabled {
     cursor: default;
     background: $secondary-color;
     border-bottom-color: $secondary-color--darken;

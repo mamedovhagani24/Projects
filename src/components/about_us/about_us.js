@@ -1,4 +1,5 @@
-const Slider = require("../../scripts/slider-multi-items");
+// const Slider = require("../../scripts/slider-multi-items");
+const Slider = require("../../scripts/new-slider");
 
 
 const clientsSliderWrapper = document.querySelector('.about-us__slider-body');
@@ -15,6 +16,7 @@ const CLIENTS_ARR = [
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
+  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'}
 ];
 
@@ -22,44 +24,42 @@ const clientsSlider = new Slider({
   container: clientsSliderWrapper,
   slides: CLIENTS_ARR,
   slidesOnScreen: 6,
-  speed: .8,
-  touchActiveBreakpoint: 425,
-  slidesGap: 20
+  speed: .6,
+  slidesWrapperClass: 'about-us__slider-wrapp'
+  // touchActiveBreakpoint: 425,
+  // slidesGap: 20
 });
 
-clientsSliderButton_prev.addEventListener('click', () => {
-  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
-  
+clientsSlider.init();
+
+clientsSliderButton_prev.addEventListener('click', () => {  
   clientsSlider.prev();
 });
 
 clientsSliderButton_next.addEventListener('click', () => {
-  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
-
   clientsSlider.next();
 });
 
-clientsSlider__range.addEventListener('input', (e)=>{
-  const value = +e.srcElement.value;
+// clientsSlider__range.addEventListener('input', (e)=>{
+//   const value = +e.srcElement.value;
   
-  const w = clientsSlider.container.offsetWidth;
+//   const w = clientsSlider.container.offsetWidth;
   
-  const res = (value / 100) * w;
+//   const res = (value / 100) * w;
   
-  clientsSlider.slideMove(-res);
-})
+//   clientsSlider.slideMove(-res);
+// })
 
-clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
-updateClientsSliderButtons(0);
+clientsSlider.onEvent('slidesChange', updateClientsSliderButtons);
+updateClientsSliderButtons({
+  prevBtn: true,
+  nextBtn: false
+});
 
-clientsSlider.init();
 
 
-function updateClientsSliderButtons(currSlide) {
-  [clientsSliderButton_prev, clientsSliderButton_next].forEach(el => el.classList.remove('btn_disabled'));
-  console.log(currSlide ,CLIENTS_ARR.length -1)
-  if (currSlide === 0)
-    clientsSliderButton_prev.classList.add('btn_disabled');
-  else if (currSlide === CLIENTS_ARR.length -1)
-    clientsSliderButton_next.classList.add('btn_disabled');
+function updateClientsSliderButtons({prevBtn, nextBtn}) {
+
+  clientsSliderButton_prev.disabled = prevBtn;
+  clientsSliderButton_next.disabled = nextBtn;
 }

@@ -77,14 +77,14 @@ a {
 .btn:focus {
   outline: 0;
 }
-.btn_disabled {
+.btn_disabled, .btn:disabled {
   cursor: default;
   background: #98a3a3;
   border-bottom-color: #7f8c8c;
   color: #7f8c8c;
   opacity: 0.8;
 }
-.btn_disabled:hover, .btn_disabled:focus, .btn_disabled:active {
+.btn_disabled:hover, .btn_disabled:focus, .btn_disabled:active, .btn:disabled:hover, .btn:disabled:focus, .btn:disabled:active {
   background: #98a3a3;
   border-bottom-color: #7f8c8c;
 }
@@ -815,12 +815,24 @@ a {
 .about-us__slider {
   padding-bottom: 30px;
 }
+.about-us__slider-wrapp {
+  margin-left: -15px;
+  margin-right: -15px;
+  height: inherit;
+}
 .about-us__slider-img {
   background-size: 60%;
-  padding: 2.3em 0;
-  text-align: center;
-  background: #f8f8f8;
+  height: inherit;
+  background-color: #f8f8f8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
   border-radius: 4px;
+}
+.about-us__slider-img-wrapp {
+  height: inherit;
+  display: inline-block;
+  padding-left: 15px;
 }
 .about-us__slider-header {
   display: flex;

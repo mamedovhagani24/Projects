@@ -5,12 +5,16 @@ module.exports = class Slider {
     container,
     slides,
     speed = 1,
+    slidesOnScreen,
+    slidesToScroll = 1,
     touchActiveBreakpoint
   }) {
     this.container = container;
     this.slides = slides;
     this.transitionValue = "all " + speed + "s ease";
     this.touchActiveBreakpoint = touchActiveBreakpoint;
+    this.slidesOnScreen = slidesOnScreen;
+    this.slidesToScroll = slidesToScroll;
 
     this.slidesElements = [];
     this.currentSlide = 0;
@@ -140,7 +144,13 @@ module.exports = class Slider {
   }
 
   next() {
-    this.setSlide(this.currentSlide + 1);
+    const nextIndex = this.slides.findIndex(el=> el.position >= this.slidesToScroll * this._calcImagesWidth());
+    // this.slides.findIndex(el=> el.position >= (this.slides.length - this.slidesOnScreen)*this._calcImagesWidth())
+
+    // el.position -= this.slidesToScroll * this._calcImagesWidth();
+    console.log('>',nextIndex)
+    this.setSlide(nextIndex);
+    // ;
   }
 
   prev() {
@@ -149,6 +159,7 @@ module.exports = class Slider {
 
   setSlide(index) {
     this._updateSizes();
+    console.log('>>',index)
 
     if (index < 0) index = 0;
     else if (index > this.slides.length - 1) index = this.slides.length - 1;
@@ -180,7 +191,7 @@ module.exports = class Slider {
 
   _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
-      el.position = i * this.width;
+      el.position = i * this.width / this.slidesOnScreen;
     });
   }
 
@@ -238,6 +249,6 @@ module.exports = class Slider {
   }
 
   _calcImagesWidth() {
-    return this.width;
+    return this.width / this.slidesOnScreen;
   }
 };
