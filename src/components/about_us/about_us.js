@@ -57,9 +57,9 @@ clientsSlider.init();
 
 function updateClientsSliderButtons(currSlide) {
   [clientsSliderButton_prev, clientsSliderButton_next].forEach(el => el.classList.remove('btn_disabled'));
-
+  console.log(currSlide ,CLIENTS_ARR.length -1)
   if (currSlide === 0)
     clientsSliderButton_prev.classList.add('btn_disabled');
-  else if (currSlide === CLIENTS_ARR.length-1)
+  else if (currSlide === CLIENTS_ARR.length -1)
     clientsSliderButton_next.classList.add('btn_disabled');
 }

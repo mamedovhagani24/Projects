@@ -382,7 +382,7 @@ a {
 
 .slider__images, .slider__wrapp {
   position: relative;
-  height: 500px;
+  height: 550px;
 }
 
 .slider__bottom-controls, .slider__control, .slider__info {
@@ -445,17 +445,17 @@ a {
   }
 }
 .slider__control {
-  height: 500px;
+  height: 550px;
   z-index: 3;
   position: relative;
 }
 .slider__control_left {
   float: left;
-  margin-bottom: -500px;
+  margin-bottom: -550px;
 }
 .slider__control_right {
   float: right;
-  margin-top: -500px;
+  margin-top: -550px;
 }
 .slider__bottom-controls {
   justify-content: center;

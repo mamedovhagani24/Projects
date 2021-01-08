@@ -47,7 +47,7 @@ module.exports = class Slider {
     
     this.slidesElements.forEach((el) => {
       el.style.transition = "none";
-      el.style.width = this.width+'px';
+      el.style.width = this._calcImagesWidth() + 'px';
     });
     
     const width = e.currentTarget.innerWidth;
@@ -163,6 +163,10 @@ module.exports = class Slider {
 
     this._updateSlidesTransform();
     
+    this._resolveChangeSlideEvent(index);
+  }
+
+  _resolveChangeSlideEvent(index) {
     if (this.events.changeSlide !== null)
       this.events.changeSlide(index);
   }
@@ -219,7 +223,7 @@ module.exports = class Slider {
     slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
     slide.style.position = "absolute";
-    slide.style.width = this.width + 'px';
+    slide.style.width = this._calcImagesWidth() + 'px';
     slide.style.transition = this.transitionValue;
     slide.style.top = 0;
     
@@ -233,4 +237,7 @@ module.exports = class Slider {
     </div>`;
   }
 
+  _calcImagesWidth() {
+    return this.width;
+  }
 };

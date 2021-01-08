@@ -58,10 +58,10 @@ clientsSlider.init();
 
 function updateClientsSliderButtons(currSlide) {
   [clientsSliderButton_prev, clientsSliderButton_next].forEach(el => el.classList.remove('btn_disabled'));
-
+  console.log(currSlide ,CLIENTS_ARR.length -1)
   if (currSlide === 0)
     clientsSliderButton_prev.classList.add('btn_disabled');
-  else if (currSlide === CLIENTS_ARR.length-1)
+  else if (currSlide === CLIENTS_ARR.length -1)
     clientsSliderButton_next.classList.add('btn_disabled');
 }
 
@@ -305,7 +305,7 @@ module.exports = class Slider {
     
     this.slidesElements.forEach((el) => {
       el.style.transition = "none";
-      el.style.width = this.width+'px';
+      el.style.width = this._calcImagesWidth() + 'px';
     });
     
     const width = e.currentTarget.innerWidth;
@@ -421,6 +421,10 @@ module.exports = class Slider {
 
     this._updateSlidesTransform();
     
+    this._resolveChangeSlideEvent(index);
+  }
+
+  _resolveChangeSlideEvent(index) {
     if (this.events.changeSlide !== null)
       this.events.changeSlide(index);
   }
@@ -477,7 +481,7 @@ module.exports = class Slider {
     slide.style.height = "inherit";
     slide.style.transform = "translateX(" + position + "px)";
     slide.style.position = "absolute";
-    slide.style.width = this.width + 'px';
+    slide.style.width = this._calcImagesWidth() + 'px';
     slide.style.transition = this.transitionValue;
     slide.style.top = 0;
     
@@ -491,12 +495,17 @@ module.exports = class Slider {
     </div>`;
   }
 
+  _calcImagesWidth() {
+    return this.width;
+  }
 };
 
 },{}],7:[function(require,module,exports){
 const Slider = require('./slider-api');
 
 module.exports = class multiSlider extends Slider {
+  lastIndex = 0;
+  isLastSlideOnScreen = 0;
   constructor(args) {
     super(args);
     
@@ -505,11 +514,24 @@ module.exports = class multiSlider extends Slider {
   }
   
   setSlide(index) {
-    const isLastSlideOnScreen = !this.slides.some((el) => el.position + this._calcImagesWidth() >= this.width);
     
-    if (!isLastSlideOnScreen) super.setSlide(index);
+    this.isLastSlideOnScreen = this.slides.filter((el) => el.position + this._calcImagesWidth() >= this.width).length;
+    
+
+    if (this.currentSlide < this.lastIndex || this.isLastSlideOnScreen > 1) super.setSlide(index);
+    else if (this.isLastSlideOnScreen === 1) {
+      this._resolveChangeSlideEvent(this.slides.length - 1);
+      this.lastIndex = 0;
+    }
+
+    this.lastIndex = index;
   }
   
+  _resolveChangeSlideEvent(index) {
+    if (this.events.changeSlide !== null)
+      this.events.changeSlide(index);
+  }
+
   _lastSlideIndex(index) {
     return (this.width / this._calcImagesWidth());
   }
@@ -520,16 +542,8 @@ module.exports = class multiSlider extends Slider {
     });
   }
   
-  _setStyles(slide, imgUrl, position, className) {
-    super._setStyles(slide, imgUrl, position, className);
-    
-    slide.style.width = this._calcImagesWidth() + 'px';
-    
-    return slide;
-  }
-  
   _calcImagesWidth() {
-    return (this.width / this.slidesOnScreen) - this.slidesGap;
+    return (this.width / this.slidesOnScreen) - (this.slidesGap / 2);
   }
 }
 },{"./slider-api":6}]},{},[5]);

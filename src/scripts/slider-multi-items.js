@@ -1,6 +1,8 @@
 const Slider = require('./slider-api');
 
 module.exports = class multiSlider extends Slider {
+  lastIndex = 0;
+  isLastSlideOnScreen = 0;
   constructor(args) {
     super(args);
     
@@ -9,11 +11,24 @@ module.exports = class multiSlider extends Slider {
   }
   
   setSlide(index) {
-    const isLastSlideOnScreen = !this.slides.some((el) => el.position + this._calcImagesWidth() >= this.width);
     
-    if (!isLastSlideOnScreen) super.setSlide(index);
+    this.isLastSlideOnScreen = this.slides.filter((el) => el.position + this._calcImagesWidth() >= this.width).length;
+    
+
+    if (this.currentSlide < this.lastIndex || this.isLastSlideOnScreen > 1) super.setSlide(index);
+    else if (this.isLastSlideOnScreen === 1) {
+      this._resolveChangeSlideEvent(this.slides.length - 1);
+      this.lastIndex = 0;
+    }
+
+    this.lastIndex = index;
   }
   
+  _resolveChangeSlideEvent(index) {
+    if (this.events.changeSlide !== null)
+      this.events.changeSlide(index);
+  }
+
   _lastSlideIndex(index) {
     return (this.width / this._calcImagesWidth());
   }
@@ -24,15 +39,7 @@ module.exports = class multiSlider extends Slider {
     });
   }
   
-  _setStyles(slide, imgUrl, position, className) {
-    super._setStyles(slide, imgUrl, position, className);
-    
-    slide.style.width = this._calcImagesWidth() + 'px';
-    
-    return slide;
-  }
-  
   _calcImagesWidth() {
-    return (this.width / this.slidesOnScreen) - this.slidesGap;
+    return (this.width / this.slidesOnScreen) - (this.slidesGap / 2);
   }
 }
