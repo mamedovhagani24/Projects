@@ -24,13 +24,7 @@ const clientsSlider = new Slider({
   slidesOnScreen: 6,
   speed: .8,
   touchActiveBreakpoint: 425,
-  slidesGap: 20,
-  breakpoints: {
-    754: {
-      slidesOnScreen: 3
-    },
-
-  }
+  slidesGap: 20
 });
 
 clientsSliderButton_prev.addEventListener('click', () => {
@@ -45,8 +39,17 @@ clientsSliderButton_next.addEventListener('click', () => {
   clientsSlider.next();
 });
 
-clientsSlider__range.addEventListener('input', (e)=>{
-  const value = +e.target.value;
+window.addEventListener('resize', resizeClientsSlider);
+
+clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
+updateClientsSliderButtons(0);
+
+resizeClientsSlider();
+
+clientsSlider.init();
+
+clientsSlider__range.addEventListener('input', function (e) {
+  const value = +this.value;
   clientsSlider.setTransition(false);
 
   const slideWidth = clientsSlider._calcImagesWidth(),
@@ -88,10 +91,6 @@ function changeRangeValue(elId) {
   clientsSlider__range.value = value;
 }
 
-clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
-updateClientsSliderButtons(0);
-
-clientsSlider.init();
 
 
 function updateClientsSliderButtons(currSlide, lastSlide) {
@@ -99,4 +98,15 @@ function updateClientsSliderButtons(currSlide, lastSlide) {
   clientsSliderButton_next.disabled = currSlide === lastSlide;
 
   changeRangeValue(currSlide);
+}
+
+
+function resizeClientsSlider(){
+  const width = window.innerWidth;
+
+  if (width <= 425) clientsSlider.slidesOnScreen = 2;
+  else if (width <= 500) clientsSlider.slidesOnScreen = 3;
+  else if (width <= 750) clientsSlider.slidesOnScreen = 4;
+  else clientsSlider.slidesOnScreen = 6;
+  
 }
