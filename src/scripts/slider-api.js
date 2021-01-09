@@ -1,6 +1,6 @@
-"use strict";
+const touchSlides = require('./slider-touch');
 
-module.exports = class Slider {
+module.exports = class Slider extends touchSlides{
   constructor({
     container,
     slides,
@@ -9,6 +9,8 @@ module.exports = class Slider {
     slidesToScroll = 1,
     touchActiveBreakpoint
   }) {
+    super();
+
     this.container = container;
     this.slides = slides;
     this.transitionValue = "all " + speed + "s ease";
@@ -20,6 +22,7 @@ module.exports = class Slider {
     this.currentSlide = 0;
     this.width = 0;
     this.height = 0;
+    this.maxSlide = this.slides.length - this.slidesOnScreen;
 
     this.events = {
       changeSlide: null,
@@ -27,10 +30,6 @@ module.exports = class Slider {
       touchDisabled: null
     };
 
-    this.touch = {
-      startX: 0,
-      moveX: 0,
-    };
   }
 
   init() {
@@ -39,99 +38,20 @@ module.exports = class Slider {
     this._drawSlides();
     this._initTouchEvents(this.width);
 
-    window.addEventListener("resize", this._onResize.bind(this));
+    super.init();
   }
 
   onEvent(type, callback) {
     this.events[type] = callback;
   }
 
-  _onResize(e) {
-    this._updateSizes();
-    
+  setTransition(isOn) {
     this.slidesElements.forEach((el) => {
-      el.style.transition = "none";
-      el.style.width = this._calcImagesWidth() + 'px';
+      el.style.transition = isOn ? this.transitionValue : 'none';
     });
-    
-    const width = e.currentTarget.innerWidth;
-    
-    this._initTouchEvents(width);
-    
-    this.setSlide(this.currentSlide);
-
-    setTimeout(() => {
-      this.slidesElements.forEach((el) => {
-        el.style.transition = this.transitionValue;
-      });
-    }, 100);
   }
 
-  _initTouchEvents(width) {
-    if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
-      this._addTouchEvents();
-
-      if (this.events.touchEnabled !== null)
-      this.events.touchEnabled();
-    } else {
-      this._removeTouchEvents();
-
-      if (this.events.touchDisabled !== null)
-        this.events.touchDisabled();
-    }
-  }
-
-  _addTouchEvents() {
-    this.container.addEventListener("touchstart", this._touchStart.bind(this));
-    this.container.addEventListener("touchmove", this._touchMove.bind(this));
-    this.container.addEventListener("touchend", this._touchEnd.bind(this));
-  }
-
-  _touchStart(e) {
-    this.slidesElements.forEach((el) => {
-      el.style.transition = "none";
-    });
-
-    this.touch.startX = e.changedTouches[0].pageX;
-  }
-
-  _touchMove(e) {
-    this.touch.moveX = e.changedTouches[0].pageX - this.touch.startX;
-    const swipeLength = Math.abs(this.touch.moveX);
-
-    if (swipeLength < 20) return;
-
-    this.touch.slidesPosition =
-      this.touch.slidesPosition ?? this.slides.map((el) => el.position);
-
-    this.slideMove(this.touch.moveX);
-
-    if (swipeLength > this.width / 2) {
-      this.touch.nextSlide =
-        this.touch.moveX < 0 ? this.currentSlide + 1 : this.currentSlide - 1;
-    }
-  }
-
-  _touchEnd(e) {
-    this.slidesElements.forEach((el) => {
-      el.style.transition = this.transitionValue;
-    });
-
-    if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
-    else this.setSlide(this.currentSlide);
-
-    this.touch = {
-      startX: 0,
-      moveX: 0,
-    };
-  }
-
-  _removeTouchEvents() {
-    this.container.removeEventListener("touchstart", this._touchStart);
-    this.container.removeEventListener("touchmove", this._touchMove);
-    this.container.removeEventListener("touchend", this._touchEnd);
-  }
-
+  
   slideMove(positionX) {
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
@@ -144,9 +64,7 @@ module.exports = class Slider {
   }
 
   next() {
-    const nextIndex = this.slides.findIndex(el=> el.position >= this.slidesToScroll * this._calcImagesWidth());
-
-    this.setSlide(nextIndex);
+    this.setSlide(this.currentSlide + this.slidesToScroll);
   }
 
   prev() {
@@ -157,7 +75,7 @@ module.exports = class Slider {
     this._updateSizes();
 
     if (index < 0) index = 0;
-    else if (index > this.slides.length - 1) index = this.slides.length - 1;
+    else if (index > this.maxSlide) index = this.maxSlide;
 
     const scrollWidth = this.slides[index].position;
 
@@ -169,12 +87,12 @@ module.exports = class Slider {
 
     this._updateSlidesTransform();
     
-    this._resolveChangeSlideEvent(index);
+    this._emitChangeSlideEvent(index);
   }
 
-  _resolveChangeSlideEvent(index) {
+  _emitChangeSlideEvent(index) {
     if (this.events.changeSlide !== null)
-      this.events.changeSlide(index);
+      this.events.changeSlide(index, this.maxSlide);
   }
 
   _updateSizes() {

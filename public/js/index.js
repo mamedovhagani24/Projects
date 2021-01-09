@@ -25,7 +25,13 @@ const clientsSlider = new Slider({
   slidesOnScreen: 6,
   speed: .8,
   touchActiveBreakpoint: 425,
-  slidesGap: 20
+  slidesGap: 20,
+  breakpoints: {
+    754: {
+      slidesOnScreen: 3
+    },
+
+  }
 });
 
 clientsSliderButton_prev.addEventListener('click', () => {
@@ -43,7 +49,7 @@ clientsSliderButton_next.addEventListener('click', () => {
 clientsSlider__range.addEventListener('input', (e)=>{
   const value = +e.target.value;
   
-  const w = clientsSlider.container.offsetWidth;
+  const w = clientsSlider.slides.length * clientsSlider._calcImagesWidth();
   
   const res = (value / 100) * w;
   
@@ -56,13 +62,9 @@ updateClientsSliderButtons(0);
 clientsSlider.init();
 
 
-function updateClientsSliderButtons(currSlide) {
-  [clientsSliderButton_prev, clientsSliderButton_next].forEach(el => el.classList.remove('btn_disabled'));
-
-  if (currSlide === 0)
-    clientsSliderButton_prev.classList.add('btn_disabled');
-  else if (currSlide === CLIENTS_ARR.length-1)
-    clientsSliderButton_next.classList.add('btn_disabled');
+function updateClientsSliderButtons(currSlide, lastSlide) {
+  clientsSliderButton_prev.disabled = currSlide === 0;
+  clientsSliderButton_next.disabled = currSlide === lastSlide;
 }
 
 },{"../../scripts/slider-multi-items":7}],2:[function(require,module,exports){
@@ -235,14 +237,10 @@ mainSliderMarkersWrapp.addEventListener("click", (e) => {
 });
 
 sliderButtonNext.addEventListener("click", () => {
-  if (sliderButtonNext.classList.contains('btn_disabled')) return;
-
   mainSlider.next();
 });
 
 sliderButtonPrev.addEventListener("click", () => {
-  if (sliderButtonPrev.classList.contains('btn_disabled')) return;
-
   mainSlider.prev();
 });
 
@@ -260,21 +258,17 @@ function createMainSliderMarkers(slides) {
   });
 }
 
-function updateMainSliderMarkers(index) {
+function updateMainSliderMarkers(index, lastSlide) {
   mainSliderMarkers.forEach((el) => el.classList.remove("slider__control-item_active"));
 
   mainSliderMarkers[index].classList.add("slider__control-item_active");
 
-  checkButtonsActivity([sliderButtonNext, sliderButtonPrev], index, SLIDES_ARR.length);
+  checkButtonsActivity([sliderButtonNext, sliderButtonPrev], index, lastSlide);
 }
 
-function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
-  buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
-  
-  if (currSlide === 0) 
-    buttonsArr[1].classList.add('btn_disabled');
-  else if (currSlide === slidesAmount-1) 
-    buttonsArr[0].classList.add('btn_disabled');
+function checkButtonsActivity(buttonsArr, currSlide, lastSlide) {  
+  buttonsArr[1].disabled = currSlide === 0;
+  buttonsArr[0].disabled = currSlide === lastSlide;
 }
 
 },{"../../scripts/slider-api":6}],5:[function(require,module,exports){
@@ -284,9 +278,9 @@ require("./components/slider/slider");
 require("./components/about_us/about_us");
 
 },{"./components/about_us/about_us":1,"./components/header/header":2,"./components/services/services-drag-n-drop":3,"./components/slider/slider":4}],6:[function(require,module,exports){
-"use strict";
+const touchSlides = require('./slider-touch');
 
-module.exports = class Slider {
+module.exports = class Slider extends touchSlides{
   constructor({
     container,
     slides,
@@ -295,6 +289,8 @@ module.exports = class Slider {
     slidesToScroll = 1,
     touchActiveBreakpoint
   }) {
+    super();
+
     this.container = container;
     this.slides = slides;
     this.transitionValue = "all " + speed + "s ease";
@@ -306,6 +302,7 @@ module.exports = class Slider {
     this.currentSlide = 0;
     this.width = 0;
     this.height = 0;
+    this.maxSlide = this.slides.length - this.slidesOnScreen;
 
     this.events = {
       changeSlide: null,
@@ -313,10 +310,6 @@ module.exports = class Slider {
       touchDisabled: null
     };
 
-    this.touch = {
-      startX: 0,
-      moveX: 0,
-    };
   }
 
   init() {
@@ -325,99 +318,20 @@ module.exports = class Slider {
     this._drawSlides();
     this._initTouchEvents(this.width);
 
-    window.addEventListener("resize", this._onResize.bind(this));
+    super.init();
   }
 
   onEvent(type, callback) {
     this.events[type] = callback;
   }
 
-  _onResize(e) {
-    this._updateSizes();
-    
+  setTransition(isOn) {
     this.slidesElements.forEach((el) => {
-      el.style.transition = "none";
-      el.style.width = this._calcImagesWidth() + 'px';
+      el.style.transition = isOn ? this.transitionValue : 'none';
     });
-    
-    const width = e.currentTarget.innerWidth;
-    
-    this._initTouchEvents(width);
-    
-    this.setSlide(this.currentSlide);
-
-    setTimeout(() => {
-      this.slidesElements.forEach((el) => {
-        el.style.transition = this.transitionValue;
-      });
-    }, 100);
   }
 
-  _initTouchEvents(width) {
-    if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
-      this._addTouchEvents();
-
-      if (this.events.touchEnabled !== null)
-      this.events.touchEnabled();
-    } else {
-      this._removeTouchEvents();
-
-      if (this.events.touchDisabled !== null)
-        this.events.touchDisabled();
-    }
-  }
-
-  _addTouchEvents() {
-    this.container.addEventListener("touchstart", this._touchStart.bind(this));
-    this.container.addEventListener("touchmove", this._touchMove.bind(this));
-    this.container.addEventListener("touchend", this._touchEnd.bind(this));
-  }
-
-  _touchStart(e) {
-    this.slidesElements.forEach((el) => {
-      el.style.transition = "none";
-    });
-
-    this.touch.startX = e.changedTouches[0].pageX;
-  }
-
-  _touchMove(e) {
-    this.touch.moveX = e.changedTouches[0].pageX - this.touch.startX;
-    const swipeLength = Math.abs(this.touch.moveX);
-
-    if (swipeLength < 20) return;
-
-    this.touch.slidesPosition =
-      this.touch.slidesPosition ?? this.slides.map((el) => el.position);
-
-    this.slideMove(this.touch.moveX);
-
-    if (swipeLength > this.width / 2) {
-      this.touch.nextSlide =
-        this.touch.moveX < 0 ? this.currentSlide + 1 : this.currentSlide - 1;
-    }
-  }
-
-  _touchEnd(e) {
-    this.slidesElements.forEach((el) => {
-      el.style.transition = this.transitionValue;
-    });
-
-    if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
-    else this.setSlide(this.currentSlide);
-
-    this.touch = {
-      startX: 0,
-      moveX: 0,
-    };
-  }
-
-  _removeTouchEvents() {
-    this.container.removeEventListener("touchstart", this._touchStart);
-    this.container.removeEventListener("touchmove", this._touchMove);
-    this.container.removeEventListener("touchend", this._touchEnd);
-  }
-
+  
   slideMove(positionX) {
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
@@ -430,9 +344,7 @@ module.exports = class Slider {
   }
 
   next() {
-    const nextIndex = this.slides.findIndex(el=> el.position >= this.slidesToScroll * this._calcImagesWidth());
-
-    this.setSlide(nextIndex);
+    this.setSlide(this.currentSlide + this.slidesToScroll);
   }
 
   prev() {
@@ -443,7 +355,7 @@ module.exports = class Slider {
     this._updateSizes();
 
     if (index < 0) index = 0;
-    else if (index > this.slides.length - 1) index = this.slides.length - 1;
+    else if (index > this.maxSlide) index = this.maxSlide;
 
     const scrollWidth = this.slides[index].position;
 
@@ -455,12 +367,12 @@ module.exports = class Slider {
 
     this._updateSlidesTransform();
     
-    this._resolveChangeSlideEvent(index);
+    this._emitChangeSlideEvent(index);
   }
 
-  _resolveChangeSlideEvent(index) {
+  _emitChangeSlideEvent(index) {
     if (this.events.changeSlide !== null)
-      this.events.changeSlide(index);
+      this.events.changeSlide(index, this.maxSlide);
   }
 
   _updateSizes() {
@@ -534,42 +446,141 @@ module.exports = class Slider {
   }
 };
 
-},{}],7:[function(require,module,exports){
+},{"./slider-touch":8}],7:[function(require,module,exports){
 const Slider = require('./slider-api');
 
 module.exports = class multiSlider extends Slider {
-  lastIndex = 0;
-  isLastSlideOnScreen = 0;
+  _slidesOnScreen = this.slidesOnScreen;
+  
   constructor(args) {
     super(args);
-    
+    this.breakpoints = args.breakpoints;
     this.slidesGap = args.slidesGap ?? 0;
   }
   
-  setSlide(index) {
-    this._updateSizes();
+  init() {
+    super.init();
 
-    const maxSlide = this.slides.length - this.slidesOnScreen;
-
-    if (index < 0) index = 0;
-    else if (index > maxSlide) index = maxSlide;
-
-    const scrollWidth = this.slides[index].position;
-
-    this.slides.forEach((el) => {
-      el.position -= scrollWidth;
-    });
-
-    this.currentSlide = index;
-
-    this._updateSlidesTransform();
-    
-    this._resolveChangeSlideEvent(index);
+    this._initBreakpoints(window.outerWidth);
   }
-  
-  
+
+  _initBreakpoints(width) {
+    for (let w in this.breakpoints) {
+      if (width <= w) this.slidesOnScreen = this.breakpoints[w].slidesOnScreen;
+      else this.slidesOnScreen = this._slidesOnScreen;
+
+    }
+    this.maxSlide = this.slides.length - this.slidesOnScreen
+  }
+
+  _onResize(e) {
+    super._onResize(e);
+
+    const width = e.currentTarget.innerWidth;
+
+    this._initBreakpoints(width)
+
+
+    console.log(this.slidesOnScreen)
+
+  }
+
   _calcImagesWidth() {
     return (this.width / this.slidesOnScreen) - (this.slidesGap / 2);
   }
 }
-},{"./slider-api":6}]},{},[5]);
+},{"./slider-api":6}],8:[function(require,module,exports){
+module.exports = class {
+  constructor() {
+    this.touch = {
+      startX: 0,
+      moveX: 0,
+    };
+  }
+
+  init() {
+    window.addEventListener("resize", this._onResize.bind(this));
+  }
+  
+  _onResize(e) {
+    this._updateSizes();
+    
+    this.setTransition(false);
+    
+    this.slidesElements.forEach((el) => {
+      el.style.width = this._calcImagesWidth() + 'px';
+    });
+    
+    const width = e.currentTarget.innerWidth;
+    
+    this._initTouchEvents(width);
+    
+    this.setSlide(this.currentSlide);
+
+    setTimeout(() => this.setTransition(true), 100);
+  }
+
+  _initTouchEvents(width) {
+    if (this.touchActiveBreakpoint && width <= this.touchActiveBreakpoint) {
+      this._addTouchEvents();
+
+      if (this.events.touchEnabled !== null)
+      this.events.touchEnabled();
+    } else {
+      this._removeTouchEvents();
+
+      if (this.events.touchDisabled !== null)
+        this.events.touchDisabled();
+    }
+  }
+
+  _addTouchEvents() {
+    this.container.addEventListener("touchstart", this._touchStart.bind(this));
+    this.container.addEventListener("touchmove", this._touchMove.bind(this));
+    this.container.addEventListener("touchend", this._touchEnd.bind(this));
+  }
+
+  _touchStart(e) {
+    this.setTransition(false);
+
+    this.touch.startX = e.changedTouches[0].pageX;
+  }
+
+  _touchMove(e) {
+    this.touch.moveX = e.changedTouches[0].pageX - this.touch.startX;
+    const swipeLength = Math.abs(this.touch.moveX);
+
+    if (swipeLength < 20) return;
+
+    this.touch.slidesPosition =
+      this.touch.slidesPosition ?? this.slides.map((el) => el.position);
+
+    this.slideMove(this.touch.moveX);
+
+    if (swipeLength > this.width / 2) {
+      this.touch.nextSlide =
+        this.touch.moveX < 0 ? this.currentSlide + 1 : this.currentSlide - 1;
+    }
+  }
+
+  _touchEnd(e) {
+    this.setTransition(true);
+
+    if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
+    else this.setSlide(this.currentSlide);
+
+    this.touch = {
+      startX: 0,
+      moveX: 0,
+    };
+  }
+
+  _removeTouchEvents() {
+    this.container.removeEventListener("touchstart", this._touchStart);
+    this.container.removeEventListener("touchmove", this._touchMove);
+    this.container.removeEventListener("touchend", this._touchEnd);
+  }
+
+
+}
+},{}]},{},[5]);
