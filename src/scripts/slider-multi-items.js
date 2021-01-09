@@ -15,6 +15,11 @@ module.exports = class multiSlider extends Slider {
     this._initBreakpoints(window.outerWidth);
   }
 
+  setSlide(index, callback) {
+    super.setSlide(index);
+    if (callback !== undefined) callback(this.slides[index]);
+  }
+
   _initBreakpoints(width) {
     for (let w in this.breakpoints) {
       if (width <= w) this.slidesOnScreen = this.breakpoints[w].slidesOnScreen;
@@ -30,10 +35,6 @@ module.exports = class multiSlider extends Slider {
     const width = e.currentTarget.innerWidth;
 
     this._initBreakpoints(width)
-
-
-    console.log(this.slidesOnScreen)
-
   }
 
   _calcImagesWidth() {

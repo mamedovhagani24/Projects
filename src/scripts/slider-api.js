@@ -104,6 +104,7 @@ module.exports = class Slider extends touchSlides{
 
   _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
+      el.id = i;
       el.position = i * this.width / this.slidesOnScreen;
     });
   }

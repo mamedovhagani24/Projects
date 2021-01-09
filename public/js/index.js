@@ -48,13 +48,30 @@ clientsSliderButton_next.addEventListener('click', () => {
 
 clientsSlider__range.addEventListener('input', (e)=>{
   const value = +e.target.value;
+  clientsSlider.setTransition(false);
+  const w = (clientsSlider.slides.length * clientsSlider._calcImagesWidth()) - clientsSlider.width + (clientsSlider._calcImagesWidth() /2) - clientsSlider.slidesGap / 2;
   
-  const w = clientsSlider.slides.length * clientsSlider._calcImagesWidth();
-  
-  const res = (value / 100) * w;
+  const res = (w / 100) * value;
   
   clientsSlider.slideMove(-res);
-})
+});
+
+clientsSlider__range.addEventListener('change', function (e) {
+  const val = +this.value;
+  const w = (clientsSlider.slides.length * clientsSlider._calcImagesWidth()) - clientsSlider.width + (clientsSlider._calcImagesWidth() /2) - clientsSlider.slidesGap / 2;
+  
+  const res = (w / 100) * val;
+
+  const a = clientsSlider.slides.filter((el)=> res >= el.position);
+
+  console.log(res, a[a.length-1])
+  clientsSlider.setTransition(true);
+
+  clientsSlider.setSlide(a[a.length-1].id, (el)=>{
+
+    this.value = w - el.position;
+  });
+});
 
 clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
 updateClientsSliderButtons(0);
@@ -384,6 +401,7 @@ module.exports = class Slider extends touchSlides{
 
   _updateSlidesPosition() {
     this.slides.forEach((el, i) => {
+      el.id = i;
       el.position = i * this.width / this.slidesOnScreen;
     });
   }
@@ -464,6 +482,11 @@ module.exports = class multiSlider extends Slider {
     this._initBreakpoints(window.outerWidth);
   }
 
+  setSlide(index, callback) {
+    super.setSlide(index);
+    if (callback !== undefined) callback(this.slides[index]);
+  }
+
   _initBreakpoints(width) {
     for (let w in this.breakpoints) {
       if (width <= w) this.slidesOnScreen = this.breakpoints[w].slidesOnScreen;
@@ -479,10 +502,6 @@ module.exports = class multiSlider extends Slider {
     const width = e.currentTarget.innerWidth;
 
     this._initBreakpoints(width)
-
-
-    console.log(this.slidesOnScreen)
-
   }
 
   _calcImagesWidth() {

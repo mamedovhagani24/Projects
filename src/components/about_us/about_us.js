@@ -47,13 +47,30 @@ clientsSliderButton_next.addEventListener('click', () => {
 
 clientsSlider__range.addEventListener('input', (e)=>{
   const value = +e.target.value;
+  clientsSlider.setTransition(false);
+  const w = (clientsSlider.slides.length * clientsSlider._calcImagesWidth()) - clientsSlider.width + (clientsSlider._calcImagesWidth() /2) - clientsSlider.slidesGap / 2;
   
-  const w = clientsSlider.slides.length * clientsSlider._calcImagesWidth();
-  
-  const res = (value / 100) * w;
+  const res = (w / 100) * value;
   
   clientsSlider.slideMove(-res);
-})
+});
+
+clientsSlider__range.addEventListener('change', function (e) {
+  const val = +this.value;
+  const w = (clientsSlider.slides.length * clientsSlider._calcImagesWidth()) - clientsSlider.width + (clientsSlider._calcImagesWidth() /2) - clientsSlider.slidesGap / 2;
+  
+  const res = (w / 100) * val;
+
+  const a = clientsSlider.slides.filter((el)=> res >= el.position);
+
+  console.log(res, a[a.length-1])
+  clientsSlider.setTransition(true);
+
+  clientsSlider.setSlide(a[a.length-1].id, (el)=>{
+
+    this.value = w - el.position;
+  });
+});
 
 clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
 updateClientsSliderButtons(0);
