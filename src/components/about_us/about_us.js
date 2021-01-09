@@ -48,7 +48,12 @@ clientsSliderButton_next.addEventListener('click', () => {
 clientsSlider__range.addEventListener('input', (e)=>{
   const value = +e.target.value;
   clientsSlider.setTransition(false);
-  const w = (clientsSlider.slides.length * clientsSlider._calcImagesWidth()) - clientsSlider.width + (clientsSlider._calcImagesWidth() /2) - clientsSlider.slidesGap / 2;
+
+  const slideWidth = clientsSlider._calcImagesWidth(),
+        allSlidesWidth = clientsSlider.slides.length * slideWidth,
+        halfSlideWidth = (slideWidth / 2) - clientsSlider.slidesGap / 2;
+
+  const w = allSlidesWidth - clientsSlider.width + halfSlideWidth;
   
   const res = (w / 100) * value;
   
@@ -57,20 +62,31 @@ clientsSlider__range.addEventListener('input', (e)=>{
 
 clientsSlider__range.addEventListener('change', function (e) {
   const val = +this.value;
-  const w = (clientsSlider.slides.length * clientsSlider._calcImagesWidth()) - clientsSlider.width + (clientsSlider._calcImagesWidth() /2) - clientsSlider.slidesGap / 2;
+  const slideWidth = clientsSlider._calcImagesWidth(),
+        allSlidesWidth = clientsSlider.slides.length * slideWidth,
+        halfSlideWidth = (slideWidth /2) - clientsSlider.slidesGap / 2;
+
+  const w = allSlidesWidth - clientsSlider.width + halfSlideWidth;
   
   const res = (w / 100) * val;
 
   const a = clientsSlider.slides.filter((el)=> res >= el.position);
 
-  console.log(res, a[a.length-1])
   clientsSlider.setTransition(true);
 
-  clientsSlider.setSlide(a[a.length-1].id, (el)=>{
+  clientsSlider.setSlide(a[a.length-1].id);
 
-    this.value = w - el.position;
-  });
+  changeRangeValue(a[a.length-1].id);
 });
+
+function changeRangeValue(elId) {
+  const amountSlides = clientsSlider.slides.length - clientsSlider.slidesOnScreen;
+
+  const allW = amountSlides / elId;
+  const value = 100 / allW;
+
+  clientsSlider__range.value = value;
+}
 
 clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
 updateClientsSliderButtons(0);
@@ -81,4 +97,6 @@ clientsSlider.init();
 function updateClientsSliderButtons(currSlide, lastSlide) {
   clientsSliderButton_prev.disabled = currSlide === 0;
   clientsSliderButton_next.disabled = currSlide === lastSlide;
+
+  changeRangeValue(currSlide);
 }
