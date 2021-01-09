@@ -56,9 +56,8 @@ const mainSliderContainer = document.getElementById("main-slider__container");
 const mainSlider = new Slider({
   container: mainSliderContainer,
   slides: SLIDES_ARR,
-  slidesOnScreen: 2,
+  slidesOnScreen: 1,
   speed: 1,
-  slidesToScroll: 1,
   touchActiveBreakpoint: 425
 });
 

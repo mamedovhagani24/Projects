@@ -6,38 +6,30 @@ module.exports = class multiSlider extends Slider {
   constructor(args) {
     super(args);
     
-    this.slidesOnScreen = args.slidesOnScreen;
     this.slidesGap = args.slidesGap ?? 0;
   }
   
   setSlide(index) {
-    
-    this.isLastSlideOnScreen = this.slides.filter((el) => el.position + this._calcImagesWidth() >= this.width).length;
-    
+    this._updateSizes();
 
-    if (this.currentSlide < this.lastIndex || this.isLastSlideOnScreen > 1) super.setSlide(index);
-    else if (this.isLastSlideOnScreen === 1) {
-      this._resolveChangeSlideEvent(this.slides.length - 1);
-      this.lastIndex = 0;
-    }
+    const maxSlide = this.slides.length - this.slidesOnScreen;
 
-    this.lastIndex = index;
-  }
-  
-  _resolveChangeSlideEvent(index) {
-    if (this.events.changeSlide !== null)
-      this.events.changeSlide(index);
-  }
+    if (index < 0) index = 0;
+    else if (index > maxSlide) index = maxSlide;
 
-  _lastSlideIndex(index) {
-    return (this.width / this._calcImagesWidth());
-  }
-  
-  _updateSlidesPosition() {
-    this.slides.forEach((el, i) => {
-      el.position = ((i * this.width) / this.slidesOnScreen);
+    const scrollWidth = this.slides[index].position;
+
+    this.slides.forEach((el) => {
+      el.position -= scrollWidth;
     });
+
+    this.currentSlide = index;
+
+    this._updateSlidesTransform();
+    
+    this._resolveChangeSlideEvent(index);
   }
+  
   
   _calcImagesWidth() {
     return (this.width / this.slidesOnScreen) - (this.slidesGap / 2);

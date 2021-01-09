@@ -1,6 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-// const Slider = require("../../scripts/slider-multi-items");
-const Slider = require("../../scripts/new-slider");
+const Slider = require("../../scripts/slider-multi-items");
 
 
 const clientsSliderWrapper = document.querySelector('.about-us__slider-body');
@@ -17,7 +16,6 @@ const CLIENTS_ARR = [
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
   {imgUrl: './img/jquery.png', className: 'about-us__slider-img'}
 ];
 
@@ -25,47 +23,49 @@ const clientsSlider = new Slider({
   container: clientsSliderWrapper,
   slides: CLIENTS_ARR,
   slidesOnScreen: 6,
-  speed: .6,
-  slidesWrapperClass: 'about-us__slider-wrapp'
-  // touchActiveBreakpoint: 425,
-  // slidesGap: 20
+  speed: .8,
+  touchActiveBreakpoint: 425,
+  slidesGap: 20
 });
 
-clientsSlider.init();
-
-clientsSliderButton_prev.addEventListener('click', () => {  
+clientsSliderButton_prev.addEventListener('click', () => {
+  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
+  
   clientsSlider.prev();
 });
 
 clientsSliderButton_next.addEventListener('click', () => {
+  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
+
   clientsSlider.next();
 });
 
-// clientsSlider__range.addEventListener('input', (e)=>{
-//   const value = +e.srcElement.value;
+clientsSlider__range.addEventListener('input', (e)=>{
+  const value = +e.target.value;
   
-//   const w = clientsSlider.container.offsetWidth;
+  const w = clientsSlider.container.offsetWidth;
   
-//   const res = (value / 100) * w;
+  const res = (value / 100) * w;
   
-//   clientsSlider.slideMove(-res);
-// })
+  clientsSlider.slideMove(-res);
+})
 
-clientsSlider.onEvent('slidesChange', updateClientsSliderButtons);
-updateClientsSliderButtons({
-  prevBtn: true,
-  nextBtn: false
-});
+clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
+updateClientsSliderButtons(0);
 
+clientsSlider.init();
 
 
-function updateClientsSliderButtons({prevBtn, nextBtn}) {
+function updateClientsSliderButtons(currSlide) {
+  [clientsSliderButton_prev, clientsSliderButton_next].forEach(el => el.classList.remove('btn_disabled'));
 
-  clientsSliderButton_prev.disabled = prevBtn;
-  clientsSliderButton_next.disabled = nextBtn;
+  if (currSlide === 0)
+    clientsSliderButton_prev.classList.add('btn_disabled');
+  else if (currSlide === CLIENTS_ARR.length-1)
+    clientsSliderButton_next.classList.add('btn_disabled');
 }
 
-},{"../../scripts/new-slider":6}],2:[function(require,module,exports){
+},{"../../scripts/slider-multi-items":7}],2:[function(require,module,exports){
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
 
@@ -191,9 +191,8 @@ const mainSliderContainer = document.getElementById("main-slider__container");
 const mainSlider = new Slider({
   container: mainSliderContainer,
   slides: SLIDES_ARR,
-  slidesOnScreen: 2,
+  slidesOnScreen: 1,
   speed: 1,
-  slidesToScroll: 1,
   touchActiveBreakpoint: 425
 });
 
@@ -278,142 +277,13 @@ function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
     buttonsArr[0].classList.add('btn_disabled');
 }
 
-},{"../../scripts/slider-api":7}],5:[function(require,module,exports){
+},{"../../scripts/slider-api":6}],5:[function(require,module,exports){
 require("./components/services/services-drag-n-drop");
 require("./components/header/header");
 require("./components/slider/slider");
 require("./components/about_us/about_us");
 
 },{"./components/about_us/about_us":1,"./components/header/header":2,"./components/services/services-drag-n-drop":3,"./components/slider/slider":4}],6:[function(require,module,exports){
-const touchSlider = require('./slider-touch');
-
-module.exports = class extends touchSlider{
-  __position = 0;
-  __itemWidth = 0
-  __movePosition = 0;
-  __slidesElements = [];
-  __wrapper = null;
-  __transition = '';
-  __events = [];
-
-  constructor({ container, slides, slidesOnScreen = 1, speed, slidesToScroll = 1, slidesWrapperClass}) {
-    super();
-
-    this.container = container;
-    this.slides = slides;
-    this.slidesOnScreen = slidesOnScreen;
-    this.slidesToScroll = slidesToScroll;
-    this.speed = speed;
-    this.slidesWrapperClass = slidesWrapperClass;
-    this.transition = '';
-
-  }
-
-  init() {
-    this.container.style.overflow = 'hidden';
-
-    this.__itemWidth = this.container.clientWidth / this.slidesOnScreen;
-    this.__movePosition = this.slidesToScroll * this.__itemWidth;
-    this.transition = this.__transition = `all ${this.speed}s ease`;
-
-    this.__createSlides();
-    this.__drawSlides();
-    
-    super.init();
-  }
-
-  onEvent(event, callback) {
-    this.__events[event] = callback;
-  }
-  
-  next() {
-    this.__position -= this.__movePosition;
-    this.__emitEventSlide();
-    this.__setPosition();
-    
-  }
-  
-  prev() {
-    this.__position += this.__movePosition;
-    this.__emitEventSlide();
-    this.__setPosition();
-  }
-
-  __emitEventSlide() {
-    this.__events?.slidesChange(this.__returnSlideConditions());
-  }
-
-  __touchMove(e) {
-    super.__touchMove(e);
-    
-    this.__touch.position = this.__touch.position ?? this.__position;
-
-    // const {prevBtn, nextBtn} = this.__returnSlideConditions();
-
-    // console.log(prevBtn, nextBtn);
-    
-    this.__position = this.__touch.position + this.__touch.moveX;
-    
-    console.log(this.__position);
-    // if (this.__position <= 0) return;
-    
-    this.transition = '';
-
-    this.__setPosition();
-  }
-
-
-  __touchEnd() {
-    super.__touchEnd();
-
-    this.transition = this.__transition;
-
-    this.__setPosition();
-  }
-
-  __setPosition() {
-    this.__wrapper.style.transition = this.transition;
-    this.__wrapper.style.transform = `translateX(${this.__position}px)`;
-  }
-
-  __createWrapper() {
-    this.__wrapper = document.createElement('div');
-    this.__wrapper.classList.add(this.slidesWrapperClass);
-    this.__wrapper.style.transition = this.transition;
-    this.__wrapper.style.width = (this.__itemWidth * this.slides.length )+ 'px';
-  }
-
-  __createSlides() {
-    this.__slidesElements = this.slides.map((el)=> {
-      const slide = document.createElement('div');
-      const slideWrapp = document.createElement('div');
-
-      slideWrapp.classList.add('about-us__slider-img-wrapp');
-      slide.classList.add('about-us__slider-img');
-      slide.style.backgroundImage = "url(" + el.imgUrl + ")";
-      slideWrapp.style.width= this.__itemWidth + 'px';
-      slideWrapp.append(slide);
-
-      return slideWrapp;
-    })
-  }
-
-  __drawSlides() {
-    this.__createWrapper();
-    this.__wrapper.append(...this.__slidesElements);
-    this.container.append(this.__wrapper);
-  }
-
-  __returnSlideConditions() {
-    return {
-      prevBtn: this.__position >= 0,
-      nextBtn: this.__position <= -((this.slides.length - this.slidesOnScreen)*this.__itemWidth)
-    }
-  }
-
-};
-
-},{"./slider-touch":8}],7:[function(require,module,exports){
 "use strict";
 
 module.exports = class Slider {
@@ -561,21 +431,16 @@ module.exports = class Slider {
 
   next() {
     const nextIndex = this.slides.findIndex(el=> el.position >= this.slidesToScroll * this._calcImagesWidth());
-    // this.slides.findIndex(el=> el.position >= (this.slides.length - this.slidesOnScreen)*this._calcImagesWidth())
 
-    // el.position -= this.slidesToScroll * this._calcImagesWidth();
-    console.log('>',nextIndex)
     this.setSlide(nextIndex);
-    // ;
   }
 
   prev() {
-    this.setSlide(this.currentSlide - 1);
+    this.setSlide(this.currentSlide - this.slidesToScroll);
   }
 
   setSlide(index) {
     this._updateSizes();
-    console.log('>>',index)
 
     if (index < 0) index = 0;
     else if (index > this.slides.length - 1) index = this.slides.length - 1;
@@ -669,64 +534,42 @@ module.exports = class Slider {
   }
 };
 
-},{}],8:[function(require,module,exports){
-module.exports = class {
-  __touch = {
-    startX: 0,
-    moveX: 0,
-  };
-  constructor() {
+},{}],7:[function(require,module,exports){
+const Slider = require('./slider-api');
+
+module.exports = class multiSlider extends Slider {
+  lastIndex = 0;
+  isLastSlideOnScreen = 0;
+  constructor(args) {
+    super(args);
+    
+    this.slidesGap = args.slidesGap ?? 0;
   }
+  
+  setSlide(index) {
+    this._updateSizes();
 
-  init() {
-    // window.addEventListener('resize', this.__onResize.bind(this));
+    const maxSlide = this.slides.length - this.slidesOnScreen;
 
-    this.__initTouchEvents();
+    if (index < 0) index = 0;
+    else if (index > maxSlide) index = maxSlide;
+
+    const scrollWidth = this.slides[index].position;
+
+    this.slides.forEach((el) => {
+      el.position -= scrollWidth;
+    });
+
+    this.currentSlide = index;
+
+    this._updateSlidesTransform();
+    
+    this._resolveChangeSlideEvent(index);
   }
-
-  __initTouchEvents() {
-    this.container.addEventListener("touchstart", this.__touchStart.bind(this));
-    this.container.addEventListener("touchmove", this.__touchMove.bind(this));
-    this.container.addEventListener("touchend", this.__touchEnd.bind(this));
+  
+  
+  _calcImagesWidth() {
+    return (this.width / this.slidesOnScreen) - (this.slidesGap / 2);
   }
-
-  __touchStart(e){
-    this.__touch.startX = e.changedTouches[0].pageX;
-  }
-
-  __touchMove(e) {
-    this.__touch.moveX = e.changedTouches[0].pageX - this.__touch.startX;
-    const swipeLength = Math.abs(this.__touch.moveX);
-
-    if (swipeLength < 20) return;
-
-    this.__touch.moveX = swipeLength;
-
-
-    // this.touch.slidesPosition =
-    //   this.touch.slidesPosition ?? this.slides.map((el) => el.position);
-
-    // this.slideMove(this.touch.moveX);
-
-    // if (swipeLength > this.width / 2) {
-    //   this.touch.nextSlide =
-    //     this.touch.moveX < 0 ? this.currentSlide + 1 : this.currentSlide - 1;
-    // }
-  }
-
-  __touchEnd(e) {
-    // this.slidesElements.forEach((el) => {
-    //   el.style.transition = this.transitionValue;
-    // });
-
-    // if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
-    // else this.setSlide(this.currentSlide);
-
-    this.__touch = {
-      startX: 0,
-      moveX: 0,
-    };
-  }
-
 }
-},{}]},{},[5]);
+},{"./slider-api":6}]},{},[5]);

@@ -145,21 +145,16 @@ module.exports = class Slider {
 
   next() {
     const nextIndex = this.slides.findIndex(el=> el.position >= this.slidesToScroll * this._calcImagesWidth());
-    // this.slides.findIndex(el=> el.position >= (this.slides.length - this.slidesOnScreen)*this._calcImagesWidth())
 
-    // el.position -= this.slidesToScroll * this._calcImagesWidth();
-    console.log('>',nextIndex)
     this.setSlide(nextIndex);
-    // ;
   }
 
   prev() {
-    this.setSlide(this.currentSlide - 1);
+    this.setSlide(this.currentSlide - this.slidesToScroll);
   }
 
   setSlide(index) {
     this._updateSizes();
-    console.log('>>',index)
 
     if (index < 0) index = 0;
     else if (index > this.slides.length - 1) index = this.slides.length - 1;
