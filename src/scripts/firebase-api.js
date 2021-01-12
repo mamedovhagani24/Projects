@@ -14,8 +14,6 @@ module.exports = class {
   _config = firebaseConfig;
 
   constructor(firebase) {
-    this.posts = [];
-
     this.init(firebase);
   }
 
@@ -27,7 +25,7 @@ module.exports = class {
   loadPosts() {
     return this._database
       .ref("/portfolio")
-      .limitToFirst(4)
+      // .limitToFirst(4)
       .get()
       .then(snap => Object.values(snap.val()));
   }

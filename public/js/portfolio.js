@@ -62,10 +62,17 @@ function clearContainer() {
 
 function tagSearch() {
   const tag = this.textContent;
-
-  db.getPostsByTag(tag)
-  .then(renderPosts)
-  .catch((err) => console.log(err));
+  if (tag === 'all') {
+    db.loadPosts()
+    .then(renderPosts)
+    .catch((err) => console.log(err));
+  
+  } else {
+    db.getPostsByTag(tag)
+    .then(renderPosts)
+    .catch((err) => console.log(err));
+    
+  }
 }
 
 function returnHTMLPost(post) {
@@ -110,8 +117,6 @@ module.exports = class {
   _config = firebaseConfig;
 
   constructor(firebase) {
-    this.posts = [];
-
     this.init(firebase);
   }
 
@@ -123,7 +128,7 @@ module.exports = class {
   loadPosts() {
     return this._database
       .ref("/portfolio")
-      .limitToFirst(4)
+      // .limitToFirst(4)
       .get()
       .then(snap => Object.values(snap.val()));
   }

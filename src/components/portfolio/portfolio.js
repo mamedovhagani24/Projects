@@ -31,10 +31,17 @@ function clearContainer() {
 
 function tagSearch() {
   const tag = this.textContent;
-
-  db.getPostsByTag(tag)
-  .then(renderPosts)
-  .catch((err) => console.log(err));
+  if (tag === 'all') {
+    db.loadPosts()
+    .then(renderPosts)
+    .catch((err) => console.log(err));
+  
+  } else {
+    db.getPostsByTag(tag)
+    .then(renderPosts)
+    .catch((err) => console.log(err));
+    
+  }
 }
 
 function returnHTMLPost(post) {
