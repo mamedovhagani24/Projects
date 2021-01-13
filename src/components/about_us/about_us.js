@@ -48,38 +48,65 @@ resizeClientsSlider();
 
 clientsSlider.init();
 
+
 clientsSlider__range.addEventListener('input', function (e) {
-  const value = +this.value;
+  const rangeVal = +this.value,
+        slideWidth = clientsSlider._calcImagesWidth(),
+        allSlidesWidth = calcAllSlidesWidth(slideWidth);
+
   clientsSlider.setTransition(false);
-
-  const slideWidth = clientsSlider._calcImagesWidth(),
-        allSlidesWidth = clientsSlider.slides.length * slideWidth,
-        halfSlideWidth = (slideWidth / 2) - clientsSlider.slidesGap / 2;
-
-  const w = allSlidesWidth - clientsSlider.width + halfSlideWidth;
   
-  const res = (w / 100) * value;
+  const shiftValue = (allSlidesWidth / 100) * rangeVal;
   
-  clientsSlider.slideMove(-res);
+  clientsSlider.slideMove(-shiftValue);
 });
 
+function calcAllSlidesWidth(slideWidth) {
+  const allSlidesWidth = clientsSlider.slides.length * slideWidth,
+        halfSlideWidth = (slideWidth / 2) - clientsSlider.slidesGap / 2;
+
+  return allSlidesWidth - clientsSlider.width + halfSlideWidth;
+}
+
+let mapped = [];
+
 clientsSlider__range.addEventListener('change', function (e) {
-  const val = +this.value;
-  const slideWidth = clientsSlider._calcImagesWidth(),
-        allSlidesWidth = clientsSlider.slides.length * slideWidth,
-        halfSlideWidth = (slideWidth /2) - clientsSlider.slidesGap / 2;
-
-  const w = allSlidesWidth - clientsSlider.width + halfSlideWidth;
+  const rangeVal = +this.value,
+        slideWidth = clientsSlider._calcImagesWidth(),
+        allSlidesWidth = calcAllSlidesWidth(slideWidth);
   
-  const res = (w / 100) * val;
+  const shiftValue = (allSlidesWidth / 100) * rangeVal;
 
-  const a = clientsSlider.slides.filter((el)=> res >= el.position);
+  const sslides = mapped.length > 0 ? mapped : clientsSlider.slides;
+
+
+  const slidesAfterShift = sslides.filter((el,i)=>{ 
+    console.log(clientsSlider.slideDirection)
+
+      return clientsSlider.slideDirection === 'right' ? 
+        shiftValue - slideWidth > el.position + (slideWidth / 2):
+        shiftValue > el.position - (slideWidth / 2);
+
+        // shiftValue - (slideWidth /2) >= el.position + (slideWidth / 2);
+  });
 
   clientsSlider.setTransition(true);
 
-  clientsSlider.setSlide(a[a.length-1].id);
+  if (slidesAfterShift.length === 0) {
+    clientsSlider.setSlide(clientsSlider.currentSlide)
+    changeRangeValue(clientsSlider.currentSlide);
+  mapped = [...clientsSlider.slides.map(el=> ({...el}) )];
 
-  changeRangeValue(a[a.length-1].id);
+    return;
+  }
+
+  const nextSlideId = slidesAfterShift[slidesAfterShift.length-1].id
+
+  clientsSlider.setSlide(nextSlideId);
+
+  mapped = [...clientsSlider.slides.map(el=> ({...el}) )];
+
+  changeRangeValue(nextSlideId);
 });
 
 function changeRangeValue(elId) {
