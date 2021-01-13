@@ -9,14 +9,38 @@ const clientsSliderButton_next = document.getElementById('clientSlider__next');
 const clientsSlider__range = document.getElementById('clientsSlider__range');
 
 const CLIENTS_ARR = [
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'}
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  }
 ];
 
 const clientsSlider = new Slider({
@@ -30,7 +54,7 @@ const clientsSlider = new Slider({
 
 clientsSliderButton_prev.addEventListener('click', () => {
   if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
-  
+
   clientsSlider.prev();
 });
 
@@ -52,19 +76,20 @@ clientsSlider.init();
 
 clientsSlider__range.addEventListener('input', function (e) {
   const rangeVal = +this.value,
-        slideWidth = clientsSlider._calcImagesWidth(),
-        allSlidesWidth = calcAllSlidesWidth(slideWidth);
+    slideWidth = clientsSlider._calcImagesWidth(),
+    allSlidesWidth = calcAllSlidesWidth(slideWidth);
 
   clientsSlider.setTransition(false);
-  
+
   const shiftValue = (allSlidesWidth / 100) * rangeVal;
-  
+
   clientsSlider.slideMove(-shiftValue);
 });
 
+
 function calcAllSlidesWidth(slideWidth) {
   const allSlidesWidth = clientsSlider.slides.length * slideWidth,
-        halfSlideWidth = (slideWidth / 2) - clientsSlider.slidesGap / 2;
+    halfSlideWidth = (slideWidth / 2) - clientsSlider.slidesGap / 2;
 
   return allSlidesWidth - clientsSlider.width + halfSlideWidth;
 }
@@ -72,42 +97,8 @@ function calcAllSlidesWidth(slideWidth) {
 let mapped = [];
 
 clientsSlider__range.addEventListener('change', function (e) {
-  const rangeVal = +this.value,
-        slideWidth = clientsSlider._calcImagesWidth(),
-        allSlidesWidth = calcAllSlidesWidth(slideWidth);
-  
-  const shiftValue = (allSlidesWidth / 100) * rangeVal;
-
-  const sslides = mapped.length > 0 ? mapped : clientsSlider.slides;
-
-
-  const slidesAfterShift = sslides.filter((el,i)=>{ 
-    console.log(clientsSlider.slideDirection)
-
-      return clientsSlider.slideDirection === 'right' ? 
-        shiftValue - slideWidth > el.position + (slideWidth / 2):
-        shiftValue > el.position - (slideWidth / 2);
-
-        // shiftValue - (slideWidth /2) >= el.position + (slideWidth / 2);
-  });
-
   clientsSlider.setTransition(true);
-
-  if (slidesAfterShift.length === 0) {
-    clientsSlider.setSlide(clientsSlider.currentSlide)
-    changeRangeValue(clientsSlider.currentSlide);
-  mapped = [...clientsSlider.slides.map(el=> ({...el}) )];
-
-    return;
-  }
-
-  const nextSlideId = slidesAfterShift[slidesAfterShift.length-1].id
-
-  clientsSlider.setSlide(nextSlideId);
-
-  mapped = [...clientsSlider.slides.map(el=> ({...el}) )];
-
-  changeRangeValue(nextSlideId);
+  clientsSlider.setSlide(clientsSlider.nextSlideId);
 });
 
 function changeRangeValue(elId) {
@@ -129,14 +120,14 @@ function updateClientsSliderButtons(currSlide, lastSlide) {
 }
 
 
-function resizeClientsSlider(){
+function resizeClientsSlider() {
   const width = window.innerWidth;
 
   if (width <= 425) clientsSlider.slidesOnScreen = 2;
   else if (width <= 500) clientsSlider.slidesOnScreen = 3;
   else if (width <= 750) clientsSlider.slidesOnScreen = 4;
   else clientsSlider.slidesOnScreen = 6;
-  
+
 }
 
 },{"../../scripts/slider-multi-items":7}],2:[function(require,module,exports){
@@ -419,6 +410,7 @@ module.exports = class Slider extends touchSlides{
     });
 
     this._updateSlidesTransform();
+    
     this._prevPositionX = (positionX === this._prevPositionX) ? null : positionX;
   }
 
@@ -647,12 +639,17 @@ module.exports = class {
     }
   }
 
+  get nextSlideId() {
+    let nextSlide = this.slides.find(el => el.position + this._calcImagesWidth() / 2 > 0);
+    
+    return nextSlide !== undefined ? nextSlide.id : this.slides[this.slides.length - 1].id;
+  }
+  
   _touchEnd(e) {
     this.setTransition(true);
 
-    if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
-    else this.setSlide(this.currentSlide);
-
+    this.setSlide(this.nextSlideId);
+    
     this.touch = {
       startX: 0,
       moveX: 0,

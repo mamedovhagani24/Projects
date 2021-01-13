@@ -67,6 +67,7 @@ module.exports = class Slider extends touchSlides{
     });
 
     this._updateSlidesTransform();
+    
     this._prevPositionX = (positionX === this._prevPositionX) ? null : positionX;
   }
 

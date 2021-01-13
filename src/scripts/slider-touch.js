@@ -71,12 +71,17 @@ module.exports = class {
     }
   }
 
+  get nextSlideId() {
+    let nextSlide = this.slides.find(el => el.position + this._calcImagesWidth() / 2 > 0);
+    
+    return nextSlide !== undefined ? nextSlide.id : this.slides[this.slides.length - 1].id;
+  }
+  
   _touchEnd(e) {
     this.setTransition(true);
 
-    if (this.touch.nextSlide !== undefined) this.setSlide(this.touch.nextSlide);
-    else this.setSlide(this.currentSlide);
-
+    this.setSlide(this.nextSlideId);
+    
     this.touch = {
       startX: 0,
       moveX: 0,
