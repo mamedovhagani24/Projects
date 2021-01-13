@@ -30,6 +30,25 @@ a {
   margin: 0 auto;
 }
 
+.input {
+  border: {
+    top: 0;
+    right: 0;
+    bottom: solid 3px $primary-color;
+    left: 0;
+  }
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.1em;
+  border-bottom-width: 3px;
+  padding: .7em 1em;
+  border-radius: $main-border-radius;
+
+  &_secondary {
+    border-bottom-color: $secondary-color;
+  }
+}
+
 .btn {
   text-transform: uppercase;
   font-family: inherit;
@@ -107,6 +126,7 @@ a {
   }
 }
 
+
 /* 
   используется в template.html
   можно потом убрать
@@ -172,6 +192,11 @@ a {
   &__col-9 {
     @extend %col-paddings;
     width: 75%;
+  }
+
+  &__col-10 {
+    @extend %col-paddings;
+    width: 83.33%;
   }
 }
 

@@ -26,6 +26,22 @@ a {
   margin: 0 auto;
 }
 
+.input {
+  border-top: 0;
+  border-right: 0;
+  border-bottom: solid 3px #76c7c0;
+  border-left: 0;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.1em;
+  border-bottom-width: 3px;
+  padding: 0.7em 1em;
+  border-radius: 4px;
+}
+.input_secondary {
+  border-bottom-color: #98a3a3;
+}
+
 .btn {
   text-transform: uppercase;
   font-family: inherit;
@@ -55,7 +71,7 @@ a {
   border: none;
   text-decoration: none;
 }
-.btn_icon {
+.btn_icon, .header-mobile__search-input {
   font-size: 1.2em;
   padding: 0.65em 1em 0.55em;
 }
@@ -108,7 +124,7 @@ a {
   color: #7f8c8c;
 }
 
-.row__col-9, .row__col-6, .row__col-4, .row__col-3, .row__col-2, .row__col {
+.row__col-10, .row__col-9, .row__col-6, .row__col-4, .row__col-3, .row__col-2, .row__col {
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -138,6 +154,9 @@ a {
 .row__col-9 {
   width: 75%;
 }
+.row__col-10 {
+  width: 83.33%;
+}
 
 .logo {
   line-height: 20px;
@@ -152,10 +171,12 @@ a {
   padding-left: 5px;
 }
 
-.submenu__item::before, .nav__submenu::before {
+.submenu__link::before, .nav__submenu::before {
   content: "";
   font-family: FontAwesome;
   margin-right: 5px;
+  position: relative;
+  top: -1px;
 }
 
 a {
@@ -271,6 +292,22 @@ a {
 }
 .header-mobile__search {
   height: 10%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.header-mobile__search-input {
+  width: 100%;
+}
+.header-mobile__search-input-wrapp {
+  width: 100%;
+  padding-right: 10px;
+}
+.header-mobile__search-btn {
+  width: 100%;
+}
+.header-mobile__search-btn-wrapp {
+  width: 50px;
 }
 .header-mobile .header__body {
   height: 35px;
@@ -298,11 +335,16 @@ a {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.nav__item {
-  list-style-type: none;
+.nav__link {
   display: inline-block;
+  padding: 10px 15px;
+  width: 100%;
+  color: white;
+}
+.nav__item {
+  padding: 0;
   border-bottom: 3px solid transparent;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .nav .btn:hover {
   background: #e2534b;
@@ -316,6 +358,7 @@ a {
 }
 .nav__submenu {
   position: relative;
+  padding: 10px 15px;
 }
 .nav__submenu .header__submenu {
   position: absolute;
@@ -351,6 +394,9 @@ a {
   visibility: visible;
 }
 
+.submenu_active {
+  background-color: #e2534b;
+}
 .submenu_active::before {
   content: "";
   margin-left: -4px;
@@ -363,9 +409,6 @@ a {
   list-style: none;
   padding-top: 15px;
 }
-.submenu__link {
-  padding: 6px 12px 7px 23px;
-}
 .submenu__item {
   margin-bottom: 4px;
   border-radius: 3px;
@@ -376,6 +419,7 @@ a {
 .submenu__item:hover {
   background-color: #62b9b0;
 }
+
 .slider__images, .slider__wrapp {
   position: relative;
   height: 500px;

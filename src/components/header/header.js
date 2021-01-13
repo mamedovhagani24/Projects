@@ -27,8 +27,8 @@ submenuBtns.forEach((el)=>{
 
 
 function toggleSubmenu(e) {
-    if (e.target.classList.contains('submenu__item')) return;
-    
+    if (!e.target.classList.contains('nav__submenu')) return;
+
     this.classList.toggle('submenu_active');
 }
 

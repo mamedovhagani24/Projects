@@ -4,6 +4,8 @@
   content: $icon--angle-right;
   font-family: FontAwesome;
   margin-right: 5px;
+  position: relative;
+  top: -1px;
 }
 
 a {
@@ -191,6 +193,28 @@ a {
 
     &__search {
       height: 10%;
+      padding: 0 $col-padding;
+      display: flex;
+      justify-content: space-between;
+
+      
+      &-input {
+        @extend .btn_icon;
+        width: 100%;
+
+        &-wrapp {
+          width: 100%;
+          padding-right: 10px;
+        }
+      }
+
+      &-btn {
+        width: 100%;
+
+        &-wrapp {
+          width: 50px;
+        }
+      }
     }
 
     .header {
@@ -228,12 +252,18 @@ a {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  
+  &__link {
+    display: inline-block;
+    padding: 10px 15px;
+    width: 100%;
+    color: white;
+  }
 
   &__item {
-    list-style-type: none;
-    display: inline-block;
+    padding: 0;
     border-bottom: 3px solid transparent;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   .btn {
@@ -253,6 +283,7 @@ a {
 
   &__submenu {
     position: relative;
+    padding: 10px 15px;
     
 
     & .header__submenu {
@@ -304,7 +335,15 @@ a {
 
 .submenu {
   
+
+  &__link {
+    &::before {
+      @extend %pseudo-icon;
+    }
+  }
   &_active {
+    background-color: $accent-color--darken;
+
     &::before {
       content: $icon--angle-down;
       margin-left: -4px;
@@ -321,10 +360,6 @@ a {
     padding-top: 15px;
   }
 
-  &__link {
-    padding: 6px 12px 7px 23px;
-  }
-
   &__item {
     margin-bottom: 4px;
     border-radius: 3px;
@@ -334,12 +369,6 @@ a {
 
     &:hover {
       background-color: $primary-color--darken;
-    }
-
-    &::before {
-      @extend %pseudo-icon;
-
-      // transform: rotate(45deg);
     }
   }
 }
