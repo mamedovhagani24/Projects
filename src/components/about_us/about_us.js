@@ -51,17 +51,7 @@ const clientsSlider = new Slider({
   slidesGap: 20
 });
 
-clientsSliderButton_prev.addEventListener('click', () => {
-  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
 
-  clientsSlider.prev();
-});
-
-clientsSliderButton_next.addEventListener('click', () => {
-  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
-
-  clientsSlider.next();
-});
 
 window.addEventListener('resize', resizeClientsSlider);
 
@@ -85,6 +75,23 @@ clientsSlider__range.addEventListener('input', function (e) {
   clientsSlider.slideMove(-shiftValue);
 });
 
+clientsSlider__range.addEventListener('change', function (e) {
+  clientsSlider.setTransition(true);
+  clientsSlider.setSlide(clientsSlider.nextSlideId);
+});
+
+
+clientsSliderButton_prev.addEventListener('click', () => {
+  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
+
+  clientsSlider.prev();
+});
+
+clientsSliderButton_next.addEventListener('click', () => {
+  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
+
+  clientsSlider.next();
+});
 
 function calcAllSlidesWidth(slideWidth) {
   const allSlidesWidth = clientsSlider.slides.length * slideWidth,
@@ -93,12 +100,8 @@ function calcAllSlidesWidth(slideWidth) {
   return allSlidesWidth - clientsSlider.width + halfSlideWidth;
 }
 
-let mapped = [];
 
-clientsSlider__range.addEventListener('change', function (e) {
-  clientsSlider.setTransition(true);
-  clientsSlider.setSlide(clientsSlider.nextSlideId);
-});
+
 
 function changeRangeValue(elId) {
   const amountSlides = clientsSlider.slides.length - clientsSlider.slidesOnScreen;

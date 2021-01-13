@@ -30,7 +30,6 @@ module.exports = class Slider extends touchSlides{
       touchDisabled: null
     };
 
-    this.slideDirection = null;
 
   }
 
@@ -56,8 +55,6 @@ module.exports = class Slider extends touchSlides{
   _prevPositionX = 0;
   
   slideMove(positionX) {
-    if (this._prevPositionX > positionX) this.slideDirection = 'left';
-    else this.slideDirection = 'right';
     
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
@@ -67,8 +64,6 @@ module.exports = class Slider extends touchSlides{
     });
 
     this._updateSlidesTransform();
-    
-    this._prevPositionX = (positionX === this._prevPositionX) ? null : positionX;
   }
 
   next() {

@@ -52,17 +52,7 @@ const clientsSlider = new Slider({
   slidesGap: 20
 });
 
-clientsSliderButton_prev.addEventListener('click', () => {
-  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
 
-  clientsSlider.prev();
-});
-
-clientsSliderButton_next.addEventListener('click', () => {
-  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
-
-  clientsSlider.next();
-});
 
 window.addEventListener('resize', resizeClientsSlider);
 
@@ -86,6 +76,23 @@ clientsSlider__range.addEventListener('input', function (e) {
   clientsSlider.slideMove(-shiftValue);
 });
 
+clientsSlider__range.addEventListener('change', function (e) {
+  clientsSlider.setTransition(true);
+  clientsSlider.setSlide(clientsSlider.nextSlideId);
+});
+
+
+clientsSliderButton_prev.addEventListener('click', () => {
+  if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
+
+  clientsSlider.prev();
+});
+
+clientsSliderButton_next.addEventListener('click', () => {
+  if (clientsSliderButton_next.classList.contains('btn_disabled')) return;
+
+  clientsSlider.next();
+});
 
 function calcAllSlidesWidth(slideWidth) {
   const allSlidesWidth = clientsSlider.slides.length * slideWidth,
@@ -94,12 +101,8 @@ function calcAllSlidesWidth(slideWidth) {
   return allSlidesWidth - clientsSlider.width + halfSlideWidth;
 }
 
-let mapped = [];
 
-clientsSlider__range.addEventListener('change', function (e) {
-  clientsSlider.setTransition(true);
-  clientsSlider.setSlide(clientsSlider.nextSlideId);
-});
+
 
 function changeRangeValue(elId) {
   const amountSlides = clientsSlider.slides.length - clientsSlider.slidesOnScreen;
@@ -373,7 +376,6 @@ module.exports = class Slider extends touchSlides{
       touchDisabled: null
     };
 
-    this.slideDirection = null;
 
   }
 
@@ -399,8 +401,6 @@ module.exports = class Slider extends touchSlides{
   _prevPositionX = 0;
   
   slideMove(positionX) {
-    if (this._prevPositionX > positionX) this.slideDirection = 'left';
-    else this.slideDirection = 'right';
     
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
@@ -410,8 +410,6 @@ module.exports = class Slider extends touchSlides{
     });
 
     this._updateSlidesTransform();
-    
-    this._prevPositionX = (positionX === this._prevPositionX) ? null : positionX;
   }
 
   next() {

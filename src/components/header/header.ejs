@@ -2,7 +2,8 @@
     <div class="header__body">
         <div class="header__column">
             <a href="#">
-                <%- include('../logo/logo') %>
+               <%= page %>
+<!--                <%- include('../logo/logo') %>-->
             </a>
         </div>
         <div class="header__column">
@@ -10,8 +11,8 @@
                 <span class="burger__line"></span>
             </div>
             <nav class="header__menu">
-                <li class="menu__item btn btn_secondary">Home</li>
-                <li class="menu__item btn btn_link">About</li>
+                <li class="menu__item btn <%= (page === 'index')? 'btn_secondary' : 'btn_link' %>">Home</li>
+                <li class="menu__item btn <%= (page === 'about')? 'btn_secondary' : 'btn_link' %>">About</li>
                 <li class="menu__item btn btn_link">Services</li>
                 <li class="menu__item btn btn_link portfolio">Portfolio
                     <ul class='header__submenu'>
