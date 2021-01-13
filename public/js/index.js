@@ -69,7 +69,7 @@ function updateClientsSliderButtons(currSlide) {
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
 
-    if (window.pageYOffset > 200) {
+    if (window.pageYOffset > 200 && !header.classList.contains('header-mobile')) {
         header.classList.add('header__small');
     } else {
         header.classList.remove('header__small');
@@ -87,13 +87,19 @@ const toggle = document.querySelector(".burger")
     });
 
 
-const portfolio = document.querySelector('.portfolio')
+const submenuBtns = document.querySelectorAll('.nav__submenu')
 
-portfolio.addEventListener('click', (e) => {
-    const header__submenu = document.querySelector('.header__submenu')
+submenuBtns.forEach((el)=>{
+    el.addEventListener('click', toggleSubmenu);
+});
 
-    header__submenu.classList.toggle('active')
-})
+
+function toggleSubmenu(e) {
+    if (e.target.classList.contains('submenu__item')) return;
+    
+    this.classList.toggle('submenu_active');
+}
+
 
 },{}],3:[function(require,module,exports){
 function enableDragSort(listClass) {
