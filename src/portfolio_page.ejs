@@ -1,4 +1,5 @@
 <%
+    const page = 'portfolio'
     const _COMP = (arg) => 'components/'+arg+'/'+arg;
 %>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 </head>
 <body>
 
-<%- include(_COMP('header')); %>
+<%- include(_COMP('header'), {page}); %>
 <%- include(_COMP('portfolio')); %>
 <%- include(_COMP('footer')); %>
 

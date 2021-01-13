@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run ejs | npm run sass | npm run js",
-    "ejs": "watch --interval=1 \"ejs-cli --base-dir src/ \"**/*.ejs\" -e src/components --out public/\" src/",
+    "ejs": "watch --interval=1 \"ejs-cli --base-dir src/ \"**/*.ejs\" -e src/components/ --out public/\" src/",
     "js": "watchify src/index.js -o public/js/index.js",
     "sass": "sass --watch src/style.scss:public/css/style.css"
   },

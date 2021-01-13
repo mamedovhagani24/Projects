@@ -1,4 +1,5 @@
 <%
+    const page = 'about'
     const _COMP = (arg) => 'components/'+arg+'/'+arg;
 %>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 </head>
 <body>
 
-<%- include(_COMP('header')); %>
+<%- include(_COMP('header'), {page}); %>
 <%- include(_COMP('slider')); %>
 <%- include(_COMP('services')); %>
 <%- include(_COMP('images_section')); %>
