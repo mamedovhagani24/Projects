@@ -51,8 +51,6 @@ module.exports = class Slider extends touchSlides{
       el.style.transition = isOn ? this.transitionValue : 'none';
     });
   }
-
-  _prevPositionX = 0;
   
   slideMove(positionX) {
     
