@@ -97,7 +97,7 @@ const toggle = document.querySelector(".burger")
     });
 
 
-const submenuBtns = document.querySelectorAll('.nav__submenu')
+const submenuBtns = document.querySelectorAll('.submenu')
 
 submenuBtns.forEach((el)=>{
     el.addEventListener('click', toggleSubmenu);

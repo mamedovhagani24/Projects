@@ -3,7 +3,7 @@
         {
             name: 'Home',
             page: 'index',
-            link: '#'
+            link: 'index.html'
         },
         {
             name: 'About',
@@ -21,7 +21,7 @@
                 {
                     name: 'Portfolio 1 column page',
                     page: 'portfolio',
-                    link: ''
+                    link: 'portfolio_page.html'
                 },
                 {
                     name: 'Portfolio 2 column page',
@@ -54,7 +54,7 @@
 %>
 
 <header class="header header-mobile">
-    <%- include('./__header_mobile', {menu, page}) %>
+    <%- include('__header_mobile', {menu, page}) %>
     <div class="header__body">
         <div class="header__column header__column_logo">
             <a href="#">
@@ -67,15 +67,15 @@
             </div>
             <nav class="nav header-nav">
                 <% for (let item of menu) { if (item.submenu) { %>
-                    <li class="nav__item header-nav__item btn btn_link nav__submenu"><%= item.name%>
-                        <ul class='header-submenu'>
+                    <li class="nav__item header-nav__item btn btn_link nav__submenu header-nav__submenu submenu"><%= item.name%>
+                        <ul class='submenu__wrapp header-submenu'>
                             <% for (let subitem of item.submenu) { %>
-                                <li class="submenu__item header-submenu__item"><%= subitem.name %></li>
+                                <li class="submenu__item header-submenu__item"><a href="<%= subitem.link %>" class="nav__link header-submenu__link"><%= subitem.name %></a></li>
                             <% } %>
                         </ul>
                     </li>
                 <% } else { %>
-                    <li class="nav__item header-nav__item btn btn_link"><%= item.name %></li>
+                    <li class="nav__item header-nav__item btn <%= page === item.page ? 'header-nav__item_active' : 'btn_link' %>"><a href="<%= item.link %>" class="header-nav__link"><%= item.name %></a></li>
                 <% }} %>
                 
                 <li class="nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
