@@ -14,7 +14,6 @@ a {
 
 .header {
   background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
-  padding: 32px 0;
   width: 100%;
   z-index: 3;
   position: fixed;
@@ -27,7 +26,7 @@ a {
 
   &__body {
     margin: 0 auto;
-    padding: 0 $col-padding;
+    padding: 32px $col-padding;
     width: 1170px;
     max-width: 100%;
     display: flex;
@@ -190,27 +189,26 @@ a {
     backdrop-filter: blur(3px);
     
     &_closing {
-      animation: closeHeader 1s ease;
+      // animation: closeHeader 1s ease;
     }
 
     &__body {
-      display: none;
       flex-direction: column;
       justify-content: space-between;
       height: 80vh;
+      margin-top: -80vh;
+      transition: margin 1s ease;
     }
     
     &_open {
-      height: 100vh;
-      animation: openHeader 1s ease;
-      animation-fill-mode: forwards;
+      background-color: rgba($primary-color, .9);
 
       & .header-mobile__body {
         display: flex;
+        margin-top: 5vh;
       }
       .header {
         &__body {
-          height: 35px;
         }
   
         &__column {
@@ -286,31 +284,6 @@ a {
   }
 }
 
-@keyframes openHeader {
-  0% {
-    transform: translateY(-90vh);
-  }
-  1% {
-    display: block;
-  }
-  100% {
-    transform: translateY(0);
-    background-color: rgba($primary-color, .9);
-  }
-}
-
-@keyframes closeHeader {
-  from {
-    transform: translateY(0);
-  }
-  90% {
-    height: 0;
-
-  }
-  to {
-    display: none;
-  }
-}
 
 .nav {
   list-style: none;
