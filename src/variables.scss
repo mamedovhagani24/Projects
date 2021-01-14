@@ -5,7 +5,7 @@ $secondary-color: #98a3a3;
 $secondary-color--darken: #7f8c8c;
 
 $accent-color: #e8645a;
-$accent-color--darken: #e2534b;
+$accent-color--darken: darken($accent-color, 14%);
 
 $text-color--grey: #777777;
 
@@ -14,6 +14,7 @@ $background-color: #f3f3f3;
 $col-padding: 15px;
 
 $main-border-radius: 4px;
+$nav-border-radius: 5px;
 
 $search-input__focus-border-width: 5px;
 

@@ -21,7 +21,8 @@ a {
   transition: all 0.1s ease-out;
 
   &.header__small {
-    padding: 15px 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 
   &__body {
@@ -104,61 +105,6 @@ a {
       }
     }
 
-    // @media screen and (max-width: 1500px) {
-    //     &:first-child,
-    //     &:last-child {
-    //         width: 100%;
-    //         padding: 0px 9px;
-    //     }
-
-    //     &:last-child {
-    //         display: flex;
-    //         flex-wrap: wrap;
-    //         max-width: 100%;
-    //     }
-
-    //     &:last-child {
-    //         display: flex;
-    //         justify-content: flex-end;
-    //         position: relative;
-
-    //         .burger {
-    //             display: block;
-    //         }
-
-    //         // .header__submenu {
-    //         // }
-
-    //         .header__menu {
-    //             display: none;
-    //             background-color: $primary-color;
-    //             width: 300px;
-    //             min-width: 160px;
-    //             height: auto;
-    //             transition: all 0.4s linear;
-    //             border-bottom-left-radius: $main-border-radius;
-    //             border-bottom-right-radius: $main-border-radius;
-
-    //             & .menu__item {
-    //                 display: block;
-    //                 margin-top: 10px;
-
-    //                 &.portfolio {
-    //                     padding: 10px 16px 8px 28px;
-    //                 }
-    //             }
-
-    //             &.active {
-    //                 display: block;
-    //                 position: absolute;
-    //                 width: 100%;
-    //                 top: 50px;
-    //                 padding: 10px;
-    //             }
-    //         }
-    //     }
-    // }
-
     @media screen and (max-width: 300px) {
       .nav__menu.active {
         max-width: 100%;
@@ -182,35 +128,43 @@ a {
   }
 
   &-mobile {
-    height: auto;
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     backdrop-filter: blur(3px);
+    transform: translateY(0);
     
     &_closing {
       // animation: closeHeader 1s ease;
     }
 
     &__body {
+      display: none;
       flex-direction: column;
       justify-content: space-between;
-      height: 80vh;
-      margin-top: -80vh;
-      transition: margin 1s ease;
+      flex-grow: 1;
+      // height: 88vh;
+      // margin-top: -88vh;
+      // transition: margin 1s ease;
     }
     
     &_open {
+      height: 100vh;
       background-color: rgba($primary-color, .9);
+      transition: transform .5s ease;
 
       & .header-mobile__body {
-        display: flex;
-        margin-top: 5vh;
+        // display: flex;
+        // margin-top: 0;
+        // padding-top: 20px;
+
       }
       .header {
         &__body {
+          flex-grow: 0;
+          // height: 12vh;
+          // padding-top: 15px;
+          // padding-bottom: 15px;
         }
-  
         &__column {
           &_logo {
             width: 100%;
@@ -236,14 +190,14 @@ a {
     }
 
     &__search {
-      height: 10%;
+      // height: 10%;
       padding: 0 $col-padding;
       display: flex;
+      padding-bottom: 20px;
       justify-content: space-between;
-
-      
       font-size: 1.2em;
 
+      
       &-input {
         @extend .btn_icon;
         min-width: 100%;
@@ -296,10 +250,13 @@ a {
     padding: 10px 15px;
     width: 100%;
     color: white;
+    border-bottom: transparent;
   }
 
   &__item {
+    border-radius: $nav-border-radius;
     padding: 0;
+    margin-bottom: 10px;
 
     &_active {
       background-color: $primary-color--darken;
@@ -313,12 +270,11 @@ a {
         color: transparent;
       }
     }
-    margin-bottom: 10px;
   }
 
   .btn {
     &:hover {
-      background: $accent-color--darken;
+      background: $accent-color;
       border: {
         top: 0;
         right: 0;
@@ -326,7 +282,7 @@ a {
         left: 0;
       }
       border-bottom-width: 3px;
-      border-radius: 4px;
+      border-bottom-color: $accent-color--darken;
       cursor: pointer;
     }
   }
@@ -419,4 +375,14 @@ a {
       background-color: $primary-color--darken;
     }
   }
+}
+
+.header-nav {
+  &__item {
+    padding: 8px 15px;
+  }
+}
+
+.header-submenu {
+  display: none;
 }

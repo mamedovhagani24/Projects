@@ -10,21 +10,23 @@ window.addEventListener('scroll', () => {
 
 const toggle = document.querySelector(".burger")
     .addEventListener("click", function (e) {
-        const header__burger = document.querySelector('.header')
+        const header__burger = document.querySelector('.header');
+        const mobileBody = header__burger.querySelector('.header-mobile__body');
 
-        e.preventDefault();
-        this.classList.toggle("active");
+        mobileBody.style.height = '100vh';
 
+        const navHeight = mobileBody.offsetHeight;
+        console.log(navHeight)
+        // e.preventDefault();
+        
         if (header__burger.classList.contains('header-mobile_open')){
-            header__burger.classList.remove('header-mobile_open')
-            header__burger.classList.add('header-mobile_closing');
-
-            setTimeout(() => {
-                header__burger.classList.remove('header-mobile_closing');                
-            }, 1000);
+            header__burger.style.transform = 'translateY('+(-navHeight)+'px)';
+            setTimeout(()=>header__burger.classList.remove('header-mobile_open'), 500); 
         } else {
             header__burger.classList.add('header-mobile_open');
+            header__burger.style.transform = 'translateY(0px)';
         }
+        this.classList.toggle("active");
 
     });
 
@@ -35,6 +37,21 @@ submenuBtns.forEach((el)=>{
     el.addEventListener('click', toggleSubmenu);
 });
 
+setHeaderPostision();
+
+function setHeaderPostision() {
+    if (window.innerWidth > 900) return;
+    const header__burger = document.querySelector('.header');
+    header__burger.style.display = 'flex';
+
+    const navHeight = header__burger.querySelector('.header-mobile__body').offsetHeight;
+
+    if (!header__burger.classList.contains('header-mobile_open')){
+        header__burger.style.transform = 'translateY('+(-navHeight)+'px)';
+    } else {
+        header__burger.style.transform = 'translateY(0px)';
+    }
+}
 
 function toggleSubmenu(e) {
     if (!e.target.classList.contains('nav__submenu')) return;

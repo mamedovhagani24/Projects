@@ -65,17 +65,17 @@
             <div class="burger">
                 <span class="burger__line"></span>
             </div>
-            <nav class="nav">
+            <nav class="nav header-nav">
                 <% for (let item of menu) { if (item.submenu) { %>
-                    <li class="nav__item btn btn_link portfolio"><%= item.name%>
-                        <ul class='header__submenu'>
+                    <li class="nav__item header-nav__item btn btn_link nav__submenu"><%= item.name%>
+                        <ul class='header-submenu'>
                             <% for (let subitem of item.submenu) { %>
-                                <li class="submenu__item"><%= subitem.name %></li>
+                                <li class="submenu__item header-submenu__item"><%= subitem.name %></li>
                             <% } %>
                         </ul>
                     </li>
                 <% } else { %>
-                    <li class="nav__item btn btn_secondary"><%= item.name %></li>
+                    <li class="nav__item header-nav__item btn btn_link"><%= item.name %></li>
                 <% }} %>
                 
                 <li class="nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
