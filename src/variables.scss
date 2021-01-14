@@ -1,5 +1,5 @@
 $primary-color: #76c7c0;
-$primary-color--darken: #62b9b0;
+$primary-color--darken: darken($primary-color, 14%);
 
 $secondary-color: #98a3a3;
 $secondary-color--darken: #7f8c8c;
@@ -17,6 +17,9 @@ $background-color--darken: #ececec;
 $col-padding: 15px;
 
 $main-border-radius: 4px;
+$header-border-radius: 5px;
+
+$search-input__focus-border-width: 5px;
 
 
 // Slider component's variables
@@ -38,6 +41,7 @@ $footer__blog-img-icon-color: rgba(255, 255, 255, 0.5);
 $icon--arrow-left: "\f060";
 $icon--arrow-right: "\f061";
 $icon--angle-right: "\f105";
+$icon--angle-down: "\f107";
 
 // Media screens values
 $media-window--laptop: 1024px;
