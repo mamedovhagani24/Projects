@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODUS versus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header__body">
+        <div class="header__column">
+            <a href="#">
+                <h2 class="logo">Modus<span class="logo__sub">versus</span></h2>
+            </a>
+        </div>
+        <div class="header__column">
+            <div class="burger">
+                <span class="burger__line"></span>
+            </div>
+            <nav class="header__menu">
+                <li class="menu__item btn btn_secondary">Home</li>
+                <li class="menu__item btn btn_link">About</li>
+                <li class="menu__item btn btn_link">Services</li>
+                <li class="menu__item btn btn_link portfolio">Portfolio
+                    <ul class='header__submenu'>
+                        <li class="submenu__item">Portfolio 2 column page</li>
+                        <li class="submenu__item">Portfolio 2 column page</li>
+                        <li class="submenu__item">Portfolio 2 column page</li>
+                    </ul>
+                </li>
+                <li class="menu__item btn btn_link">Blog</li>
+                <li class="menu__item btn btn_link">Features</li>
+                <li class="menu__item btn btn_link">Contact</li>
+                <li class="menu__item btn btn_link icon"><i class="fa fa-search"></i></li>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<div class="portfolio">
+    <div class="portfolio__subheader">
+        <div class="container">
+
+            <div class="portfolio__title">
+
+                <div class="portfolio__title__left">
+                    <h3 class="title-h3">Portfolio</h3>
+                </div>
+
+                <div class="portfolio__title__right">
+                    <div class="breadcrumbs">
+                        <a class="breadcrumbs__item breadcrumbs__item-link" href="index.html">Home</a>
+                        <span class="breadcrumbs__item">Portfolio</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="arrow"></div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            
+            
+                <button class="btn btn_secondary btn_small" onmouseup="tagSearch">all</button>
+             
+                <button class="btn btn_secondary btn_small" onmouseup="tagSearch">web design</button>
+             
+                <button class="btn btn_secondary btn_small" onmouseup="tagSearch">logo design</button>
+             
+                <button class="btn btn_secondary btn_small" onmouseup="tagSearch">photography</button>
+             
+                <button class="btn btn_secondary btn_small" onmouseup="tagSearch">wordpress</button>
+             
+        </div>
+
+        <div class="cases" style="min-height: 200px;">
+
+            <!-- 
+                <div class="cases__item">
+
+                    <div class="cases__item__img">
+                        <img class="img-inner" src="img/img.jpg">
+                    </div>
+    
+                    <div class="cases__item__info">
+                        <div class="text-content">
+                            <h3 class="title-h3">Donec faucibus ultricies congue</h3>
+                            <p class="description">Maecenas eget turpis turpis. Nunc vel metus augue. Aenean euismod cursus ligula eget dapibus. Praesent vel erat in tortor placerat dignissim. Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                        </div>
+                        <div class="links">
+                            <div class="links__link">
+                                <a class="links__link__url" href="www.project.dom">
+                                    <div class="link-img"></div><span>www.project.dom</span>
+                                </a>
+                            </div>
+                            <button class="btn btn_secondary btn_large">view details</button>
+                        </div>
+                    </div>
+    
+                </div>
+            
+                <div class="cases__item">
+
+                    <div class="cases__item__img">
+                        <img class="img-inner" src="img/img.jpg">
+                    </div>
+    
+                    <div class="cases__item__info">
+                        <div class="text-content">
+                            <h3 class="title-h3">In eget dictum lorem, vel interdum quam.</h3>
+                            <p class="description">Morbi purus nibh, porta cursus efficitur a, sagittis id tortor. Mauris pellentesque, orci commodo egestas congue, arcu nulla porta velit, vel viverra ante ligula eu elit. Cras vulputate posuere venenatis. Aenean ornare, tortor id rutrum tristique, tellus velit dignissim turpis, ac finibus risus augue convallis mauris. Cras accumsan ullamcorper metus, et viverra nibh molestie vel. Maecenas id dolor in sapien scelerisque congue quis nec sapien. Donec sed tempus purus.</p>
+                        </div>
+                        <div class="links">
+                            <div class="links__link">
+                                <a class="links__link__url" href="www.project.dom">
+                                    <div class="link-img"></div><span>www.project.dom</span>
+                                </a>
+                            </div>
+                            <button class="btn btn_secondary btn_large">view details</button>
+                        </div>
+                    </div>
+    
+                </div>
+            
+                <div class="cases__item">
+
+                    <div class="cases__item__img">
+                        <img class="img-inner" src="img/img.jpg">
+                    </div>
+    
+                    <div class="cases__item__info">
+                        <div class="text-content">
+                            <h3 class="title-h3">Donec at convallis massa, non vehicula magna.</h3>
+                            <p class="description">Quisque et nunc ipsum. Etiam a ligula ac nunc fringilla egestas vitae in risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam rhoncus turpis auctor ligula vulputate hendrerit. Morbi pretium vehicula diam, in lobortis nisi porta id. Morbi semper ornare nunc quis euismod. Donec sapien nibh, rhoncus eget est vel, tincidunt congue lorem. Pellentesque finibus ligula non risus ornare gravida. Sed elit dolor, consectetur non risus at, iaculis fermentum augue. Aliquam finibus eu risus a fringilla. Sed volutpat tortor at augue iaculis, ac euismod ante interdum.</p>
+                        </div>
+                        <div class="links">
+                            <div class="links__link">
+                                <a class="links__link__url" href="www.project.dom">
+                                    <div class="link-img"></div><span>www.project.dom</span>
+                                </a>
+                            </div>
+                            <button class="btn btn_secondary btn_large">view details</button>
+                        </div>
+                    </div>
+    
+                </div>
+            
+                <div class="cases__item">
+
+                    <div class="cases__item__img">
+                        <img class="img-inner" src="img/img.jpg">
+                    </div>
+    
+                    <div class="cases__item__info">
+                        <div class="text-content">
+                            <h3 class="title-h3">Donec dignissim libero at blandit dapibus. </h3>
+                            <p class="description"> Duis nulla sem, efficitur et lobortis quis, egestas sodales arcu. Morbi malesuada nulla sed augue semper tristique sit amet sed arcu. Praesent ac ultricies lectus. Fusce interdum placerat ante, sit amet volutpat justo. Vestibulum consequat suscipit dignissim. Nullam hendrerit nisi a porttitor pellentesque. Mauris consequat massa turpis, tempor eleifend nibh ornare vitae. Donec pharetra orci sapien, quis varius massa blandit id. Ut rhoncus ligula non ante laoreet, at congue lacus rutrum.</p>
+                        </div>
+                        <div class="links">
+                            <div class="links__link">
+                                <a class="links__link__url" href="www.project.dom">
+                                    <div class="link-img"></div><span>www.project.dom</span>
+                                </a>
+                            </div>
+                            <button class="btn btn_secondary btn_large">view details</button>
+                        </div>
+                    </div>
+    
+                </div>
+             -->
+            
+        </div>
+
+        <div class="pagination">
+            <a href="#">
+                <div class="pagination__item left-arrow">
+                    <i class="fa fa-chevron-left"></i>
+                </div>
+            </a>
+            <a href="#">
+                <div class="pagination__item page-active">1</div>
+            </a>
+            <a href="#">
+                <div class="pagination__item page">2</div>
+            </a>
+            <a href="#">
+                <div class="pagination__item page">3</div>
+            </a>
+            <a href="#">
+                <div class="pagination__item right-arrow">
+                    <i class="fa fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<footer class="footer">
+  <div class="footer__container container">
+    <div class="row">
+      <div class="footer__col-1 row__col-4">
+        <div class="footer__logo-wrapp">
+          <h2 class="logo">Modus<span class="logo__sub">versus</span></h2>
+        </div>
+        <p class="footer__p">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+          euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem,
+          adipiscing in adipiscing et, interdum nec.
+        </p>
+        <span class="footer__contact">
+          Phone: <a href="#" class="footer__link footer__contact_big">182 2569 5896</a>
+        </span>
+        <span class="footer__contact">
+          e-mail: <a href="#" class="footer__link footer__contact_big">info@modu.versus</a>
+        </span>
+      </div>
+      <div class="footer__col-2 row__col-2">
+        <h3 class="footer__title title-h3">Company</h3>
+        <ul class="footer__list">
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">About</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">FAQ</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Contact</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Terms</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Privacy</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Testimonials</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer__col-3 row__col-2">
+        <h3 class="footer__title title-h3">Community</h3>
+        <ul class="footer__list">
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Blog</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Forum</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Support</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Newsletter</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer__col-4 row__col-4">
+        <h3 class="footer__title footer__title_italic title-h3">
+          from the <span>blog</span>
+        </h3>
+        
+        <div class="footer__blog-row row">
+          <div class="footer__blog-img-wrapp row__col-3">
+            <div class="footer__blog-img"><i class="fa fa-picture-o"></i></div>
+          </div>
+          <div class="row__col-9">
+            <div class="footer__blog-info">
+              <p class="footer__blog-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <span class="footer__blog-date">26 May, 2013</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer__blog-row row">
+          <div class="footer__blog-img-wrapp row__col-3">
+            <div class="footer__blog-img"><i class="fa fa-picture-o"></i></div>
+          </div>
+          <div class="row__col-9">
+            <div class="footer__blog-info">
+              <p class="footer__blog-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <span class="footer__blog-date">26 May, 2013</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="footer__footer">
+    <div class="footer__wrapp container">
+      <div class="footer__footer_left"><span>2013 ModusVersus</span></div>
+      <div class="footer__footer_right">
+        <div class="footer__socials">
+          <a href="#" class="footer__link footer__socials-link"
+            ><i class="fa fa-facebook"></i
+          ></a>
+          <a href="#" class="footer__link footer__socials-link"
+            ><i class="fa fa-google-plus-official"></i
+          ></a>
+          <a href="#" class="footer__link footer__socials-link"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a href="#" class="footer__link footer__socials-link"><i class="fa fa-rss"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+<script src="js/portfolio.js"></script>
+</body>
+</html>
