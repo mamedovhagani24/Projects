@@ -447,3 +447,13 @@ a {
     }
   }
 }
+
+.header-nav {
+  &__item {
+    padding: 8px 15px;
+  }
+}
+
+.header-submenu {
+  display: none;
+}
