@@ -43,9 +43,16 @@ a {
     &_nav {
       width: 70%;
 
+      & .nav {
+        @media screen and (max-width: 900px) {
+          display: none;
+        }
+      }
+
       & .burger {
         display: none;
         margin-top: 10px;
+        float: right;
 
         &__line {
           display: block;
@@ -90,6 +97,10 @@ a {
               transition: all 0.3s linear;
             }
           }
+        }
+
+        @media screen and (max-width: 900px) {
+          display: block;
         }
       }
     }
@@ -172,18 +183,53 @@ a {
   }
 
   &-mobile {
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: rgba($primary-color, .9);
     backdrop-filter: blur(3px);
+    
+    &_closing {
+      animation: closeHeader 1s ease;
+    }
 
     &__body {
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: space-between;
-      height: 77vh;
+      height: 80vh;
+    }
+    
+    &_open {
+      height: 100vh;
+      animation: openHeader 1s ease;
+      animation-fill-mode: forwards;
+
+      & .header-mobile__body {
+        display: flex;
+      }
+      .header {
+        &__body {
+          height: 35px;
+        }
+  
+        &__column {
+          &_logo {
+            width: 100%;
+          }
+          &_nav {
+            width: auto;
+  
+            .nav {
+              display: none;
+            }
+  
+            .burger {
+              display: block;
+            }
+          }
+        }
+      }
     }
 
     &__links {
@@ -198,18 +244,32 @@ a {
       justify-content: space-between;
 
       
+      font-size: 1.2em;
+
       &-input {
         @extend .btn_icon;
-        width: 100%;
+        min-width: 100%;
+        padding: 0.6em 1em 0.7em;
 
         &-wrapp {
           width: 100%;
           padding-right: 10px;
         }
+
+        &:focus {
+          margin: {
+            top: -$search-input__focus-border-width;
+            right: -$search-input__focus-border-width;
+            // bottom: -$search-input__focus-border-width;
+            left: -$search-input__focus-border-width;
+          }
+        }
       }
 
       &-btn {
         width: 100%;
+        // padding: 0.5em 1em 0.7em;
+        padding: 0.5em 1em 0.6em .9em;
 
         &-wrapp {
           width: 50px;
@@ -217,33 +277,38 @@ a {
       }
     }
 
-    .header {
-      &__body {
-        height: 35px;
-      }
-
-      &__column {
-        &_logo {
-          width: 100%;
-        }
-        &_nav {
-          width: auto;
-
-          .nav {
-            display: none;
-          }
-
-          .burger {
-            display: block;
-          }
-        }
-      }
-    }
+    
 
     &__nav {
       flex-direction: column;
       padding: 0 $col-padding;
     }
+  }
+}
+
+@keyframes openHeader {
+  0% {
+    transform: translateY(-90vh);
+  }
+  1% {
+    display: block;
+  }
+  100% {
+    transform: translateY(0);
+    background-color: rgba($primary-color, .9);
+  }
+}
+
+@keyframes closeHeader {
+  from {
+    transform: translateY(0);
+  }
+  90% {
+    height: 0;
+
+  }
+  to {
+    display: none;
   }
 }
 
@@ -262,7 +327,19 @@ a {
 
   &__item {
     padding: 0;
-    border-bottom: 3px solid transparent;
+
+    &_active {
+      background-color: $primary-color--darken;
+      border-bottom-color: darken($primary-color--darken, 10%);
+    }
+
+    &.btn_link {
+      border-bottom: { 
+        width: 3px;
+        style: solid;
+        color: transparent;
+      }
+    }
     margin-bottom: 10px;
   }
 
@@ -334,8 +411,6 @@ a {
 }
 
 .submenu {
-  
-
   &__link {
     &::before {
       @extend %pseudo-icon;

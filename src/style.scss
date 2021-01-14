@@ -30,25 +30,6 @@ a {
   margin: 0 auto;
 }
 
-.input {
-  border: {
-    top: 0;
-    right: 0;
-    bottom: solid 3px $primary-color;
-    left: 0;
-  }
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 1.1em;
-  border-bottom-width: 3px;
-  padding: .7em 1em;
-  border-radius: $main-border-radius;
-
-  &_secondary {
-    border-bottom-color: $secondary-color;
-  }
-}
-
 .btn {
   text-transform: uppercase;
   font-family: inherit;
@@ -60,10 +41,13 @@ a {
   border: {
     top: 0;
     right: 0;
-    bottom: solid 3px $primary-color--darken;
+    bottom: {
+      style: solid;
+      width: 3px;
+      color: $primary-color--darken;
+    };
     left: 0;
   }
-  border-bottom-width: 3px;
   border-radius: $main-border-radius;
   cursor: pointer;
 
@@ -85,7 +69,7 @@ a {
 
   &_icon {
     font-size: 1.2em;
-    padding: .65em 1em .55em;
+    padding: .64em 1em .56em;
   }
 
   &_small {
@@ -109,6 +93,8 @@ a {
 
   &:focus {
     outline: 0;
+    background: $secondary-color;
+    border-bottom-color: $secondary-color--darken;
   }
   
   &_disabled {
@@ -127,6 +113,29 @@ a {
 }
 
 
+.input {
+  border: {
+    top: 0;
+    right: 0;
+    bottom: solid 3px $primary-color;
+    left: 0;
+  }
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.1em;
+  border-bottom-width: 3px;
+  padding: .7em 1em;
+  border-radius: $main-border-radius;
+
+  &_secondary {
+    border-bottom-color: $secondary-color--darken;
+  }
+
+  &:focus {
+    border: $search-input__focus-border-width solid $accent-color;
+    outline: none;
+  }
+}
 /* 
   используется в template.html
   можно потом убрать
