@@ -51,7 +51,6 @@ function renderPosts(posts) {
 
   posts.forEach((post) => {
     const item = returnHTMLPost(post);
-    console.log(post)
     cases.innerHTML = cases.innerHTML + item;
   });
 }
