@@ -6,10 +6,13 @@ $secondary-color--darken: #7f8c8c;
 
 $accent-color: #e8645a;
 $accent-color--darken: #e2534b;
+$accent-color--focus:#62a29e;
+$accent-color--focus--darken:#528b86;
 
 $text-color--grey: #777777;
 
 $background-color: #f3f3f3;
+$background-color--darken: #ececec;
 
 $col-padding: 15px;
 
@@ -18,13 +21,15 @@ $header-border-radius: 5px;
 
 $search-input__focus-border-width: 5px;
 
+
 // Slider component's variables
-$slider__height: 500px;
+$slider__height: 550px;
 $slider__subtitle-bg-color: rgba(0, 0, 0, 0.5);
 
-// About Us component's colors:
+// About Us component's variables:
 $about_us__slider-card-bg-color: #f8f8f8;
 $about_us__line-color: #e1e2e2;
+$about_us__slider-padding: 15px;
 
 // Footer component's variables
 $footer__base-padding: 20px;

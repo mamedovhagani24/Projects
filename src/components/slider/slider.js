@@ -21,6 +21,34 @@ const SLIDES_ARR = [
     imgUrl:
       "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
   },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
+  },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
+  },
+  {
+    heading: "Vestibulium 2",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://s1.1zoom.me/b5050/7/225989-Sepik_2048x1152.jpg",
+  },
+  {
+    heading: "AAAAA 21",
+    description:
+      "Rutrum condimentum, libero lectus mattis orci, ut commodo. Maecenas tincidunt, augue et Maecenas tincidunt, augue et ",
+    imgUrl:
+      "https://canadalifechurch.com/wp-content/uploads/2017/06/2017.02.05.jpg",
+  },
 ];
 
 const mainSliderContainer = document.getElementById("main-slider__container");
@@ -72,14 +100,10 @@ mainSliderMarkersWrapp.addEventListener("click", (e) => {
 });
 
 sliderButtonNext.addEventListener("click", () => {
-  if (sliderButtonNext.classList.contains('btn_disabled')) return;
-
   mainSlider.next();
 });
 
 sliderButtonPrev.addEventListener("click", () => {
-  if (sliderButtonPrev.classList.contains('btn_disabled')) return;
-
   mainSlider.prev();
 });
 
@@ -97,19 +121,15 @@ function createMainSliderMarkers(slides) {
   });
 }
 
-function updateMainSliderMarkers(index) {
+function updateMainSliderMarkers(index, lastSlide) {
   mainSliderMarkers.forEach((el) => el.classList.remove("slider__control-item_active"));
 
   mainSliderMarkers[index].classList.add("slider__control-item_active");
 
-  checkButtonsActivity([sliderButtonNext, sliderButtonPrev], index, SLIDES_ARR.length);
+  checkButtonsActivity([sliderButtonNext, sliderButtonPrev], index, lastSlide);
 }
 
-function checkButtonsActivity(buttonsArr, currSlide, slidesAmount) {
-  buttonsArr.forEach(el => el.classList.remove('btn_disabled'));
-  
-  if (currSlide === 0) 
-    buttonsArr[1].classList.add('btn_disabled');
-  else if (currSlide === slidesAmount-1) 
-    buttonsArr[0].classList.add('btn_disabled');
+function checkButtonsActivity(buttonsArr, currSlide, lastSlide) {  
+  buttonsArr[1].disabled = currSlide === 0;
+  buttonsArr[0].disabled = currSlide === lastSlide;
 }

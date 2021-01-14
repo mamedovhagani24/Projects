@@ -1,0 +1,189 @@
+.portfolio {
+    background-color: $background-color;
+
+    &__subheader {
+        background-color: $background-color--darken;
+        padding: 35px 0 35px;
+
+    }
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title-h3 {
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+    }
+
+    .breadcrumbs {
+        &__item {
+            font-size: 12px;
+            font-weight: 400;
+            color: #7f8c8c;
+
+            &-link {
+                &:hover {
+                    color: $accent-color;
+                }
+
+                &:after {
+                    content: "/";
+                    color: #7f8c8c;
+                    margin-left: 5px;
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+
+    .arrow {
+        background: url("../img/arrow-portfolio.png") top left no-repeat;
+        height: 12px;
+        margin-bottom: 30px;
+    }
+
+    .filters {
+        margin-bottom: 35px;
+
+        .btn {
+            margin-right: 15px;
+
+            &:focus {
+                background-color: $accent-color--focus;
+                border-bottom-color: $accent-color--focus--darken;
+            }
+        }
+    }
+
+    .cases {
+        &__item {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+
+            &__img {
+                max-height: 270px;
+                width: 50%;
+                flex-shrink: 0;
+
+                border: {
+                    top: 0;
+                    right: 0;
+                    bottom: solid 3px $secondary-color--darken;
+                    left: 0;
+                }
+
+                border-radius: $main-border-radius;
+                overflow: hidden;
+
+
+                .img-inner {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &__info {
+                margin-left: 35px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .title-h3 {
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-bottom: 20px;
+                }
+
+                .description {
+                    font-size: 13px;
+                    font-weight: 400;
+                    color: $secondary-color--darken;
+                }
+
+                .links {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    &__link {
+                        font-size: 20px;
+                        font-weight: 600;
+
+                        &__url {
+                            color: $secondary-color--darken;
+                            display: flex;
+                            align-items: center;
+
+                            .link-img {
+                                margin-right: 20px;
+                                width: 40px;
+                                height: 40px;
+                                background: url(../img/link.png);
+                            }
+
+                            &:hover {
+                                color: $accent-color;
+
+                                .link-img {
+                                    background: url(../img/link-hover.png);
+                                }
+                            }
+                        }
+                    }
+
+                    .btn {
+                        padding: 20px 55px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 65px 0;
+
+        &__item {
+            width: 40px;
+            height: 37px;
+            color: #ffffff;
+            background-color: $secondary-color;
+            border-bottom: solid 3px $secondary-color--darken;
+            border-radius: $main-border-radius;
+            margin: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: FontAwesome;
+            font-size: 16px;
+            font-weight: 800;
+
+            &:hover {
+                background-color: $accent-color;
+                border-bottom-color: $accent-color--darken;
+            }
+        }
+
+        .page-active {
+            background-color: $accent-color--focus;
+            border-bottom-color: $accent-color--focus--darken;
+        }
+
+        .left-arrow {
+            margin-right: 20px;
+        }
+
+        .right-arrow {
+            margin-left: 20px;
+        }
+    }
+}

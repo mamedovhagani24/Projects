@@ -97,7 +97,8 @@ a {
     border-bottom-color: $secondary-color--darken;
   }
   
-  &_disabled {
+  &_disabled,
+  &:disabled {
     cursor: default;
     background: $secondary-color;
     border-bottom-color: $secondary-color--darken;
@@ -217,3 +218,5 @@ a {
 @import 'components/images_section/images_section';
 @import 'components/about_us/about_us';
 @import 'components/footer/footer';
+@import 'components/portfolio/portfolio';
+

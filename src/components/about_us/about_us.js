@@ -1,6 +1,6 @@
-const Slider = require("../../scripts/slider-api");
+const Slider = require("../../scripts/slider-multi-items");
 
-// const clientsSlider = new Slider(mainSliderContainer, SLIDES_ARR, 1, 1, 425);
+
 const clientsSliderWrapper = document.querySelector('.about-us__slider-body');
 
 const clientsSliderButton_prev = document.getElementById('clientSlider__prev');
@@ -8,14 +8,38 @@ const clientsSliderButton_next = document.getElementById('clientSlider__next');
 const clientsSlider__range = document.getElementById('clientsSlider__range');
 
 const CLIENTS_ARR = [
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'},
-  {imgUrl: './img/jquery.png', className: 'about-us__slider-img'}
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  },
+  {
+    imgUrl: './img/jquery.png',
+    className: 'about-us__slider-img'
+  }
 ];
 
 const clientsSlider = new Slider({
@@ -27,9 +51,39 @@ const clientsSlider = new Slider({
   slidesGap: 20
 });
 
+
+
+window.addEventListener('resize', resizeClientsSlider);
+
+clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
+updateClientsSliderButtons(0);
+
+resizeClientsSlider();
+
+clientsSlider.init();
+
+
+clientsSlider__range.addEventListener('input', function (e) {
+  const rangeVal = +this.value,
+    slideWidth = clientsSlider._calcImagesWidth(),
+    allSlidesWidth = calcAllSlidesWidth(slideWidth);
+
+  clientsSlider.setTransition(false);
+
+  const shiftValue = (allSlidesWidth / 100) * rangeVal;
+
+  clientsSlider.slideMove(-shiftValue);
+});
+
+clientsSlider__range.addEventListener('change', function (e) {
+  clientsSlider.setTransition(true);
+  clientsSlider.setSlide(clientsSlider.nextSlideId);
+});
+
+
 clientsSliderButton_prev.addEventListener('click', () => {
   if (clientsSliderButton_prev.classList.contains('btn_disabled')) return;
-  
+
   clientsSlider.prev();
 });
 
@@ -39,27 +93,41 @@ clientsSliderButton_next.addEventListener('click', () => {
   clientsSlider.next();
 });
 
-clientsSlider__range.addEventListener('input', (e)=>{
-  const value = +e.srcElement.value;
-  
-  const w = clientsSlider.container.offsetWidth;
-  
-  const res = (value / 100) * w;
-  
-  clientsSlider.slideMove(-res);
-})
+function calcAllSlidesWidth(slideWidth) {
+  const allSlidesWidth = clientsSlider.slides.length * slideWidth,
+    halfSlideWidth = (slideWidth / 2) - clientsSlider.slidesGap / 2;
 
-clientsSlider.onEvent('changeSlide', updateClientsSliderButtons);
-updateClientsSliderButtons(0);
-
-clientsSlider.init();
+  return allSlidesWidth - clientsSlider.width + halfSlideWidth;
+}
 
 
-function updateClientsSliderButtons(currSlide) {
-  [clientsSliderButton_prev, clientsSliderButton_next].forEach(el => el.classList.remove('btn_disabled'));
 
-  if (currSlide === 0)
-    clientsSliderButton_prev.classList.add('btn_disabled');
-  else if (currSlide === CLIENTS_ARR.length-1)
-    clientsSliderButton_next.classList.add('btn_disabled');
+
+function changeRangeValue(elId) {
+  const amountSlides = clientsSlider.slides.length - clientsSlider.slidesOnScreen;
+
+  const allW = amountSlides / elId;
+  const value = 100 / allW;
+
+  clientsSlider__range.value = value;
+}
+
+
+
+function updateClientsSliderButtons(currSlide, lastSlide) {
+  clientsSliderButton_prev.disabled = currSlide === 0;
+  clientsSliderButton_next.disabled = currSlide === lastSlide;
+
+  changeRangeValue(currSlide);
+}
+
+
+function resizeClientsSlider() {
+  const width = window.innerWidth;
+
+  if (width <= 425) clientsSlider.slidesOnScreen = 2;
+  else if (width <= 500) clientsSlider.slidesOnScreen = 3;
+  else if (width <= 750) clientsSlider.slidesOnScreen = 4;
+  else clientsSlider.slidesOnScreen = 6;
+
 }
