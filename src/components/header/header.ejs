@@ -17,6 +17,7 @@
         },
         {
             name: 'Portfolio',
+            page: 'portfolio',
             submenu: [
                 {
                     name: 'Portfolio 1 column page',
@@ -58,7 +59,7 @@
     <div class="header__body">
         <div class="header__column header__column_logo">
             <a href="#">
-               <%- include('../logo/logo') %>
+                <%- include('../logo/logo') %>
             </a>
         </div>
         <div class="header__column header__column_nav">
@@ -67,7 +68,7 @@
             </div>
             <nav class="nav header-nav">
                 <% for (let item of menu) { if (item.submenu) { %>
-                    <li class="nav__item header-nav__item btn btn_link nav__submenu header-nav__submenu submenu"><%= item.name%>
+                    <li class="nav__item header-nav__item btn nav__submenu header-nav__submenu submenu <%= page === item.page ? 'header-nav__item_active' : 'btn_link' %>"><%= item.name%>
                         <ul class='submenu__wrapp header-submenu'>
                             <% for (let subitem of item.submenu) { %>
                                 <li class="submenu__item header-submenu__item"><a href="<%= subitem.link %>" class="nav__link header-submenu__link"><%= subitem.name %></a></li>
@@ -79,7 +80,6 @@
                 <% }} %>
                 
                 <li class="nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
-
             </nav>
         </div>
     </div>
