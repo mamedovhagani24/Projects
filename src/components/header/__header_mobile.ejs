@@ -27,3 +27,28 @@
       </div>
   </div>
 </div>
+<div class="header-mobile__body">
+    <div class="header-mobile__links">
+        <nav class="nav header-mobile__nav">
+          <% for (let item of menu) { if (item.submenu) { %>
+              <li class="nav__item btn btn_link nav__submenu"><%= item.name%>
+                  <ul class='submenu__wrapp'>
+                      <% for (let subitem of item.submenu) { %>
+                          <li class="submenu__item"><a href="<%= subitem.link %>" class="nav__link submenu__link"><%= subitem.name %></a></</li>
+                      <% } %>
+                  </ul>
+              </li>
+          <% } else { %>
+              <li class="nav__item btn <%= page === item.page ? 'nav__item_active' : 'btn_link' %>"><a href="<%= item.link %>" class="nav__link"><%= item.name %></a></li>
+          <% }} %>
+        </nav>
+    </div>
+    <div class="header-mobile__search">
+      <div class="header-mobile__search-input-wrapp">
+          <input type="text" class="header-mobile__search-input input input_secondary" placeholder="Search the site">
+      </div>
+      <div class="header-mobile__search-btn-wrapp">
+          <button class="header-mobile__search-btn btn btn_icon btn_secondary"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </div>
