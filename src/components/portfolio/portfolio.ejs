@@ -74,36 +74,13 @@
         <div class="filters">
             
             <% for (let filterItem of filters) { %>
-                <button class="btn btn_secondary btn_small" onmouseup="tagSearch"><%= filterItem.title %></button>
+                <button class="btn btn_secondary btn_small"><%= filterItem.title %></button>
              <% } %>
         </div>
 
         <div class="cases" style="min-height: 200px;">
 
-            <!-- <% for (let portfolioItem of portfolioItems) { %>
-                <div class="cases__item">
-
-                    <div class="cases__item__img">
-                        <img class="img-inner" src="<%= portfolioItem.imgUrl %>">
-                    </div>
-    
-                    <div class="cases__item__info">
-                        <div class="text-content">
-                            <h3 class="title-h3"><%= portfolioItem.title %></h3>
-                            <p class="description"><%= portfolioItem.description %></p>
-                        </div>
-                        <div class="links">
-                            <div class="links__link">
-                                <a class="links__link__url" href="<%= portfolioItem.link %>">
-                                    <div class="link-img"></div><span><%= portfolioItem.link %></span>
-                                </a>
-                            </div>
-                            <button class="btn btn_secondary btn_large">view details</button>
-                        </div>
-                    </div>
-    
-                </div>
-            <% } %> -->
+            
             
         </div>
 
