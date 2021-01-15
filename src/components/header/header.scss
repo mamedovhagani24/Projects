@@ -1,273 +1,457 @@
 @import "../../variables";
 
+%pseudo-icon {
+  content: $icon--angle-right;
+  font-family: FontAwesome;
+  margin-right: 5px;
+  position: relative;
+  top: -1px;
+}
+
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .header {
-    background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
-    padding: 32px 0;
-    width: 100%;
-    z-index: 3;
-    position: fixed;
-    top: 0;
-    transition: all 0.1s ease-out;
+  background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
+  padding: 32px 0;
+  width: 100%;
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  transition: all 0.1s ease-out;
 
-    &.header__small {
-        padding: 15px 0;
+  &.header__small {
+    padding: 15px 0;
+  }
+
+  &__body {
+    margin: 0 auto;
+    padding: 0 $col-padding;
+    width: 1170px;
+    max-width: 100%;
+    display: flex;
+  }
+
+  &__column {
+    max-width: 100%;
+
+    &_logo {
+      width: 30%;
+
+    }
+
+    &_nav {
+      width: 70%;
+
+      & .nav {
+        @media screen and (max-width: 900px) {
+          display: none;
+        }
+      }
+
+      & .burger {
+        display: none;
+        margin-top: 10px;
+        float: right;
+
+        &__line {
+          display: block;
+          background-color: white;
+          width: 40px;
+          height: 4px;
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            background-color: white;
+            width: 40px;
+            height: inherit;
+            top: 11px;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+            width: 40px;
+            height: inherit;
+            bottom: 11px;
+          }
+        }
+
+        &.active {
+          transition: all 0.3s ease;
+          & .burger__line {
+            background: none;
+
+            &::before {
+              top: 0;
+              transform: rotate(45deg);
+              transition: all 0.3s linear;
+            }
+
+            &::after {
+              bottom: 0;
+              transform: rotate(-45deg);
+              transition: all 0.3s linear;
+            }
+          }
+        }
+
+        @media screen and (max-width: 900px) {
+          display: block;
+        }
+      }
+    }
+
+    @media screen and (max-width: 300px) {
+      .nav__menu.active {
+        max-width: 100%;
+        width: 800px;
+      }
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      margin-top: 5px;
+
+      & span {
+        font-size: 18px;
+        font-weight: 400;
+        text-transform: lowercase;
+      }
+    }
+  }
+
+  &-mobile {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(3px);
+    
+    &_closing {
+      animation: closeHeader 1s ease;
     }
 
     &__body {
-        margin: 0 auto;
-        width: 1170px;
-        max-width: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 80vh;
+    }
+    
+    &_open {
+      height: 100vh;
+      animation: openHeader 1s ease;
+      animation-fill-mode: forwards;
+
+      & .header-mobile__body {
         display: flex;
+      }
+      .header {
+        &__body {
+          height: 35px;
+        }
+  
+        &__column {
+          &_logo {
+            width: 100%;
+          }
+          &_nav {
+            width: auto;
+  
+            .nav {
+              display: none;
+            }
+  
+            .burger {
+              display: block;
+            }
+          }
+        }
+      }
     }
 
-    &__column {
-        max-width: 100%;
-        &:first-child {
-            width: 30%;
-        }
-
-        &:last-child {
-            width: 70%;
-
-            & .burger {
-                display: none;
-                margin-top: 10px;
-
-                &__line {
-                    display: block;
-                    background-color: white;
-                    width: 40px;
-                    height: 4px;
-                    position: relative;
-
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        background-color: white;
-                        width: 40px;
-                        height: inherit;
-                        top: 11px;
-                    }
-
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        background-color: white;
-                        width: 40px;
-                        height: inherit;
-                        bottom: 11px;
-                    }
-                }
-
-                &.active {
-                    transition: all 0.3s ease;
-                    & .burger__line {
-                        background: none;
-
-                        &::before {
-                            top: 0;
-                            transform: rotate(45deg);
-                            transition: all 0.3s linear;
-                        }
-
-                        &::after {
-                            bottom: 0;
-                            transform: rotate(-45deg);
-                            transition: all 0.3s linear;
-                        }
-                    }
-                }
-            }
-
-            .header__menu {
-                list-style: none;
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-
-                & .menu__item {
-                    list-style-type: none;
-                    display: inline-block;
-                }
-
-                .btn {
-                    &:hover {
-                        background: $accent-color--darken;
-                        border: {
-                            top: 0;
-                            right: 0;
-                            bottom: 3px solid $accent-color--darken;
-                            left: 0;
-                        }
-                        border-bottom-width: 3px;
-                        border-radius: 4px;
-                        cursor: pointer;
-                    }
-                }
-
-                .portfolio {
-                    position: relative;
-                    padding: 10px 16px 0px 28px;
-
-                    & .header__submenu {
-                        position: absolute;
-                        display: block;
-                        visibility: hidden;
-                        width: 198px;
-                        background-color: #e2534b;
-                        font-size: 13px;
-                        padding: 6px 5px 3px 5px;
-                        top: 53px;
-                        left: 1px;
-                        border-radius: 8px;
-                        transition: all 3s, 3s, linear;
-                        list-style-type: none;
-
-                        &.active {
-                            visibility: visible;
-                        }
-
-                        & .submenu__item {
-                            margin-bottom: 4px;
-                            padding: 6px 12px 7px 23px;
-                            border-radius: 3px;
-                            position: relative;
-                            background-color: #e8645a;
-                            text-transform: capitalize;
-
-                            &:hover {
-                                background-color: $primary-color--darken;
-                            }
-
-                            &::before {
-                                content: "";
-                                display: block;
-                                width: 4px;
-                                height: 4px;
-                                position: absolute;
-                                top: 11px;
-                                left: 8px;
-                                border-right: 2px solid;
-                                border-top: 2px solid;
-                                transform: rotate(45deg);
-                            }
-                        }
-
-                        &::before {
-                            position: absolute;
-                            content: "";
-                            display: block;
-                            border-radius: 0px 0px 23px 0px;
-                            width: 10px;
-                            height: 10px;
-                            background-color: $accent-color--darken;
-                            top: -4px;
-                            left: 14px;
-                            transform: rotate(45deg);
-                        }
-                    }
-
-                    &::before {
-                        content: "";
-                        display: block;
-                        width: 5px;
-                        height: 5px;
-                        position: absolute;
-                        border-right: 2px solid white;
-                        border-bottom: 2px solid white;
-                        left: 15px;
-                        top: 14px;
-                        transform: rotate(45deg);
-                    }
-                }
-
-                .portfolio:active,
-                .portfolio:focus {
-                    .header__submenu {
-                        visibility: visible;
-                    }
-                }
-            }
-        }
-
-        @media screen and (max-width: 1500px) {
-            &:first-child,
-            &:last-child {
-                width: 100%;
-                padding: 0px 9px;
-            }
-
-            &:last-child {
-                display: flex;
-                flex-wrap: wrap;
-                max-width: 100%;
-            }
-
-            &:last-child {
-                display: flex;
-                justify-content: flex-end;
-                position: relative;
-
-                .burger {
-                    display: block;
-                }
-
-                .header__submenu {
-                }
-
-                .header__menu {
-                    display: none;
-                    background-color: $primary-color;
-                    width: 300px;
-                    min-width: 160px;
-                    height: auto;
-                    transition: all 0.4s linear;
-                    border-bottom-left-radius: $main-border-radius;
-                    border-bottom-right-radius: $main-border-radius;
-
-                    & .menu__item {
-                        display: block;
-                        margin-top: 10px;
-
-                        &.portfolio {
-                            padding: 10px 16px 8px 28px;
-                        }
-                    }
-
-                    &.active {
-                        display: block;
-                        position: absolute;
-                        width: 100%;
-                        top: 50px;
-                        padding: 10px;
-                    }
-                }
-            }
-        }
-
-        @media screen and (max-width: 300px) {
-            .header__menu.active {
-                max-width: 100%;
-                width: 800px;
-            }
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: white;
-            text-transform: uppercase;
-            margin: 6px;
-
-            & span {
-                font-size: 18px;
-                font-weight: 400;
-                text-transform: lowercase;
-            }
-        }
+    &__links {
+      height: 80%;
+      overflow-y: auto;
     }
+
+    &__search {
+      height: 10%;
+      padding: 0 $col-padding;
+      display: flex;
+      justify-content: space-between;
+
+      
+      font-size: 1.2em;
+
+      &-input {
+        @extend .btn_icon;
+        min-width: 100%;
+        padding: 0.6em 1em 0.7em;
+
+        &-wrapp {
+          width: 100%;
+          padding-right: 10px;
+        }
+
+        &:focus {
+          margin: {
+            top: -$search-input__focus-border-width;
+            right: -$search-input__focus-border-width;
+            left: -$search-input__focus-border-width;
+          }
+        }
+      }
+
+      &-btn {
+        width: 100%;
+        // padding: 0.5em 1em 0.7em;
+        padding: 0.5em 1em 0.6em .9em;
+
+        &-wrapp {
+          width: 50px;
+        }
+      }
+    }
+
+    
+
+    &__nav {
+      flex-direction: column;
+      padding: 0 $col-padding;
+    }
+  }
+
+
+}
+
+@keyframes openHeader {
+  0% {
+    transform: translateY(-90vh);
+  }
+  1% {
+    display: block;
+  }
+  100% {
+    transform: translateY(0);
+    background-color: rgba($primary-color, .9);
+  }
+}
+
+@keyframes closeHeader {
+  from {
+    transform: translateY(0);
+  }
+  90% {
+    height: 0;
+
+  }
+  to {
+    display: none;
+  }
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  
+  &__link {
+    display: inline-block;
+    padding: 10px 15px;
+    width: 100%;
+    color: white;
+  }
+
+  &__item {
+    padding: 0;
+
+    &_active {
+      @extend %btn-active;
+    }
+    
+    &.btn_link {
+      border-bottom: { 
+        width: 3px;
+        style: solid;
+        color: transparent;
+      }
+    }
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    &:hover {
+      background: $accent-color--darken;
+      border: {
+        top: 0;
+        right: 0;
+        bottom: 3px solid $accent-color--darken;
+        left: 0;
+      }
+      border-bottom-width: 3px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  &__submenu {
+    position: relative;
+    padding: 10px 15px;
+    
+
+    & .header__submenu {
+      position: absolute;
+      display: block;
+      visibility: hidden;
+      width: 198px;
+      background-color: #e2534b;
+      font-size: 13px;
+      padding: 6px 5px 3px 5px;
+      top: 53px;
+      left: 1px;
+      border-radius: 8px;
+      transition: all 3s, 3s, linear;
+      list-style-type: none;
+
+      &.active {
+        visibility: visible;
+      }
+
+      
+
+      &::before {
+        position: absolute;
+        content: "";
+        display: block;
+        border-radius: 0px 0px 23px 0px;
+        width: 10px;
+        height: 10px;
+        background-color: $accent-color--darken;
+        top: -4px;
+        left: 14px;
+        transform: rotate(45deg);
+      }
+    }
+
+    &::before {
+      @extend %pseudo-icon;
+    }
+  }
+
+  .portfolio:active,
+  .portfolio:focus {
+    .header__submenu {
+      visibility: visible;
+    }
+  }
+}
+
+.submenu {
+  &__link {
+    &::before {
+      @extend %pseudo-icon;
+    }
+  }
+  &_active {
+    background-color: $accent-color--darken;
+
+    &::before {
+      content: $icon--angle-down;
+      margin-left: -4px;
+    }
+
+    .submenu__wrapp {
+      display: block;
+    }
+  }
+
+  &__wrapp {
+    display: none;
+    list-style: none;
+    padding-top: 15px;
+  }
+
+  &__item {
+    margin-bottom: 4px;
+    border-radius: 3px;
+    position: relative;
+    background-color: #e8645a;
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: $primary-color--darken;
+    }
+  }
+}
+
+.header-nav {
+  &__item {
+    padding: 8px 15px;
+
+    &_active {
+      @extend %btn-active;
+    }
+  }
+
+  &__link {
+    color: white;
+  }
+}
+
+.header-submenu {
+  margin: {
+    top: 20px;
+    left: -15px;
+  }
+  font-weight: lighter;
+  position: absolute;
+  padding: 10px;
+  background-color: $accent-color--darken;
+  border-radius: $header-border-radius;
+  min-width: 100px;
+  list-style: none;
+
+  &::before {
+    position: absolute;
+    content: "";
+    display: block;
+    border-radius: 0px 0px 23px 0px;
+    width: 10px;
+    height: 10px;
+    background-color: $accent-color--darken;
+    top: -4px;
+    left: 14px;
+    transform: rotate(45deg);
+  }
+
+  &__item {
+    background-color: $accent-color;
+  }
+
+  &__link {
+    padding: 5px 10px;
+    line-height: 1.6;
+    &::before {
+      @extend %pseudo-icon;
+    }
+  }
+}
+
+%btn-active {
+  background-color: $primary-color--darken;
+  border-bottom-color: darken($primary-color--darken, 10%);
+}
+
+.header-nav__submenu {
+  position: initial;
 }

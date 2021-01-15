@@ -1,29 +1,84 @@
-<header class="header">
+<%
+    const menu = [
+        {
+            name: 'Home',
+            page: 'index',
+            link: 'index.html'
+        },
+        {
+            name: 'About',
+            page: 'about',
+            link: '#'
+        },
+        {
+            name: 'Services',
+            page: 'services',
+            link: '#'
+        },
+        {
+            name: 'Portfolio',
+            page: 'portfolio',
+            submenu: [
+                {
+                    name: 'Portfolio 1 column page',
+                    page: 'portfolio',
+                    link: 'portfolio_page.html'
+                },
+                {
+                    name: 'Portfolio 2 column page',
+                    page: 'portfolio2',
+                    link: '#'
+                },
+                {
+                    name: 'Portfolio 3 column page',
+                    page: 'portfolio3',
+                    link: '#'
+                }
+            ]
+        },
+        {
+            name: 'Blog',
+            page: 'blog',
+            link: '#'
+        },
+        {
+            name: 'Features',
+            page: 'features',
+            link: '#'
+        },
+        {
+            name: 'Contact',
+            page: 'contacts',
+            link: '#'
+        },
+    ]
+%>
+
+<header class="header header-mobile">
+    <%- include('__header_mobile', {menu, page}) %>
     <div class="header__body">
-        <div class="header__column">
+        <div class="header__column header__column_logo">
             <a href="#">
                 <%- include('../logo/logo') %>
             </a>
         </div>
-        <div class="header__column">
+        <div class="header__column header__column_nav">
             <div class="burger">
                 <span class="burger__line"></span>
             </div>
-            <nav class="header__menu">
-                <li class="menu__item btn btn_secondary">Home</li>
-                <li class="menu__item btn btn_link">About</li>
-                <li class="menu__item btn btn_link">Services</li>
-                <li class="menu__item btn btn_link portfolio">Portfolio
-                    <ul class='header__submenu'>
-                        <li class="submenu__item">Portfolio 2 column page</li>
-                        <li class="submenu__item">Portfolio 2 column page</li>
-                        <li class="submenu__item">Portfolio 2 column page</li>
-                    </ul>
-                </li>
-                <li class="menu__item btn btn_link">Blog</li>
-                <li class="menu__item btn btn_link">Features</li>
-                <li class="menu__item btn btn_link">Contact</li>
-                <li class="menu__item btn btn_link icon"><i class="fa fa-search"></i></li>
+            <nav class="nav header-nav">
+                <% for (let item of menu) { if (item.submenu) { %>
+                    <li class="nav__item header-nav__item btn nav__submenu header-nav__submenu submenu <%= page === item.page ? 'header-nav__item_active' : 'btn_link' %>"><%= item.name%>
+                        <ul class='submenu__wrapp header-submenu'>
+                            <% for (let subitem of item.submenu) { %>
+                                <li class="submenu__item header-submenu__item"><a href="<%= subitem.link %>" class="nav__link header-submenu__link"><%= subitem.name %></a></li>
+                            <% } %>
+                        </ul>
+                    </li>
+                <% } else { %>
+                    <li class="nav__item header-nav__item btn <%= page === item.page ? 'header-nav__item_active' : 'btn_link' %>"><a href="<%= item.link %>" class="header-nav__link"><%= item.name %></a></li>
+                <% }} %>
+                <li class="nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
             </nav>
         </div>
     </div>
