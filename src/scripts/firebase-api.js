@@ -12,17 +12,17 @@ module.exports = class {
   _database;
   _firebase;
   _config = firebaseConfig;
-  _length = null;
-
   constructor(firebase) {
     this.init(firebase);
+    this.length = null;
+  
   }
 
   init(firebase) {
     this._firebase = firebase.initializeApp(firebaseConfig);
     this._database = this._firebase.database();
 
-    this.dataLength;
+    this.setLength();
   }
 
   loadPosts(paginationIndex = 0) {
@@ -45,15 +45,13 @@ module.exports = class {
       .then((snap) => Object.values(snap.val()));
   }
 
-  get dataLength() {
-    if (this._length !== null) return this._length;
-
-    return this._database
+  setLength() {
+    this._database
       .ref("/portfolio-2/")
       .limitToLast(1)
       .get()
       .then((snap) => {
-        return this._length = +Object.keys(snap.val())[0] + 1;
+        this.length = +Object.keys(snap.val())[0] + 1;
       })
       .catch((err) => console.error(err));
   }

@@ -1,45 +1,39 @@
 "use strict";
 
 const Firebase = require("../../scripts/firebase-api");
-
 const db = new Firebase(firebase);
+const postsContainer = document.querySelector(".cases");
 
-const cases = document.querySelector(".cases");
+const elementsData = {
+  activeTag: null, // string
+  activePagination: null // number
+}
 
 
-setTimeout(() => {
-  const page = +getCurrentPaginationPage();
-  
-  if (page !== undefined){
-    db.loadPosts(page)
-      .then(renderPosts)
-      .catch((err) => console.error(err));}
-}, 1000);
-
+db.loadPosts()
+  .then(renderPosts)
+  .catch((err) => console.error(err));
 
 document.querySelectorAll(".filters button").forEach((btn) => {
   btn.addEventListener("click", tagSearch);
 });
 
-async function getlength() {
-  return await db.dataLength;
+
+function updateAllElements() {
+  updateTagsElements();
+  updatePaginationElements();
 }
 
-function renderPosts(posts) {
-  clearContainer();
-
-  posts.forEach((post) => {
-    const item = returnHTMLPost(post);
-    cases.innerHTML = cases.innerHTML + item;
-  });
+function updateTagsElements(){
+  // ... https://github.com/mamedovhagani24/Projects/issues/76
 }
-
-function clearContainer() {
-  cases.innerHTML = "";
+function updatePaginationElements(){
+  // ... https://github.com/mamedovhagani24/Projects/issues/87
 }
 
 function tagSearch() {
   const tag = this.textContent;
+
   if (tag === "all") {
     db.loadPosts()
       .then(renderPosts)
@@ -49,6 +43,20 @@ function tagSearch() {
       .then(renderPosts)
       .catch((err) => console.log(err));
   }
+}
+
+function renderPosts(allPostsData) {
+  const allPostsHTML = allPostsData.reduce(
+    (postsHTML, postObj) => (postsHTML += returnHTMLPost(postObj)),
+    ""
+  );
+
+  replacePostsIntoContainer(allPostsHTML);
+  updateAllElements();
+}
+
+function replacePostsIntoContainer(postsHTML) {
+  postsContainer.innerHTML = postsHTML;
 }
 
 function returnHTMLPost(post) {
@@ -71,25 +79,4 @@ function returnHTMLPost(post) {
       </div>
   </div>
 </div>`;
-}
-
-function returnHTMLPaginationLink(index) {
-  return `<a href="#">
-            <div class="pagination__item page-active">${i}</div>
-          </a>`;
-}
-
-function getCurrentPaginationPage() {
-  return returnObjectFromGETQuery(window.location.search)?.page;
-}
-
-function returnObjectFromGETQuery(query) {
-  return query
-    .replace("?", "")
-    .split("&")
-    .reduce((obj, str) => {
-      const arr = str.split("=");
-      obj[arr[0]] = arr[1];
-      return obj;
-    }, {});
 }
