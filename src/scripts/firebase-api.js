@@ -40,6 +40,7 @@ module.exports = class {
       .ref("/portfolio-2/")
       .orderByChild("tags/" + tag)
       .equalTo(true)
+      .startAt('1')
       .limitToFirst(4)
       .once("value")
       .then((snap) => Object.values(snap.val()));
