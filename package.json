@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run ejs | npm run sass | npm run js",
     "ejs": "watch --interval=1 \"ejs-cli --base-dir src/ \"**/*.ejs\" -e src/components --out public/\" src/",
-    "js": "start watchify src/index.js -o public/js/index.js && start watchify src/portfolio.js -o public/js/portfolio.js",
+    "js": "watchify src/portfolio.js -o public/js/portfolio.js",
     "sass": "sass --watch src/style.scss:public/css/style.css"
   },
   "keywords": [],
