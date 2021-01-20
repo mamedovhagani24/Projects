@@ -6,16 +6,6 @@
   }
 }
 
-%range-style {
-  height: 5px;
-
-  &::-webkit-slider-thumb {
-    height: 25px;
-    width: 25px;
-    margin-left: -2px;
-    border: solid 3px $background-color;
-  }
-}
 
 .about-us {
   color: $text-color--grey;
@@ -175,6 +165,17 @@
       background-color: $about_us__line-color;
       cursor: pointer;
     }
+    
+    @media screen and (max-width: $about_us__media-slider-nav) {
+      height: 5px;
+
+      &::-webkit-slider-thumb {
+        height: 25px;
+        width: 25px;
+        margin-left: -2px;
+        border: solid 3px $background-color;
+      }
+    }
 
     &-wrapp {
       flex-grow: 1;
@@ -186,11 +187,18 @@
         padding-top: 20px;
       }
 
-        &:hover {
-          .about-us__range {
-            @extend %range-style;
+      &:hover {
+        .about-us__range {
+          height: 5px;
+
+          &::-webkit-slider-thumb {
+            height: 25px;
+            width: 25px;
+            margin-left: -2px;
+            border: solid 3px $background-color;
           }
         }
+      }
     }
   }
 
