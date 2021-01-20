@@ -11,21 +11,22 @@ window.addEventListener('scroll', () => {
 
 const toggle = document.querySelector(".burger")
     .addEventListener("click", function (e) {
-        const header__burger = document.querySelector('.header')
-
+        const header = document.querySelector('.header');
+        
         e.preventDefault();
         this.classList.toggle("active");
+        header.classList.toggle('header-mobile_open');
 
-        if (header__burger.classList.contains('header-mobile_open')){
-            header__burger.classList.remove('header-mobile_open')
-            header__burger.classList.add('header-mobile_closing');
+        // if (header.classList.contains('header-mobile_open')){
+        //     header.classList.remove('header-mobile_open')
+        //     header.classList.add('header-mobile_closing');
 
-            setTimeout(() => {
-                header__burger.classList.remove('header-mobile_closing');                
-            }, 1000);
-        } else {
-            header__burger.classList.add('header-mobile_open');
-        }
+        //     setTimeout(() => {
+        //         header.classList.remove('header-mobile_closing');                
+        //     }, 1000);
+        // } else {
+        //     header.classList.add('header-mobile_open');
+        // }
 
     });
 
