@@ -57,7 +57,6 @@ const elementsData = {
   activePagination: null // number
 }
 
-
 db.loadPosts()
   .then(renderPosts)
   .catch((err) => console.error(err));
@@ -66,31 +65,38 @@ document.querySelectorAll(".filters button").forEach((btn) => {
   btn.addEventListener("click", tagSearch);
 });
 
-
 function updateAllElements() {
   updateTagsElements();
   updatePaginationElements();
 }
 
-function updateTagsElements(){
-  // ... https://github.com/mamedovhagani24/Projects/issues/76
+function updateTagsElements(tag){
+  document.querySelectorAll(".filters button").forEach((btn) => {
+    if (btn.getAttribute('data-name') === tag) {
+      btn.classList.add("selected");
+    } else {
+      btn.classList.remove("selected");
+    }
+  });
 }
 function updatePaginationElements(){
   // ... https://github.com/mamedovhagani24/Projects/issues/87
 }
 
 function tagSearch() {
-  const tag = this.textContent;
+  elementsData.activeTag = this.getAttribute("data-name");
 
-  if (tag === "all") {
+  if (elementsData.activeTag === "all") {
     db.loadPosts()
       .then(renderPosts)
       .catch((err) => console.log(err));
   } else {
-    db.loadPostsByTag(tag)
+    db.loadPostsByTag(elementsData.activeTag)
       .then(renderPosts)
       .catch((err) => console.log(err));
   }
+
+  updateTagsElements(elementsData.activeTag);
 }
 
 function renderPosts(allPostsData) {
@@ -100,7 +106,7 @@ function renderPosts(allPostsData) {
   );
 
   replacePostsIntoContainer(allPostsHTML);
-  updateAllElements();
+  // updateAllElements();
 }
 
 function replacePostsIntoContainer(postsHTML) {
@@ -123,7 +129,7 @@ function returnHTMLPost(post) {
                   <div class="link-img"></div><span>${post.link}</span>
               </a>
           </div>
-          <button class="btn btn_secondary btn_large">view details</button>
+          <button class="btn btn_large">view details</button>
       </div>
   </div>
 </div>`;

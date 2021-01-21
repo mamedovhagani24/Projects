@@ -87,14 +87,16 @@ a {
     border-bottom-color: $accent-color--darken;
   }
 
-  &:active {
-    background: $accent-color--darken;
-  }
 
   &:focus {
     outline: 0;
-    background: $secondary-color;
-    border-bottom-color: $secondary-color--darken;
+//    background: $secondary-color;
+//    border-bottom-color: $secondary-color--darken;
+  }
+  
+  &:active {
+    background: $accent-color--darken;
+    border-bottom-color: $accent-color--darken;
   }
   
   &_disabled,

@@ -151,6 +151,10 @@ a {
       justify-content: space-between;
       transition: height 2s ease;
     }
+    
+    &__links {
+      overflow-y: auto;
+    }
 
     @media screen and (max-width: $header__mobile-active-width) {
       .header__body {
@@ -272,7 +276,7 @@ a {
 
   .btn {
     &:hover {
-      background: $accent-color--darken;
+      background: $accent-color;
       border: {
         top: 0;
         right: 0;
@@ -282,6 +286,9 @@ a {
       border-bottom-width: 3px;
       border-radius: 4px;
       cursor: pointer;
+    }
+    &:active {
+      background: $accent-color--darken;
     }
   }
 
