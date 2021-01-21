@@ -71,7 +71,7 @@
             margin-right: 15px;
             margin-bottom: 10px;
 
-            &:focus {
+            &.selected {
                 background-color: $accent-color--focus;
                 border-bottom-color: $accent-color--focus--darken;
             }
