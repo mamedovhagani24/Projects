@@ -79,6 +79,13 @@
     }
 
     .cases {
+        min-height: 200px;
+
+        & .loader-block{
+            display: block;
+            text-align: center;
+        } 
+
         &__item {
             margin-bottom: 40px;
             display: flex;

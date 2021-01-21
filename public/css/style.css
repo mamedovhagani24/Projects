@@ -1246,6 +1246,13 @@ a {
   background-color: #62a29e;
   border-bottom-color: #528b86;
 }
+.portfolio .cases {
+  min-height: 200px;
+}
+.portfolio .cases .loader-block {
+  display: block;
+  text-align: center;
+}
 .portfolio .cases__item {
   margin-bottom: 40px;
   display: flex;
