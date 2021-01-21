@@ -1209,11 +1209,6 @@ a {
   padding-top: 90px;
   background-color: #f3f3f3;
 }
-@media (max-width: 900px) {
-  .portfolio {
-    padding-top: 94px;
-  }
-}
 .portfolio__subheader {
   background-color: #ececec;
   padding: 35px 0 35px;
