@@ -16,7 +16,9 @@
 }
 
 .slider {
+  padding-top: 70px;
   display: block;
+  padding-top: 112px;
 
   &__wrapp {
     @extend %block-slides;

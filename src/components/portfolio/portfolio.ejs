@@ -1,4 +1,4 @@
-<% 
+<%
     const portfolioItems = [
         {
             title: 'Donec faucibus ultricies congue',
@@ -24,23 +24,28 @@
             imgUrl: 'img/img.jpg',
             link: 'www.project.dom',
         },
-    ]; 
+    ];
 
     const filters = [
         {
             title:'all',
+            attr: 'all',
         },
         {
-            title:'web design',          
+            title:'web design',
+            attr: 'web design',
         },
         {
-            title:'logo design',           
+            title:'logo design',
+            attr: 'logo design',
         },
         {
-            title:'photography',          
+            title:'photography',
+            attr: 'photography',
         },
         {
-            title:'wordpress',          
+            title:'wordpress',
+            attr: 'wordpress',
         },
     ];
 %>
@@ -72,17 +77,15 @@
 
     <div class="container">
         <div class="filters">
-            
+
             <% for (let filterItem of filters) { %>
-                <button class="btn btn_secondary btn_small"><%= filterItem.title %></button>
+                <button class="btn btn_secondary btn_small" data-name="<%= filterItem.attr %>"><%= filterItem.title %></button>
              <% } %>
         </div>
 
         <div class="cases">
             <h1 class="loader-block"><i class="fa fa-spinner" class="loader-block__icon"></i></h1>
-            
-            
-            
+
         </div>
 
         <div class="pagination">
