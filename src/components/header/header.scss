@@ -13,24 +13,34 @@ a {
 }
 
 .header {
+  height: 90px;
   background: url("../img/ruller_bottom.png") repeat-x bottom, $primary-color;
-  padding: 32px 0;
   width: 100%;
   z-index: 3;
   position: fixed;
   top: 0;
-  transition: all 0.1s ease-out;
+  transition: $header__main-transition;
 
-  &.header__small {
-    padding: 15px 0;
+  &__small {
+    height: 70px;
+
+    .header__body {
+      padding-top: 13px;
+    }
   }
 
   &__body {
     margin: 0 auto;
-    padding: 0 $col-padding;
     width: 1170px;
+    padding: 0 $col-padding;
     max-width: 100%;
+    padding: {
+      top: 23px;
+      left: $col-padding;
+      right: $col-padding;
+    }
     display: flex;
+    transition: $header__main-transition;
   }
 
   &__column {
@@ -38,14 +48,13 @@ a {
 
     &_logo {
       width: 30%;
-
     }
 
     &_nav {
       width: 70%;
 
       & .nav {
-        @media screen and (max-width: 900px) {
+        @media screen and (max-width: $header__mobile-active-width) {
           display: none;
         }
       }
@@ -100,7 +109,7 @@ a {
           }
         }
 
-        @media screen and (max-width: 900px) {
+        @media screen and (max-width: $header__mobile-active-width) {
           display: block;
         }
       }
@@ -129,47 +138,49 @@ a {
   }
 
   &-mobile {
-    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    backdrop-filter: blur(3px);
-    
-    &_closing {
-      animation: closeHeader 1s ease;
-    }
+    justify-content: start;
+    backdrop-filter: blur(10px);
 
     &__body {
       display: none;
+      overflow: hidden;
+      padding-top: 30px;
       flex-direction: column;
       justify-content: space-between;
-      height: 80vh;
+      transition: height 2s ease;
     }
-    
+
+    @media screen and (max-width: $header__mobile-active-width) {
+      .header__body {
+        padding-top: 30px;
+      }
+    }
+
     &_open {
       height: 100vh;
-      animation: openHeader 1s ease;
-      animation-fill-mode: forwards;
+      justify-content: start;
+      background-color: rgba($primary-color, 0.8);
+      transition: height 0.5s ease;
 
-      & .header-mobile__body {
+      .header-mobile__body {
         display: flex;
+        height: 100vh;
       }
+
       .header {
-        &__body {
-          height: 35px;
-        }
-  
         &__column {
           &_logo {
             width: 100%;
           }
           &_nav {
             width: auto;
-  
+
             .nav {
               display: none;
             }
-  
+
             .burger {
               display: block;
             }
@@ -178,18 +189,11 @@ a {
       }
     }
 
-    &__links {
-      height: 80%;
-      overflow-y: auto;
-    }
-
     &__search {
-      height: 10%;
+      height: 100px;
       padding: 0 $col-padding;
       display: flex;
       justify-content: space-between;
-
-      
       font-size: 1.2em;
 
       &-input {
@@ -213,8 +217,7 @@ a {
 
       &-btn {
         width: 100%;
-        // padding: 0.5em 1em 0.7em;
-        padding: 0.5em 1em 0.6em .9em;
+        padding: 0.5em 1em 0.6em 0.9em;
 
         &-wrapp {
           width: 50px;
@@ -222,40 +225,18 @@ a {
       }
     }
 
-    
-
     &__nav {
       flex-direction: column;
       padding: 0 $col-padding;
     }
-  }
 
-
-}
-
-@keyframes openHeader {
-  0% {
-    transform: translateY(-90vh);
-  }
-  1% {
-    display: block;
-  }
-  100% {
-    transform: translateY(0);
-    background-color: rgba($primary-color, .9);
-  }
-}
-
-@keyframes closeHeader {
-  from {
-    transform: translateY(0);
-  }
-  90% {
-    height: 0;
-
-  }
-  to {
-    display: none;
+    &.header__small {
+      .header__body {
+        @media screen and (max-width: $header__mobile-active-width) {
+          padding-top: 20px;
+        }
+      }
+    }
   }
 }
 
@@ -264,7 +245,7 @@ a {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  
+
   &__link {
     display: inline-block;
     padding: 10px 15px;
@@ -278,9 +259,9 @@ a {
     &_active {
       @extend %btn-active;
     }
-    
+
     &.btn_link {
-      border-bottom: { 
+      border-bottom: {
         width: 3px;
         style: solid;
         color: transparent;
@@ -307,7 +288,6 @@ a {
   &__submenu {
     position: relative;
     padding: 10px 15px;
-    
 
     & .header__submenu {
       position: absolute;
@@ -326,8 +306,6 @@ a {
       &.active {
         visibility: visible;
       }
-
-      
 
       &::before {
         position: absolute;

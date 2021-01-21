@@ -17,10 +17,13 @@ $background-color--darken: #ececec;
 $col-padding: 15px;
 
 $main-border-radius: 4px;
-$header-border-radius: 5px;
 
 $search-input__focus-border-width: 5px;
 
+// Header component variables
+$header__mobile-active-width: 1050px;
+$header-border-radius: 5px;
+$header__main-transition: all 0.1s ease-out;
 
 // Slider component's variables
 $slider__height: 550px;

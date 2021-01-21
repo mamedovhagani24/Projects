@@ -1,46 +1,68 @@
 "use strict";
 
 const Firebase = require("../../scripts/firebase-api");
-
 const db = new Firebase(firebase);
+const postsContainer = document.querySelector(".cases");
 
-const cases = document.querySelector(".cases");
+const elementsData = {
+  activeTag: null, // string
+  activePagination: null // number
+}
 
 db.loadPosts()
   .then(renderPosts)
-  .catch((err) => console.log(err));
+  .catch((err) => console.error(err));
 
-document.querySelectorAll('.filters button').forEach((btn)=>{
-  btn.addEventListener('click', tagSearch);
+document.querySelectorAll(".filters button").forEach((btn) => {
+  btn.addEventListener("click", tagSearch);
 });
 
-
-function renderPosts(posts) {
-  clearContainer();
-
-  posts.forEach((post) => {
-    const item = returnHTMLPost(post);
-    cases.innerHTML = cases.innerHTML + item;
-  });
+function updateAllElements() {
+  updateTagsElements();
+  updatePaginationElements();
 }
 
-function clearContainer() {
-  cases.innerHTML = '';
+function updateTagsElements(tag){
+  document.querySelectorAll(".filters button").forEach((btn) => {
+    if (btn.getAttribute('data-name') === tag) {
+      btn.classList.add("selected");
+    } else {
+      btn.classList.remove("selected");
+    }
+  });
+}
+function updatePaginationElements(){
+  // ... https://github.com/mamedovhagani24/Projects/issues/87
 }
 
 function tagSearch() {
-  const tag = this.textContent;
-  if (tag === 'all') {
+  elementsData.activeTag = this.getAttribute("data-name");
+
+  if (elementsData.activeTag === "all") {
     db.loadPosts()
-    .then(renderPosts)
-    .catch((err) => console.log(err));
-  
+      .then(renderPosts)
+      .catch((err) => console.log(err));
   } else {
-    db.getPostsByTag(tag)
-    .then(renderPosts)
-    .catch((err) => console.log(err));
-    
+    db.loadPostsByTag(elementsData.activeTag)
+      .then(renderPosts)
+      .catch((err) => console.log(err));
   }
+
+  updateTagsElements(elementsData.activeTag);
+}
+
+function renderPosts(allPostsData) {
+  const allPostsHTML = allPostsData.reduce(
+    (postsHTML, postObj) => (postsHTML += returnHTMLPost(postObj)),
+    ""
+  );
+
+  replacePostsIntoContainer(allPostsHTML);
+  // updateAllElements();
+}
+
+function replacePostsIntoContainer(postsHTML) {
+  postsContainer.innerHTML = postsHTML;
 }
 
 function returnHTMLPost(post) {
@@ -50,7 +72,7 @@ function returnHTMLPost(post) {
   </div>
   <div class="cases__item__info">
       <div class="text-content">
-          <h3 class="title-h3">${post.title}</h3>
+          <h3 class="title-h3">${post.id} • ${post.title}</h3>
           <p class="description">${post.description}</p>
       </div>
       <div class="links">
@@ -59,7 +81,7 @@ function returnHTMLPost(post) {
                   <div class="link-img"></div><span>${post.link}</span>
               </a>
           </div>
-          <button class="btn btn_secondary btn_large">view details</button>
+          <button class="btn btn_large">view details</button>
       </div>
   </div>
 </div>`;

@@ -55,7 +55,6 @@
 %>
 
 <header class="header header-mobile">
-    <%- include('__header_mobile', {menu, page}) %>
     <div class="header__body">
         <div class="header__column header__column_logo">
             <a href="#">
@@ -78,8 +77,10 @@
                 <% } else { %>
                     <li class="nav__item header-nav__item btn <%= page === item.page ? 'header-nav__item_active' : 'btn_link' %>"><a href="<%= item.link %>" class="header-nav__link"><%= item.name %></a></li>
                 <% }} %>
-                <li class="nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
+                <li class="nav__item header-nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
             </nav>
         </div>
     </div>
+    <%- include('__header_mobile', {menu, page}) %>
+
 </header>

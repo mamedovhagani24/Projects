@@ -1,4 +1,4 @@
-<% 
+<%
     const portfolioItems = [
         {
             title: 'Donec faucibus ultricies congue',
@@ -24,23 +24,28 @@
             imgUrl: 'img/img.jpg',
             link: 'www.project.dom',
         },
-    ]; 
+    ];
 
     const filters = [
         {
             title:'all',
+            attr: 'all',
         },
         {
-            title:'web design',          
+            title:'web design',
+            attr: 'web design',
         },
         {
-            title:'logo design',           
+            title:'logo design',
+            attr: 'logo design',
         },
         {
-            title:'photography',          
+            title:'photography',
+            attr: 'photography',
         },
         {
-            title:'wordpress',          
+            title:'wordpress',
+            attr: 'wordpress',
         },
     ];
 %>
@@ -72,39 +77,14 @@
 
     <div class="container">
         <div class="filters">
-            
+
             <% for (let filterItem of filters) { %>
-                <button class="btn btn_secondary btn_small" onmouseup="tagSearch"><%= filterItem.title %></button>
+                <button class="btn btn_secondary btn_small" data-name="<%= filterItem.attr %>"><%= filterItem.title %></button>
              <% } %>
         </div>
 
         <div class="cases" style="min-height: 200px;">
 
-            <!-- <% for (let portfolioItem of portfolioItems) { %>
-                <div class="cases__item">
-
-                    <div class="cases__item__img">
-                        <img class="img-inner" src="<%= portfolioItem.imgUrl %>">
-                    </div>
-    
-                    <div class="cases__item__info">
-                        <div class="text-content">
-                            <h3 class="title-h3"><%= portfolioItem.title %></h3>
-                            <p class="description"><%= portfolioItem.description %></p>
-                        </div>
-                        <div class="links">
-                            <div class="links__link">
-                                <a class="links__link__url" href="<%= portfolioItem.link %>">
-                                    <div class="link-img"></div><span><%= portfolioItem.link %></span>
-                                </a>
-                            </div>
-                            <button class="btn btn_secondary btn_large">view details</button>
-                        </div>
-                    </div>
-    
-                </div>
-            <% } %> -->
-            
         </div>
 
         <div class="pagination">

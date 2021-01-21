@@ -11,21 +11,22 @@ window.addEventListener('scroll', () => {
 
 const toggle = document.querySelector(".burger")
     .addEventListener("click", function (e) {
-        const header__burger = document.querySelector('.header')
-
+        const header = document.querySelector('.header');
+        
         e.preventDefault();
         this.classList.toggle("active");
+        header.classList.toggle('header-mobile_open');
 
-        if (header__burger.classList.contains('header-mobile_open')){
-            header__burger.classList.remove('header-mobile_open')
-            header__burger.classList.add('header-mobile_closing');
+        // if (header.classList.contains('header-mobile_open')){
+        //     header.classList.remove('header-mobile_open')
+        //     header.classList.add('header-mobile_closing');
 
-            setTimeout(() => {
-                header__burger.classList.remove('header-mobile_closing');                
-            }, 1000);
-        } else {
-            header__burger.classList.add('header-mobile_open');
-        }
+        //     setTimeout(() => {
+        //         header.classList.remove('header-mobile_closing');                
+        //     }, 1000);
+        // } else {
+        //     header.classList.add('header-mobile_open');
+        // }
 
     });
 
@@ -48,46 +49,62 @@ function toggleSubmenu(e) {
 "use strict";
 
 const Firebase = require("../../scripts/firebase-api");
-
 const db = new Firebase(firebase);
+const postsContainer = document.querySelector(".cases");
 
-const cases = document.querySelector(".cases");
+const elementsData = {
+  activeTag: null, // string
+  activePagination: null // number
+}
+
 
 db.loadPosts()
   .then(renderPosts)
-  .catch((err) => console.log(err));
+  .catch((err) => console.error(err));
 
-document.querySelectorAll('.filters button').forEach((btn)=>{
-  btn.addEventListener('click', tagSearch);
+document.querySelectorAll(".filters button").forEach((btn) => {
+  btn.addEventListener("click", tagSearch);
 });
 
 
-function renderPosts(posts) {
-  clearContainer();
-
-  posts.forEach((post) => {
-    const item = returnHTMLPost(post);
-    cases.innerHTML = cases.innerHTML + item;
-  });
+function updateAllElements() {
+  updateTagsElements();
+  updatePaginationElements();
 }
 
-function clearContainer() {
-  cases.innerHTML = '';
+function updateTagsElements(){
+  // ... https://github.com/mamedovhagani24/Projects/issues/76
+}
+function updatePaginationElements(){
+  // ... https://github.com/mamedovhagani24/Projects/issues/87
 }
 
 function tagSearch() {
   const tag = this.textContent;
-  if (tag === 'all') {
+
+  if (tag === "all") {
     db.loadPosts()
-    .then(renderPosts)
-    .catch((err) => console.log(err));
-  
+      .then(renderPosts)
+      .catch((err) => console.log(err));
   } else {
-    db.getPostsByTag(tag)
-    .then(renderPosts)
-    .catch((err) => console.log(err));
-    
+    db.loadPostsByTag(tag)
+      .then(renderPosts)
+      .catch((err) => console.log(err));
   }
+}
+
+function renderPosts(allPostsData) {
+  const allPostsHTML = allPostsData.reduce(
+    (postsHTML, postObj) => (postsHTML += returnHTMLPost(postObj)),
+    ""
+  );
+
+  replacePostsIntoContainer(allPostsHTML);
+  updateAllElements();
+}
+
+function replacePostsIntoContainer(postsHTML) {
+  postsContainer.innerHTML = postsHTML;
 }
 
 function returnHTMLPost(post) {
@@ -97,7 +114,7 @@ function returnHTMLPost(post) {
   </div>
   <div class="cases__item__info">
       <div class="text-content">
-          <h3 class="title-h3">${post.title}</h3>
+          <h3 class="title-h3">${post.id} • ${post.title}</h3>
           <p class="description">${post.description}</p>
       </div>
       <div class="links">
@@ -111,6 +128,7 @@ function returnHTMLPost(post) {
   </div>
 </div>`;
 }
+
 },{"../../scripts/firebase-api":4}],3:[function(require,module,exports){
 require("./components/header/header");
 require('./components/portfolio/portfolio');
@@ -130,32 +148,48 @@ module.exports = class {
   _database;
   _firebase;
   _config = firebaseConfig;
-
   constructor(firebase) {
     this.init(firebase);
+    this.length = null;
+  
   }
 
   init(firebase) {
     this._firebase = firebase.initializeApp(firebaseConfig);
     this._database = this._firebase.database();
+
+    this.setLength();
   }
 
-  loadPosts() {
+  loadPosts(paginationIndex = 0) {
     return this._database
-      .ref("/portfolio")
-      // .limitToFirst(4)
+      .ref("/portfolio-2/")
+      .orderByKey()
+      .startAt(''+paginationIndex)
+      .limitToFirst(4)
       .get()
-      .then(snap => Object.values(snap.val()));
+      .then((snap) => Object.values(snap.val()));
   }
 
-  getPostsByTag(tag) {
+  loadPostsByTag(tag) {
     return this._database
-      .ref("/portfolio")
-      .orderByChild("tags/"+tag)
+      .ref("/portfolio-2/")
+      .orderByChild("tags/" + tag)
       .equalTo(true)
-      .limitToLast(4)
+      .limitToFirst(4)
       .once("value")
-      .then(snap => Object.values(snap.val()));
+      .then((snap) => Object.values(snap.val()));
+  }
+
+  setLength() {
+    this._database
+      .ref("/portfolio-2/")
+      .limitToLast(1)
+      .get()
+      .then((snap) => {
+        this.length = +Object.keys(snap.val())[0] + 1;
+      })
+      .catch((err) => console.error(err));
   }
 };
 

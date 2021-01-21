@@ -1,9 +1,18 @@
 .portfolio {
+    padding-top: 112px;
     background-color: $background-color;
+
+    @media (max-width:900px) {
+        padding-top: 94px;
+    }
 
     &__subheader {
         background-color: $background-color--darken;
         padding: 35px 0 35px;
+
+        @media (max-width:620px) {
+            padding: 20px 0 20px;
+        }
 
     }
 
@@ -45,15 +54,24 @@
         background: url("../img/arrow-portfolio.png") top left no-repeat;
         height: 12px;
         margin-bottom: 30px;
+
+        @media (max-width:620px) {
+            margin-bottom: 15px;
+        }
     }
 
     .filters {
         margin-bottom: 35px;
 
+        @media (max-width:620px) {
+            margin-bottom: 10px;
+        }
+
         .btn {
             margin-right: 15px;
+            margin-bottom: 10px;
 
-            &:focus {
+            &.selected {
                 background-color: $accent-color--focus;
                 border-bottom-color: $accent-color--focus--darken;
             }
@@ -66,10 +84,20 @@
             display: flex;
             justify-content: space-between;
 
+            @media (max-width:734px) {
+                flex-direction: column;
+                margin-bottom: 55px;
+            }
+
             &__img {
                 max-height: 270px;
                 width: 50%;
                 flex-shrink: 0;
+
+                @media (max-width:734px) {
+                    width: 100%;
+                    margin-bottom: 15px;
+                }
 
                 border: {
                     top: 0;
@@ -86,6 +114,10 @@
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+
+                    @media (max-width:460px) {
+                        display: block;
+                    }
                 }
             }
 
@@ -94,6 +126,10 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+
+                @media (max-width:734px) {
+                    margin: 0;
+                }
 
                 .title-h3 {
                     font-size: 20px;
@@ -105,6 +141,7 @@
                     font-size: 13px;
                     font-weight: 400;
                     color: $secondary-color--darken;
+                    margin-bottom: 15px;
                 }
 
                 .links {
@@ -112,20 +149,38 @@
                     justify-content: space-between;
                     align-items: center;
 
+                    @media (max-width:355px) {
+                        flex-direction: column;
+                    }
+
                     &__link {
                         font-size: 20px;
                         font-weight: 600;
+
+                        @media (max-width:846px) {
+                            font-size: 17px;
+                        }
 
                         &__url {
                             color: $secondary-color--darken;
                             display: flex;
                             align-items: center;
 
+                            @media (max-width:355px) {
+                                margin-bottom: 15px;
+                            }
+
                             .link-img {
                                 margin-right: 20px;
                                 width: 40px;
                                 height: 40px;
                                 background: url(../img/link.png);
+
+                                @media (max-width:846px) {
+                                    width: 26px;
+                                    height: 26px;
+                                    background-size: contain;;
+                                }
                             }
 
                             &:hover {
@@ -141,6 +196,16 @@
                     .btn {
                         padding: 20px 55px;
                         font-size: 14px;
+
+                        @media (max-width:979px) {
+                            padding: 15px 35px;
+                            font-size: 10px;
+                        }
+
+                        @media (max-width:846px) {
+                            padding: 15px 25px;
+                            font-size: 10px;
+                        }
                     }
                 }
             }
