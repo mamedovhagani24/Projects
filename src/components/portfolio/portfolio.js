@@ -75,7 +75,7 @@ function returnHTMLPost(post) {
                   <div class="link-img"></div><span>${post.link}</span>
               </a>
           </div>
-          <button class="btn btn_secondary btn_large">view details</button>
+          <button class="btn btn_large">view details</button>
       </div>
   </div>
 </div>`;
