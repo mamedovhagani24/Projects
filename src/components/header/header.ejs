@@ -58,7 +58,7 @@
     <div class="header__body">
         <div class="header__column header__column_logo">
             <a href="#">
-                <%- include('../logo/logo') %>
+                <%= include('logo') %>
             </a>
         </div>
         <div class="header__column header__column_nav">
@@ -81,6 +81,6 @@
             </nav>
         </div>
     </div>
-    <%- include('__header_mobile', {menu, page}) %>
+    <%= include('__header_mobile', {menu, page}) %>
 
 </header>

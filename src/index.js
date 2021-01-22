@@ -1,4 +1,5 @@
-require("./components/services/services-drag-n-drop");
-require("./components/header/header");
-require("./components/slider/slider");
-require("./components/about_us/about_us");
+import "./components/header/header.js";
+import "./components/services/services-drag-n-drop.js";
+// import "./components/header/header.js";
+// require("./components/slider/slider");
+// require("./components/about_us/about_us");
