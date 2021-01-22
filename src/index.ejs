@@ -1,5 +1,5 @@
 <% function include(name, sendData) {
-    return require(`./components/${name}/${name}.ejs`)({...{include}, ...sendData});
+    return require(`./components/${name}.ejs`)({...{include}, ...sendData});
 }; %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +13,11 @@
 </head>
 <body>
 
-<%= include('header', {page:'index'}) %>
-<%= include('services') %>
-<%= include('images_section') %>
-<%= include('about_us') %>
-<%= include('footer') %>
+<%= include('header/header', {page:'index'}) %>
+<%= include('services/services') %>
+<%= include('images_section/images_section') %>
+<%= include('about_us/about_us') %>
+<%= include('footer/footer') %>
 
 </body>
 </html>

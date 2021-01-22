@@ -1,29 +1,396 @@
-Html Webpack Plugin:
-<pre>
-  Error: Cannot find module './__header_mobile/__header_mobile.ejs'
-  
-  
-  
-  - index.ejs:8 Object.include
-    [.]/[html-webpack-plugin]/lib/loader.js!./src/index.ejs:8:88
-  
-  - header.ejs:89 module.exports
-    webpack-internal:///./src/components/header/header.ejs:89:11
-  
-  - index.ejs:8 include
-    [.]/[html-webpack-plugin]/lib/loader.js!./src/index.ejs:8:113
-  
-  - index.ejs:11 module.exports
-    [.]/[html-webpack-plugin]/lib/loader.js!./src/index.ejs:11:11
-  
-  - index.js:406 
-    [Projects]/[html-webpack-plugin]/index.js:406:16
-  
-  - runMicrotasks
-  
-  - task_queues.js:93 processTicksAndRejections
-    internal/process/task_queues.js:93:5
-  
-  - async Promise.all
-  
-</pre>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODUS versus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+
+<header class="header header-mobile">
+    <div class="header__body">
+        <div class="header__column header__column_logo">
+            <a href="#">
+                <h2 class="logo">Modus<span class="logo__sub">versus</span></h2>
+            </a>
+        </div>
+        <div class="header__column header__column_nav">
+            <div class="burger">
+                <span class="burger__line"></span>
+            </div>
+            <nav class="nav header-nav">
+                
+                    <li class="nav__item header-nav__item btn header-nav__item_active"><a href="index.html" class="header-nav__link">Home</a></li>
+                
+                    <li class="nav__item header-nav__item btn btn_link"><a href="#" class="header-nav__link">About</a></li>
+                
+                    <li class="nav__item header-nav__item btn btn_link"><a href="#" class="header-nav__link">Services</a></li>
+                
+                    <li class="nav__item header-nav__item btn nav__submenu header-nav__submenu submenu btn_link">Portfolio
+                        <ul class='submenu__wrapp header-submenu'>
+                            
+                                <li class="submenu__item header-submenu__item"><a href="portfolio_page.html" class="nav__link header-submenu__link">Portfolio 1 column page</a></li>
+                            
+                                <li class="submenu__item header-submenu__item"><a href="#" class="nav__link header-submenu__link">Portfolio 2 column page</a></li>
+                            
+                                <li class="submenu__item header-submenu__item"><a href="#" class="nav__link header-submenu__link">Portfolio 3 column page</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li class="nav__item header-nav__item btn btn_link"><a href="#" class="header-nav__link">Blog</a></li>
+                
+                    <li class="nav__item header-nav__item btn btn_link"><a href="#" class="header-nav__link">Features</a></li>
+                
+                    <li class="nav__item header-nav__item btn btn_link"><a href="#" class="header-nav__link">Contact</a></li>
+                
+                <li class="nav__item header-nav__item btn btn_link icon"><i class="fa fa-search"></i></li>
+            </nav>
+        </div>
+    </div>
+    <div class="header-mobile__body">
+    <div class="header-mobile__links">
+        <nav class="nav header-mobile__nav">
+          
+              <li class="nav__item btn nav__item_active"><a href="index.html" class="nav__link">Home</a></li>
+          
+              <li class="nav__item btn btn_link"><a href="#" class="nav__link">About</a></li>
+          
+              <li class="nav__item btn btn_link"><a href="#" class="nav__link">Services</a></li>
+          
+              <li class="nav__item btn btn_link submenu nav__submenu">Portfolio
+                  <ul class='submenu__wrapp'>
+                      
+                          <li class="submenu__item"><a href="portfolio_page.html" class="nav__link submenu__link">Portfolio 1 column page</a></</li>
+                      
+                          <li class="submenu__item"><a href="#" class="nav__link submenu__link">Portfolio 2 column page</a></</li>
+                      
+                          <li class="submenu__item"><a href="#" class="nav__link submenu__link">Portfolio 3 column page</a></</li>
+                      
+                  </ul>
+              </li>
+          
+              <li class="nav__item btn btn_link"><a href="#" class="nav__link">Blog</a></li>
+          
+              <li class="nav__item btn btn_link"><a href="#" class="nav__link">Features</a></li>
+          
+              <li class="nav__item btn btn_link"><a href="#" class="nav__link">Contact</a></li>
+          
+        </nav>
+    </div>
+    <div class="header-mobile__search">
+      <div class="header-mobile__search-input-wrapp">
+          <input type="text" class="header-mobile__search-input input input_secondary" placeholder="Search the site">
+      </div>
+      <div class="header-mobile__search-btn-wrapp">
+          <button class="header-mobile__search-btn btn btn_icon btn_secondary"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+</div>
+
+</header>
+
+
+<div class="services">
+    <div class="container">
+
+        <div class="services__top">
+            <div class="services__top__left">
+                <h3 class="title-h3">Some of our top services</h3>
+                <p class="description">Ut eleifend libero sed neque rhoncus consequat. Maecenas tincidunt, augue et rutrum condimentum, libero lectus mattis orci, ut commodo. </p>
+            </div>
+
+            <div class="services__top__right">
+                <button class="btn btn_accent btn_large">view more</button>
+            </div>
+        </div>
+
+        <div class="services__items-wrapper">
+
+            
+                <div class="services__item">
+                    <i class="fa fa-thumbs-up icon"></i>
+                    <h3 class="title-h3">SUSPENDISSE</h3>
+                    <p class="description">Quisque id tellus quis risus vehicula vehicula ut turpis. In eros nulla, placerat vitae at, vehicula ut nunc.</p>
+                    <button class="btn btn_large">read more</button>
+                </div>
+            
+                <div class="services__item">
+                    <i class="fa fa-key icon"></i>
+                    <h3 class="title-h3">ACTIVE</h3>
+                    <p class="description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</p>
+                    <button class="btn btn_large">read more</button>
+                </div>
+            
+                <div class="services__item">
+                    <i class="fa fa-flag icon"></i>
+                    <h3 class="title-h3">OUR COUNTRY</h3>
+                    <p class="description">Oaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <button class="btn btn_large">read more</button>
+                </div>
+            
+                <div class="services__item">
+                    <i class="fa fa-flask icon"></i>
+                    <h3 class="title-h3">CHEMISTRY</h3>
+                    <p class="description">Ssit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi </p>
+                    <button class="btn btn_large">read more</button>
+                </div>
+            
+
+        </div>
+
+    </div>
+</div>
+
+<div class="images">
+    <div class="container">
+
+        <div class="images__inner">
+            <h2 class="title-h2">WHY MODUS VERSUS?</h2>
+            <p class="description">Capacitance cascading integer reflective interface data development high bus cache
+                dithering transponder. </p>
+
+            <div class="images__wrapper">
+                <div class="img_lit">
+
+                    
+                        <div class="img">
+                            <div class="img__wrapper">
+                                <img class="img__wrapper__inner" 
+                                    src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                                    alt="your image1">
+                            </div>
+                        </div>
+                    
+                        <div class="img">
+                            <div class="img__wrapper">
+                                <img class="img__wrapper__inner" 
+                                    src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                                    alt="your image2">
+                            </div>
+                        </div>
+                    
+
+                </div>
+                <div class="img_big">
+                    <div class="img">
+                        <div class="img__wrapper">
+                            <img class="img__wrapper__inner" 
+                                src="https://images.unsplash.com/photo-1603046978553-7dfda29bf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                                alt="your image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about-us" style="margin-top: 250px">
+  <div class="container">
+    <div class="about-us__row-padding row">
+       
+
+<div class="row__col-3">
+  <h3 class="about-us__col-title title-h3">Why choose us?</h3>
+  <ul class="about-us__list">
+    <li class="about-us__list-item"> Quisque at massa ipsum  </li> <li class="about-us__list-item"> Maecenas a lorem augue, egestas  </li> <li class="about-us__list-item"> Cras vitae felis at lacus eleifend  </li> <li class="about-us__list-item"> Etiam auctor diam pellentesque  </li> <li class="about-us__list-item"> Nulla ac massa at dolor  </li> <li class="about-us__list-item"> Condimentum eleifend vitae vitae  </li>  
+  </ul>
+</div>
+       
+
+<div class="about-us__middle-col row__col-6">
+  <p class="about-us__p">
+    Curabitur quis nisl in leo euismod venenatis eu in diam. Etiam auctor
+    diam pellentesque lectus <a href="#">vehicula mattis</a>. Nulla ac
+    massa at dolor condimentum eleifend vitae vitae urna.
+  </p>
+  <div class="about-us__counters-row row">
+     
+    <div class="row__col-4 about-us__counter_col-md">
+      <div class="about-us__counter">
+        <div class="about-us__counter-img">
+          <img class="about-us__circle about-us__circle_50" src="img/diagram.svg">
+        </div>
+        <span class="about-us__counter-num"> 50 </span>
+        <h3 class="about-us__counter-sub-title title-h3"> Suspendisse </h3>
+      </div>
+    </div>
+     
+    <div class="row__col-4 about-us__counter_col-md">
+      <div class="about-us__counter">
+        <div class="about-us__counter-img">
+          <img class="about-us__circle about-us__circle_70" src="img/diagram.svg">
+        </div>
+        <span class="about-us__counter-num"> 70 </span>
+        <h3 class="about-us__counter-sub-title title-h3"> Maecenas </h3>
+      </div>
+    </div>
+     
+    <div class="row__col-4 about-us__counter_col-md">
+      <div class="about-us__counter">
+        <div class="about-us__counter-img">
+          <img class="about-us__circle about-us__circle_80" src="img/diagram.svg">
+        </div>
+        <span class="about-us__counter-num"> 80 </span>
+        <h3 class="about-us__counter-sub-title title-h3"> Aliquam </h3>
+      </div>
+    </div>
+     
+    <div class="row__col-4 about-us__counter_col-md">
+      <div class="about-us__counter">
+        <div class="about-us__counter-img">
+          <img class="about-us__circle about-us__circle_100" src="img/diagram.svg">
+        </div>
+        <span class="about-us__counter-num"> 100 </span>
+        <h3 class="about-us__counter-sub-title title-h3"> Habitasse </h3>
+      </div>
+    </div>
+    
+  </div>
+</div>
+      <div class="row__col-3">
+  <h3 class="about-us__col-title title-h3">What Client’s Say?</h3>
+  <blockquote class="blockquote">
+    <p class="blockquote__text">
+      Curabitur quis nisl in leo euismod venenatis eu in diam. Etiam
+      auctor diam pellentesque lectus vehicula mattis. Nulla ac massa at
+      dolor condimentum
+    </p>
+    <span class="blockquote__author">John Doe</span>
+  </blockquote>
+</div>
+    </div>
+
+    <div class="about-us__slider">
+      <div class="about-us__row-padding about-us__slider-header">
+        <div class="about-us__title-wrapp">
+          <h3 class="title-h3">Our Happy Clients</h3>
+        </div>
+        <div class="about-us__range-wrapp">
+          <input type="range" id="clientsSlider__range" class="about-us__range" min="0" max="100" value="0">
+        </div>
+        <div class="about-us__nav-wrapp">
+          <button id="clientSlider__prev" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-left"></i></button>
+          <button id="clientSlider__next" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="about-us__slider-body"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="footer__container container">
+    <div class="row">
+      <div class="footer__col-1 row__col-4">
+        <div class="footer__logo-wrapp">
+          <h2 class="logo">Modus<span class="logo__sub">versus</span></h2>
+        </div>
+        <p class="footer__p">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+          euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem,
+          adipiscing in adipiscing et, interdum nec.
+        </p>
+        <span class="footer__contact">
+          Phone: <a href="#" class="footer__link footer__contact_big">182 2569 5896</a>
+        </span>
+        <span class="footer__contact">
+          e-mail: <a href="#" class="footer__link footer__contact_big">info@modu.versus</a>
+        </span>
+      </div>
+      <div class="footer__col-2 row__col-2">
+        <h3 class="footer__title title-h3">Company</h3>
+        <ul class="footer__list">
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">About</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">FAQ</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Contact</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Terms</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Privacy</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Testimonials</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer__col-3 row__col-2">
+        <h3 class="footer__title title-h3">Community</h3>
+        <ul class="footer__list">
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Blog</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Forum</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Support</a></li>
+          
+            <li class="footer__list-item"><a class="footer__link" href="#">Newsletter</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer__col-4 row__col-4">
+        <h3 class="footer__title footer__title_italic title-h3">
+          from the <span>blog</span>
+        </h3>
+        
+        <div class="footer__blog-row row">
+          <div class="footer__blog-img-wrapp row__col-3">
+            <div class="footer__blog-img"><i class="fa fa-picture-o"></i></div>
+          </div>
+          <div class="row__col-9">
+            <div class="footer__blog-info">
+              <p class="footer__blog-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <span class="footer__blog-date">26 May, 2013</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer__blog-row row">
+          <div class="footer__blog-img-wrapp row__col-3">
+            <div class="footer__blog-img"><i class="fa fa-picture-o"></i></div>
+          </div>
+          <div class="row__col-9">
+            <div class="footer__blog-info">
+              <p class="footer__blog-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <span class="footer__blog-date">26 May, 2013</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="footer__footer">
+    <div class="footer__wrapp container">
+      <div class="footer__footer_left"><span>2013 ModusVersus</span></div>
+      <div class="footer__footer_right">
+        <div class="footer__socials">
+          <a href="#" class="footer__link footer__socials-link"
+            ><i class="fa fa-facebook"></i
+          ></a>
+          <a href="#" class="footer__link footer__socials-link"
+            ><i class="fa fa-google-plus-official"></i
+          ></a>
+          <a href="#" class="footer__link footer__socials-link"
+            ><i class="fa fa-twitter"></i
+          ></a>
+          <a href="#" class="footer__link footer__socials-link"><i class="fa fa-rss"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="js/index-bundle.js?aceafb7af962ad116480"></script></body>
+</html>

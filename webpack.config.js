@@ -51,9 +51,9 @@ module.exports = (env, argv) => ({
     }),
     
   ],
-  devServer: {
-    contentBase: path.join(__dirname, "public-2"),
-    compress: true,
-    port: 9000,
-  },
+//  devServer: {
+//    contentBase: path.join(__dirname, "public-2"),
+//    compress: true,
+//    port: 9000,
+//  },
 });
