@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => ({
   entry: {
@@ -10,7 +11,8 @@ module.exports = (env, argv) => ({
   },
   output: {
     globalObject: "this",
-    path: path.resolve(__dirname, "public-2"),
+    publicPath: "./",
+    path: path.resolve(__dirname, "public"),
     filename: "js/[name]-bundle.js",
   },
   module: {
@@ -29,31 +31,72 @@ module.exports = (env, argv) => ({
           esModule: false,
         },
       },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+            },
+          },
+          // {
+          //   loader: "resolve-url-loader",
+          //   options: {
+          //     root: path.resolve(__dirname)
+          //   }
+          // },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "img/[name].[ext]",
+            },
+          },
+        ],
+      },
     ],
   },
   devtool: argv.mode === "development" ? "eval-source-map" : undefined,
   plugins: [
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: true,
+    }),
     new webpack.ProvidePlugin({
       _: "underscore",
     }),
     new HtmlWebpackPlugin({
       hash: true,
       chunks: ["index"],
-      templateParameters: {
-        title: "aaa",
-        incl: (path) => require(`./src/components/${path}/${path}.ejs`),
-      },
       template: path.resolve(__dirname, "src", "index.ejs"),
-      filename: path.resolve(__dirname, "public-2", "index.html"),
+      filename: path.resolve(__dirname, "public", "index.html"),
     }),
-    new CleanWebpackPlugin({
-      cleanStaleWebpackAssets: true,
+    new HtmlWebpackPlugin({
+      hash: true,
+      chunks: ["portfolio"],
+      template: path.resolve(__dirname, "src", "portfolio_page.ejs"),
+      filename: path.resolve(__dirname, "public", "portfolio.html"),
     }),
-    
+    new MiniCssExtractPlugin({
+      filename: "css/[name].css",
+      chunkFilename: "css/[id].css",
+    }),
   ],
-//  devServer: {
-//    contentBase: path.join(__dirname, "public-2"),
-//    compress: true,
-//    port: 9000,
-//  },
+  //  devServer: {
+  //    contentBase: path.join(__dirname, "public"),
+  //    compress: true,
+  //    port: 9000,
+  //  },
 });
