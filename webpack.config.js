@@ -4,7 +4,6 @@ const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-
 module.exports = (env, argv) => ({
   entry: {
     index: "./src/index.js",
@@ -12,7 +11,7 @@ module.exports = (env, argv) => ({
   },
   output: {
     globalObject: "this",
-    publicPath: "./",
+    // publicPath: "./",
     path: path.resolve(__dirname, "public"),
     filename: "js/[name]-bundle.js",
   },
@@ -33,6 +32,10 @@ module.exports = (env, argv) => ({
         },
       },
       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
@@ -46,7 +49,7 @@ module.exports = (env, argv) => ({
           {
             loader: "sass-loader",
             options: {
-              sourceMap: true,
+              sourceMap: argv.mode === "development",
             },
           },
         ],
@@ -64,7 +67,7 @@ module.exports = (env, argv) => ({
       },
     ],
   },
-  devtool: argv.mode === "development" ? "eval-source-map" : undefined,
+  devtool: argv.mode === "development" ? "eval-source-map" : false,
   plugins: [
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: true,
@@ -75,17 +78,25 @@ module.exports = (env, argv) => ({
     new HtmlWebpackPlugin({
       hash: true,
       chunks: ["index"],
+      minify: false,
       template: path.resolve(__dirname, "src", "index.ejs"),
       filename: path.resolve(__dirname, "public", "index.html"),
     }),
     new HtmlWebpackPlugin({
       hash: true,
       chunks: ["portfolio"],
+      minify: false,
       template: path.resolve(__dirname, "src", "portfolio_page.ejs"),
       filename: path.resolve(__dirname, "public", "portfolio.html"),
     }),
     new MiniCssExtractPlugin({
       filename: "css/style.css",
     }),
+    new webpack.SourceMapDevToolPlugin({}),
   ],
+  devServer: {
+    contentBase: path.join(__dirname, "public"),
+    compress: true,
+    port: 9000,
+  },
 });
