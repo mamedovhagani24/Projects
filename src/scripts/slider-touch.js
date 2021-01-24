@@ -3,6 +3,7 @@ module.exports = class {
     this.touch = {
       startX: 0,
       moveX: 0,
+      slidesPosition: null
     };
   }
 
@@ -60,8 +61,8 @@ module.exports = class {
 
     if (swipeLength < 20) return;
 
-    this.touch.slidesPosition =
-      this.touch.slidesPosition ?? this.slides.map((el) => el.position);
+    // this.touch.slidesPosition =
+    //   this.touch.slidesPosition ?? this.slides.map((el) => el.position);
 
     this.slideMove(this.touch.moveX);
 
@@ -71,12 +72,6 @@ module.exports = class {
     }
   }
 
-  get nextSlideId() {
-    let nextSlide = this.slides.find(el => el.position + this._calcImagesWidth() / 2 > 0);
-    
-    return nextSlide !== undefined ? nextSlide.id : this.slides[this.slides.length - 1].id;
-  }
-  
   _touchEnd(e) {
     this.setTransition(true);
 

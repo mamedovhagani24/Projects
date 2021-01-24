@@ -54,6 +54,8 @@ module.exports = class Slider extends touchSlides{
   slideMove(positionX) {
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
+
+    console.log(this.touch.slidesPosition[0])
     
     this.slides.forEach((el, i) => {
       el.position = this.touch.slidesPosition[i] + positionX;
@@ -78,15 +80,18 @@ module.exports = class Slider extends touchSlides{
 
     const scrollWidth = this.slides[index].position;
 
+
     this.slides.forEach((el) => {
       el.position -= scrollWidth;
     });
 
     this.currentSlide = index;
-
+    
     this._updateSlidesTransform();
     
     this._emitChangeSlideEvent(index);
+
+    console.log(this.touch.slidesPosition)
   }
 
   _emitChangeSlideEvent(index) {
@@ -94,6 +99,12 @@ module.exports = class Slider extends touchSlides{
       this.events.changeSlide(index, this.maxSlide);
   }
 
+  get nextSlideId() {
+    const nextSlide = this.slides.find(el => el.position + this._calcImagesWidth() / 2 > 0);
+    
+    return nextSlide !== undefined ? nextSlide.id : this.slides[this.slides.length - 1].id;
+  }
+  
   _updateSizes() {
     this.width = this.container.clientWidth;
     this.height = this.container.clientHeight;

@@ -15,10 +15,6 @@ module.exports = class multiSlider extends Slider {
     this._initBreakpoints(window.outerWidth);
   }
 
-  setSlide(index, callback) {
-    super.setSlide(index);
-    if (callback !== undefined) callback(this.slides[index]);
-  }
 
   _initBreakpoints(width) {
     for (let w in this.breakpoints) {
