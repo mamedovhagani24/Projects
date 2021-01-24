@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+
 module.exports = (env, argv) => ({
   entry: {
     index: "./src/index.js",
@@ -42,12 +43,6 @@ module.exports = (env, argv) => ({
               url: false,
             },
           },
-          // {
-          //   loader: "resolve-url-loader",
-          //   options: {
-          //     root: path.resolve(__dirname)
-          //   }
-          // },
           {
             loader: "sass-loader",
             options: {
@@ -90,13 +85,7 @@ module.exports = (env, argv) => ({
       filename: path.resolve(__dirname, "public", "portfolio.html"),
     }),
     new MiniCssExtractPlugin({
-      filename: "css/[name].css",
-      chunkFilename: "css/[id].css",
+      filename: "css/style.css",
     }),
   ],
-  //  devServer: {
-  //    contentBase: path.join(__dirname, "public"),
-  //    compress: true,
-  //    port: 9000,
-  //  },
 });
