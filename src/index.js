@@ -1,4 +1,13 @@
-require("./components/services/services-drag-n-drop");
-require("./components/header/header");
-require("./components/slider/slider");
-require("./components/about_us/about_us");
+import "./style.scss";
+import "./components/header/header.js";
+import "./components/services/services-drag-n-drop.js";
+import "./components/slider/slider.js";
+import "./components/about_us/about_us.js";
+
+import "./img/diagram.svg";
+import "./img/jquery.png";
+import "./img/ruller.png";
+import "./img/ruller_bottom.png";
+import "./img/Path.png";
+import "./img/mask.png";
+import "./img/bigmask.png";

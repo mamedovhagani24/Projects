@@ -30,7 +30,6 @@ module.exports = class Slider extends touchSlides{
       touchDisabled: null
     };
 
-
   }
 
   init() {
@@ -53,7 +52,6 @@ module.exports = class Slider extends touchSlides{
   }
   
   slideMove(positionX) {
-    
     this.touch.slidesPosition =
       this.touch.slidesPosition ?? this.slides.map((el) => el.position);
     

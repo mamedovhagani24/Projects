@@ -1,6 +1,6 @@
-<%
-    const _COMP = (arg) => 'components/'+arg+'/'+arg;
-%>
+<% function include(name, sendData) {
+    return require(`./components/${name}.ejs`)({...{include}, ...sendData});
+}; %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +9,15 @@
     <title>MODUS versus</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
+<%= include('header/header', {page:'index'}) %>
+<%= include('slider/slider') %>
+<%= include('services/services') %>
+<%= include('images_section/images_section') %>
+<%= include('about_us/about_us') %>
+<%= include('footer/footer') %>
 
-<%- include(_COMP('header'), {page:'index'}); %>
-<%- include(_COMP('slider')); %>
-<%- include(_COMP('services')); %>
-<%- include(_COMP('images_section')); %>
-<%- include(_COMP('about_us')); %>
-<%- include(_COMP('footer')); %>
-
-<script src="js/index.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <div class="about-us" style="margin-top: 250px">
   <div class="container">
     <div class="about-us__row-padding row">
-      <%- include('__left_column'); %>
-      <%- include('__middle_column'); %>
-      <%- include('__right_column'); %>
+      <%= include('about_us/__left_column') %>
+      <%= include('about_us/__middle_column') %>
+      <%= include('about_us/__right_column') %>
     </div>
 
     <div class="about-us__slider">
@@ -12,7 +12,6 @@
           <h3 class="title-h3">Our Happy Clients</h3>
         </div>
         <div class="about-us__range-wrapp">
-<!--          <div class="about-us__line"></div>-->
           <input type="range" id="clientsSlider__range" class="about-us__range" min="0" max="100" value="0">
         </div>
         <div class="about-us__nav-wrapp">
