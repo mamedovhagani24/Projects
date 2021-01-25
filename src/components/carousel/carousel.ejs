@@ -1,0 +1,15 @@
+<div class="carousel" id="carousel">
+  <div class="carousel__container">
+    <% if (IMAGES.length) { %> 
+      <% for (let img of IMAGES) { %> 
+        <div class="carousel__slide">
+          <img class="carousel__img" src="<%= img.imgUrl%>">
+          <div class="carousel__slide-info">
+            <h2 class="carousel__slide-title"><%= img.heading %></h2>
+            <p class="carousel__slide-description"><%= img.description %></p>
+          </div>
+        </div>
+      <% }%> 
+    <% }%> 
+  </div>
+</div>

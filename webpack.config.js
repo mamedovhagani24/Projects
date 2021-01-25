@@ -49,7 +49,7 @@ module.exports = (env, argv) => ({
           {
             loader: "sass-loader",
             options: {
-              sourceMap: argv.mode === "development",
+              sourceMap: true,
             },
           },
         ],
@@ -92,7 +92,7 @@ module.exports = (env, argv) => ({
     new MiniCssExtractPlugin({
       filename: "css/style.css",
     }),
-    new webpack.SourceMapDevToolPlugin({}),
+    new webpack.SourceMapDevToolPlugin(),
   ],
   devServer: {
     contentBase: path.join(__dirname, "public"),
