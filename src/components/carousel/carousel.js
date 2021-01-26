@@ -12,10 +12,10 @@ const slider = new Slider({
 
 slider.init();
 
-sliderControls.forEach((btn)=>{
+sliderControls.forEach((btn) => {
   const btnName = btn.id.split('__')[1];
 
-  btn.addEventListener('click', ()=>{
+  btn.addEventListener('click', () => {
     slider[btnName]();
 
     checkControlsDisabling(slider.activeSlide);
@@ -24,11 +24,11 @@ sliderControls.forEach((btn)=>{
 });
 checkButtonsDisabling();
 
-sliderBottomControls.forEach((el, i, arr)=>{
-  
-  el.addEventListener('click', (e)=>{
+sliderBottomControls.forEach((el, i, arr) => {
+
+  el.addEventListener('click', (e) => {
     const index = +el.dataset.index;
-    
+
     slider.setSlide(index);
 
     checkControlsDisabling(index);
@@ -37,12 +37,13 @@ sliderBottomControls.forEach((el, i, arr)=>{
 
 });
 
-slider.adaptive.onResize((e)=>{
-    slider.updateElementsInfo();
+slider.adaptive.onResize((e) => {
+  slider.updateElementsInfo();
+  slider.setSlide(slider.activeSlide);
 });
 
 function checkControlsDisabling(i) {
-  sliderBottomControls.forEach((btn)=> btn.classList.remove('slider__control-item_active'));
+  sliderBottomControls.forEach((btn) => btn.classList.remove('slider__control-item_active'));
   sliderBottomControls[i].classList.add('slider__control-item_active');
 }
 
