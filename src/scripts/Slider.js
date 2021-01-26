@@ -1,10 +1,14 @@
 export default class Slider {
   constructor(data) {
+    this.slideTime = data.slideTime;
     this.sliderDom = new sliderDOM(data);
     this.adaptive = new sliderAdaptive({
       onResizeCallback: () => {
+        this.activeTransition(false);
+
         this.updateElementsInfo();
         this.setSlide(this.activeSlide);
+        
       }
     });
 
@@ -17,6 +21,7 @@ export default class Slider {
     this.adaptive.init();
 
     this.updateElementsInfo();
+    this.activeTransition(true);
   }
 
   updateElementsInfo() {
@@ -31,7 +36,13 @@ export default class Slider {
     this.setSlide(--this.activeSlide);
   }
 
+  activeTransition(isActive) {
+    this.sliderDom.container.style.transition = isActive ? `transform ${this.slideTime}s ease` : 'none';
+  }
+
   setSlide(index) {
+    if (index !== this.activeSlide) this.activeTransition(true);
+    
     index =
       index < 0 ?
       0 :

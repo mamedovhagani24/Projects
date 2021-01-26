@@ -7,7 +7,8 @@ const sliderBottomControls = document.querySelectorAll('.slider__control-item');
 
 const slider = new Slider({
   container: carousel,
-  slidesClass: ".carousel__slide"
+  slidesClass: ".carousel__slide",
+  slideTime: .5
 });
 
 slider.init();
