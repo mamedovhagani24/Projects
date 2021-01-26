@@ -38,10 +38,10 @@ sliderBottomControls.forEach((el) => {
 
 });
 
-slider.adaptive.onResize((e) => {
-  slider.updateElementsInfo();
-  slider.setSlide(slider.activeSlide);
-});
+// slider.adaptive.onResize((e) => {
+//   slider.updateElementsInfo();
+//   slider.setSlide(slider.activeSlide);
+// });
 
 function checkControlsDisabling(i) {
   sliderBottomControls.forEach((btn) => btn.classList.remove('slider__control-item_active'));

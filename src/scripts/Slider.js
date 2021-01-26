@@ -1,3 +1,5 @@
+import { times } from "underscore";
+
 export default class Slider {
   constructor(data) {
     this.slideTime = data.slideTime;
@@ -9,11 +11,15 @@ export default class Slider {
         this.updateElementsInfo();
         this.setSlide(this.activeSlide);
         
+        setTimeout(() => {
+          this.activeTransition(true);
+        }, 10);
       }
     });
 
     this.elements = {};
     this.activeSlide = 0;
+    this.maxSlide = null;
   }
 
   init() {
@@ -22,6 +28,8 @@ export default class Slider {
 
     this.updateElementsInfo();
     this.activeTransition(true);
+
+    this.maxSlide = this.elements.length - 1;
   }
 
   updateElementsInfo() {
@@ -46,8 +54,8 @@ export default class Slider {
     index =
       index < 0 ?
       0 :
-      index >= this.elements.length ?
-      this.elements.length - 1 :
+      index > this.maxSlide ?
+      this.maxSlide :
       index;
 
     const shift = this.elements[index].position;

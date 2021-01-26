@@ -1,0 +1,16 @@
+.carousel_multi {
+  &__container {
+    margin-left: -10px;
+  }
+
+  &__slide {
+    padding: 0 10px;
+  }
+
+  &__img {
+    background-color: $about_us__slider-card-bg-color;
+    border-radius: $main-border-radius;
+    object-fit: contain;
+    padding: 15px;
+  }
+}
