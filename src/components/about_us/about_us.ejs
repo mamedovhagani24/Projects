@@ -1,3 +1,7 @@
+<% 
+  const IMAGES = [...Array(8)].map(()=> ({imgUrl: 'img/jquery.png'}));
+%> 
+
 <div class="about-us" style="margin-top: 250px">
   <div class="container">
     <div class="about-us__row-padding row">
@@ -19,7 +23,9 @@
           <button id="clientSlider__next" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
         </div>
       </div>
-      <div class="about-us__slider-body"></div>
+      <div class="about-us__slider-body">
+        <%= include('carousel-mulri-items/carousel-mulri-items', {IMAGES}) %> 
+      </div>
     </div>
   </div>
 </div>

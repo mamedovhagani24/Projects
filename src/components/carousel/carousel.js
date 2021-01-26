@@ -25,7 +25,7 @@ sliderControls.forEach((btn) => {
 });
 checkButtonsDisabling();
 
-sliderBottomControls.forEach((el, i, arr) => {
+sliderBottomControls.forEach((el) => {
 
   el.addEventListener('click', (e) => {
     const index = +el.dataset.index;
