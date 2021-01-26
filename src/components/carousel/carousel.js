@@ -3,12 +3,11 @@ import Slider from "../../scripts/Slider";
 const carousel = document.getElementById("carousel");
 
 const sliderControls = document.querySelectorAll('.slider__btn');
+const sliderBottomControls = document.querySelectorAll('.slider__control-item');
 
 const slider = new Slider({
   container: carousel,
-  slidesClass: ".carousel__slide",
-  titleClass: ".carousel__slide-title",
-  descriptionClass: ".carousel__slide-description",
+  slidesClass: ".carousel__slide"
 });
 
 slider.init();
@@ -18,14 +17,34 @@ sliderControls.forEach((btn)=>{
 
   btn.addEventListener('click', ()=>{
     slider[btnName]();
+
+    checkControlsDisabling(slider.activeSlide);
     checkButtonsDisabling();
   });
 });
 checkButtonsDisabling();
 
-slider.adaptive.onResize((e)=>{
+sliderBottomControls.forEach((el, i, arr)=>{
   
+  el.addEventListener('click', (e)=>{
+    const index = +el.dataset.index;
+    
+    slider.setSlide(index);
+
+    checkControlsDisabling(index);
+    checkButtonsDisabling();
+  });
+
 });
+
+slider.adaptive.onResize((e)=>{
+    slider.updateElementsInfo();
+});
+
+function checkControlsDisabling(i) {
+  sliderBottomControls.forEach((btn)=> btn.classList.remove('slider__control-item_active'));
+  sliderBottomControls[i].classList.add('slider__control-item_active');
+}
 
 function checkButtonsDisabling() {
   sliderControls[0].disabled = slider.activeSlide === 0;

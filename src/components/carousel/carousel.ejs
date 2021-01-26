@@ -1,6 +1,5 @@
 <div class="carousel" >
   <div class="carousel__container" id="carousel">
-    <% if (IMAGES.length) { %> 
       <% for (let img of IMAGES) { %> 
         <div class="carousel__slide">
           <img class="carousel__img" src="<%= img.imgUrl%>">
@@ -10,6 +9,5 @@
           </div>
         </div>
       <% }%> 
-    <% }%> 
   </div>
 </div>

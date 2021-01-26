@@ -10,13 +10,17 @@ export default class Slider {
   init() {
     this.sliderDom.init();
     this.adaptive.init();
-    
-    this.updateElementsInfo();
-    // this.adaptive.onResize(this.updateElementsInfo.bind(this));
-  }
 
-  updateElementsInfo(e) {
+    this.updateElementsInfo();
+  }
+  updateElementsInfo() {
     this.elements = this.sliderDom.getInfoFromElements();
+    // console.log(this.activeSlide)
+    const a = this.sliderDom.container;
+    const containerPosition = +window.getComputedStyle(a).transform.split(',')[4];
+    console.log(containerPosition,this.adaptive.windowResizedWidth)
+
+    this.sliderDom.container.style.transform = `translateX(${containerPosition - this.adaptive.windowResizedWidth}px)`;
   }
 
   next() {
@@ -28,9 +32,12 @@ export default class Slider {
   }
 
   setSlide(index) {
-    index = (index<0) ? 0 : 
-            (index>=this.elements.length) ? 
-            this.elements.length-1 : index;
+    index =
+      index < 0
+        ? 0
+        : index >= this.elements.length
+        ? this.elements.length - 1
+        : index;
 
     const shift = this.elements[index].position;
 
@@ -39,13 +46,10 @@ export default class Slider {
   }
 }
 
-
 class sliderDOM {
-  constructor({ container, slidesClass, titleClass, descriptionClass }) {
+  constructor({ container, slidesClass }) {
     this.container = container;
     this.slidesClass = slidesClass;
-    this.titleClass = titleClass;
-    this.descriptionClass = descriptionClass;
 
     this.elements = [];
   }
@@ -55,9 +59,8 @@ class sliderDOM {
   }
 
   getInfoFromElements() {
-    return [...this.elements].map((el, id) => {
-      const { width, x: position } = el.getBoundingClientRect();
-      return { id, width, position };
+    return [...this.elements].map((el) => {
+      return { position: el.offsetLeft };
     });
   }
 
@@ -70,17 +73,41 @@ class sliderDOM {
 class sliderAdaptive {
   constructor() {
     this.callbacks = [];
+    this.windowResizedWidth = 0;
   }
 
   init() {
     window.addEventListener("resize", this.initResize.bind(this));
+    window.addEventListener(
+      "resize",
+      this.debounce(this.onResizeEnd.bind(this))
+    );
   }
 
+  _startResizeWidth = null;
   initResize(event) {
-    this.callbacks.forEach((callback)=>callback(event));
+    this._startResizeWidth =
+      this._startResizeWidth ?? document.documentElement.clientWidth;
+
+    this.windowResizedWidth =
+      document.documentElement.clientWidth - this._startResizeWidth;
+
+    this.callbacks.forEach((callback) => callback(event));
   }
 
   onResize(callback) {
     this.callbacks.push(callback);
+  }
+  onResizeEnd() {
+    console.log(this.windowResizedWidth)
+    this._startResizeWidth = null;
+    this.windowResizedWidth = 0;
+  }
+  debounce(func) {
+    let timer;
+    return function (event) {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(func, 100, event);
+    };
   }
 }

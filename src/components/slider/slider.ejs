@@ -39,5 +39,9 @@ const IMAGES = [
     </div>
   </div>
 
-  <div class="slider__bottom-controls"></div>
+  <div class="slider__bottom-controls">
+    <% for (let i = 0; i < IMAGES.length; i++) { %> 
+      <div class="slider__control-item <%= i === 0 ? 'slider__control-item_active' : '' %>" data-index="<%= i %>"></div>
+    <% } %> 
+  </div>
 </div>
