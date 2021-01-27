@@ -25,12 +25,10 @@ module.exports = class {
     this.setLength();
   }
 
-  loadPosts(paginationIndex = 0) {
+  loadPosts() {
     return this._database
       .ref("/portfolio-2/")
-      .orderByKey()
-      .startAt(''+paginationIndex)
-      .limitToFirst(4)
+      .orderByChild('title')
       .get()
       .then((snap) => Object.values(snap.val()));
   }
@@ -40,7 +38,6 @@ module.exports = class {
       .ref("/portfolio-2/")
       .orderByChild("tags/" + tag)
       .equalTo(true)
-      .limitToFirst(4)
       .once("value")
       .then((snap) => Object.values(snap.val()));
   }

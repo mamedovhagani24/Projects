@@ -4,13 +4,14 @@ const Firebase = require("../../scripts/firebase-api");
 const db = new Firebase(firebase);
 const postsContainer = document.querySelector(".cases");
 
-const elementsData = {
+const pageData = {
   activeTag: null, // string
-  activePagination: null // number
+  activePagination: null, // number
+  elements: []
 }
 
 db.loadPosts()
-  .then(renderPosts)
+  .then(prepareData)
   .catch((err) => console.error(err));
 
 document.querySelectorAll(".filters button").forEach((btn) => {
@@ -20,6 +21,27 @@ document.querySelectorAll(".filters button").forEach((btn) => {
 function updateAllElements() {
   updateTagsElements();
   updatePaginationElements();
+}
+
+function prepareData(postsArr) {
+  let counter = 0;
+
+  pageData.elements = postsArr.reduce((arr, curr)=>{
+    arr[counter] = arr[counter] ?? [];
+
+    if (arr[counter].length < 4) arr[counter].push(curr);
+    else arr[++counter] = [curr];
+
+    return arr;
+  }, []);
+
+  renderElementsByPagination();
+}
+
+function renderElementsByPagination() {
+  const currentPage = pageData.activePagination ?? 0;
+
+  renderPosts(pageData.elements[currentPage]);
 }
 
 function updateTagsElements(tag){
@@ -36,19 +58,19 @@ function updatePaginationElements(){
 }
 
 function tagSearch() {
-  elementsData.activeTag = this.getAttribute("data-name");
+  pageData.activeTag = this.getAttribute("data-name");
 
-  if (elementsData.activeTag === "all") {
+  if (pageData.activeTag === "all") {
     db.loadPosts()
-      .then(renderPosts)
+      .then(prepareData)
       .catch((err) => console.log(err));
   } else {
-    db.loadPostsByTag(elementsData.activeTag)
-      .then(renderPosts)
+    db.loadPostsByTag(pageData.activeTag)
+      .then(prepareData)
       .catch((err) => console.log(err));
   }
 
-  updateTagsElements(elementsData.activeTag);
+  updateTagsElements(pageData.activeTag);
 }
 
 function renderPosts(allPostsData) {
