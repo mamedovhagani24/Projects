@@ -71,13 +71,17 @@ clientsSlider__range.addEventListener('input', function (e) {
   clientsSlider.setTransition(false);
 
   const shiftValue = (allSlidesWidth / 100) * rangeVal;
-
+  console.log(shiftValue, allSlidesWidth)
+  // console.log(shiftValue)
   clientsSlider.slideMove(-shiftValue);
 });
 
 clientsSlider__range.addEventListener('change', function (e) {
   clientsSlider.setTransition(true);
   clientsSlider.setSlide(clientsSlider.nextSlideId);
+  console.log('change before', clientsSlider.touch.slidesPosition)
+  clientsSlider.touch.slidesPosition = null;
+  console.log('change after', clientsSlider.touch.slidesPosition)
 });
 
 
@@ -101,10 +105,9 @@ function calcAllSlidesWidth(slideWidth) {
 }
 
 
-
-
 function changeRangeValue(elId) {
   const amountSlides = clientsSlider.slides.length - clientsSlider.slidesOnScreen;
+  console.log('slides', amountSlides)
 
   const allW = amountSlides / elId;
   const value = 100 / allW;

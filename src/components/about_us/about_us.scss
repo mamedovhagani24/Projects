@@ -1,3 +1,5 @@
+@import '../carousel-multi-items/carousel-mulri-items.scss';
+
 %flex-nowrapp--media {
   flex-wrap: nowrap;
 
@@ -116,6 +118,11 @@
       background-size: 60%;
       border-radius: $main-border-radius;
 
+      &::before {
+        counter-increment: images;
+        content: 'IMAGE ' counter(images);
+      }
+
       &-wrapp {
         height: inherit;
         display: inline-block;
@@ -133,6 +140,7 @@
     }
 
     &-body {
+      counter-reset: images;
       height: 110px;
       padding: 5px 0;
     }

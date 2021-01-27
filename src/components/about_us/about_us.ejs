@@ -1,3 +1,7 @@
+<% 
+  const IMAGES = [...Array(8)].map(()=> ({imgUrl: 'img/jquery.png'}));
+%> 
+
 <div class="about-us" style="margin-top: 250px">
   <div class="container">
     <div class="about-us__row-padding row">
@@ -12,14 +16,16 @@
           <h3 class="title-h3">Our Happy Clients</h3>
         </div>
         <div class="about-us__range-wrapp">
-          <input type="range" id="clientsSlider__range" class="about-us__range" min="0" max="100" value="0">
+          <input type="range" id="slider-range" class="about-us__range" value="0">
         </div>
         <div class="about-us__nav-wrapp">
           <button id="clientSlider__prev" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-left"></i></button>
           <button id="clientSlider__next" class="about-us__nav-btn btn btn_small btn_icon btn_secondary"><i class="fa fa-chevron-right"></i></button>
         </div>
       </div>
-      <div class="about-us__slider-body"></div>
+      <div class="about-us__slider-body">
+        <%= include('carousel-multi-items/carousel-multi-items', {IMAGES}) %> 
+      </div>
     </div>
   </div>
 </div>
