@@ -3,10 +3,11 @@
 const Firebase = require("../../scripts/firebase-api");
 const db = new Firebase(firebase);
 const postsContainer = document.querySelector(".cases");
+const paginationContainer = document.querySelector(".pagination");
 
 const pageData = {
-  activeTag: null, // string
-  activePagination: null, // number
+  activeTag: 'all', // string
+  activePagination: 0, // number
   elements: []
 }
 
@@ -42,23 +43,34 @@ function renderElementsByPagination() {
   const currentPage = pageData.activePagination ?? 0;
 
   renderPosts(pageData.elements[currentPage]);
+
+  document.querySelectorAll(".pagination a").forEach((link) => {
+    link.addEventListener("click", handlePaginationChange);
+  });
 }
 
-function updateTagsElements(tag){
+function updateTagsElements(){
   document.querySelectorAll(".filters button").forEach((btn) => {
-    if (btn.getAttribute('data-name') === tag) {
+    if (btn.getAttribute('data-name') === pageData.activeTag) {
       btn.classList.add("selected");
     } else {
       btn.classList.remove("selected");
     }
   });
 }
+
 function updatePaginationElements(){
-  // ... https://github.com/mamedovhagani24/Projects/issues/87
+  const allPaginationButtons = pageData.elements.reduce(
+    (allButtons, currentButton, index) => (allButtons += returnPaginationButton(index)),
+    ""
+  );
+
+  replacePaginationIntoContainer(allPaginationButtons);
 }
 
 function tagSearch() {
   pageData.activeTag = this.getAttribute("data-name");
+  pageData.activePagination = 0;
 
   if (pageData.activeTag === "all") {
     db.loadPosts()
@@ -73,6 +85,11 @@ function tagSearch() {
   updateTagsElements(pageData.activeTag);
 }
 
+function handlePaginationChange() {
+  pageData.activePagination = + this.getAttribute("data-page");
+  renderElementsByPagination();
+}
+
 function renderPosts(allPostsData) {
   const allPostsHTML = allPostsData.reduce(
     (postsHTML, postObj) => (postsHTML += returnHTMLPost(postObj)),
@@ -80,11 +97,15 @@ function renderPosts(allPostsData) {
   );
 
   replacePostsIntoContainer(allPostsHTML);
-  // updateAllElements();
+  updateAllElements();
 }
 
 function replacePostsIntoContainer(postsHTML) {
   postsContainer.innerHTML = postsHTML;
+}
+
+function replacePaginationIntoContainer(paginationHTML) {
+  paginationContainer.innerHTML = paginationHTML;
 }
 
 function returnHTMLPost(post) {
@@ -107,4 +128,10 @@ function returnHTMLPost(post) {
       </div>
   </div>
 </div>`;
+}
+
+function returnPaginationButton(page) {
+  return `<a href="#" data-page="${page}">
+  <div class="pagination__item ${page === pageData.activePagination ? 'page-active' : ''}">${page+1}</div>
+</a>`;
 }
