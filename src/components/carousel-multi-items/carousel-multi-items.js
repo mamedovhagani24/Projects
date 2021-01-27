@@ -29,10 +29,9 @@ sliderRange.addEventListener('input', function() {
 });
 
 sliderRange.addEventListener('change', function(){
-  const val = +this.value;
-
+  const nextSliderId = multiSlider.nextSlideIndexByPosition;
   multiSlider.activeTransition(true);
-  multiSlider.setSlide(multiSlider.nextSlideIndexByPosition);
+  multiSlider.setSlide(nextSliderId);
 });
 
 // sliderRange.addEventListener()
