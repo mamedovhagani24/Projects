@@ -227,9 +227,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: FontAwesome;
+      font-family: FontAwesome, $font-name;
       font-size: 16px;
       font-weight: 800;
+
+      @media screen and (max-width: $media-window--mobile-L){
+        font-size: .9em;
+        margin: 0 2px;
+      }
 
       &:hover {
         background-color: $accent-color;
@@ -244,10 +249,18 @@
 
     .left-arrow {
       margin-right: 20px;
+
+      @media screen and (max-width: $media-window--mobile-L){
+        margin-right: 5px;
+      }
     }
 
     .right-arrow {
       margin-left: 20px;
+
+      @media screen and (max-width: $media-window--mobile-L){
+        margin-left: 5px;
+      }
     }
   }
 }

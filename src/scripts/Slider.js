@@ -6,23 +6,24 @@ export default class Slider {
     this.adaptive = new sliderAdaptive({
       onResizeCallback: () => {
         this.activeTransition(false);
-
+        
         this.updateElementsInfo();
         this.setSlide(this.activeSlide);
-
+        
         setTimeout(() => {
           this.activeTransition(true);
         }, 10);
       },
     });
-
+    
+    this.events = {};
     this.elements = {};
     this.activeSlide = 0;
     this.maxSlide = null;
     this.elementWidth = null;
   }
 
-  init() {
+  init(callback) {
     this.sliderDom.init();
     this.adaptive.init();
 
@@ -38,17 +39,17 @@ export default class Slider {
     this.elementWidth = this.containerWidth;
 
     this.maxSlide = this.elements.length - 1;
+
+    if (callback !== undefined) callback();
   }
 
   touchStart() {
     this.activeTransition(false);
+    this._startElementMovePosition = this.sliderDom.cotainerPosition;
   }
 
   _startElementMovePosition = null;
   touchMove({ moveX }) {
-    this._startElementMovePosition =
-      this._startElementMovePosition ?? this.sliderDom.cotainerPosition;
-
     const shift = this._startElementMovePosition + moveX;
 
     this.sliderDom.moveElements(shift);
@@ -63,9 +64,11 @@ export default class Slider {
   }
 
   get nextSlideIndexByPosition() {
+    const parentPosition = this.sliderDom.container.parentNode.offsetLeft;
+
     const index = this.sliderDom
       .getComputedElementsPosition()
-      .findIndex((el) => el.position + this.elementWidth / 2 > 0);
+      .findIndex((el) => el.position + this.elementWidth / 2 > parentPosition);
 
     return index >= 0 ? index : this.maxSlide;
   }
@@ -101,8 +104,11 @@ export default class Slider {
 
     this.activeSlide = index;
     this.sliderDom.moveElements(-shift);
+
+    if (this.events.onSlideChange !== undefined) this.events.onSlideChange(index);
   }
 }
+
 
 class sliderDOM {
   constructor({ container, slidesClass }) {
@@ -142,6 +148,7 @@ class sliderDOM {
   }
 }
 
+
 class sliderAdaptive {
   constructor({ onResizeCallback }) {
     this.callbacks = [];
@@ -151,6 +158,7 @@ class sliderAdaptive {
 
   init() {
     window.addEventListener("resize", this.initResize.bind(this));
+    window.addEventListener("load", this.initResize.bind(this));
   }
 
   initResize(event) {
@@ -162,6 +170,7 @@ class sliderAdaptive {
     this.callbacks.push(callback);
   }
 }
+
 
 class sliderTouch {
   constructor(container) {
@@ -204,3 +213,10 @@ class sliderTouch {
     if (this.events.touchEnd) this.events.touchEnd();
   }
 }
+
+// class sliderEvents {
+//   constructor({onSlideChange}) {
+//     this.onSlideChange = onSlideChange;
+//   }
+
+// }

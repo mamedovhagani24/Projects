@@ -7,10 +7,12 @@ export default class SliderMultiItems extends Slider {
     this.slidesOnScreen = data.slidesOnScreen;
   }
 
-  init() {
+  init(callback) {
     super.init();
     this.maxSlide = this.elements.length - this.slidesOnScreen;
     this.elementWidth = (this.containerWidth / this.slidesOnScreen) + 10 / this.slidesOnScreen;
+    
+    callback();
   }
 
   updateElementsInfo() {
@@ -23,9 +25,7 @@ export default class SliderMultiItems extends Slider {
 
     this.maxSlide = this.elements.length - this.slidesOnScreen;
   }
-
   
-
   updateElementsOnScreen() {
     [...this.sliderDom.elements].map((el)=>{
       el.style.width = this.elementWidth+'px';
