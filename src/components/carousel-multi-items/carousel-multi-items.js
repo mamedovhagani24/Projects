@@ -24,7 +24,6 @@ function slideChanged(index) {
 }
 
 function setRangeAttributes() {
-  sliderRange.setAttribute("min", "0");
   sliderRange.setAttribute(
     "max",
     multiSlider.elements[multiSlider.maxSlide].position
