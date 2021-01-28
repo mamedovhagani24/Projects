@@ -6,10 +6,10 @@ const postsContainer = document.querySelector(".cases");
 const paginationContainer = document.querySelector(".pagination");
 
 const pageData = {
-  activeTag: 'all', // string
+  activeTag: "all", // string
   activePagination: 0, // number
-  elements: []
-}
+  elements: [],
+};
 
 db.loadPosts()
   .then(prepareData)
@@ -27,7 +27,7 @@ function updateAllElements() {
 function prepareData(postsArr) {
   let counter = 0;
 
-  pageData.elements = postsArr.reduce((arr, curr)=>{
+  pageData.elements = postsArr.reduce((arr, curr) => {
     arr[counter] = arr[counter] ?? [];
 
     if (arr[counter].length < 4) arr[counter].push(curr);
@@ -49,9 +49,9 @@ function renderElementsByPagination() {
   });
 }
 
-function updateTagsElements(){
+function updateTagsElements() {
   document.querySelectorAll(".filters button").forEach((btn) => {
-    if (btn.getAttribute('data-name') === pageData.activeTag) {
+    if (btn.getAttribute("data-name") === pageData.activeTag) {
       btn.classList.add("selected");
     } else {
       btn.classList.remove("selected");
@@ -59,13 +59,19 @@ function updateTagsElements(){
   });
 }
 
-function updatePaginationElements(){
+function updatePaginationElements() {
   const allPaginationButtons = pageData.elements.reduce(
-    (allButtons, currentButton, index) => (allButtons += returnPaginationButton(index)),
+    (allButtons, currentButton, index) =>
+      (allButtons += returnPaginationButton(index)),
     ""
   );
 
-  replacePaginationIntoContainer(allPaginationButtons);
+  replaceElementsIntoContainer(
+    paginationContainer,
+    returnPaginationArrowButtons("left") +
+      allPaginationButtons +
+      returnPaginationArrowButtons("right")
+  );
 }
 
 function tagSearch() {
@@ -86,7 +92,15 @@ function tagSearch() {
 }
 
 function handlePaginationChange() {
-  pageData.activePagination = + this.getAttribute("data-page");
+  let dataPage = this.getAttribute("data-page");
+
+  if (dataPage === 'left') dataPage = --pageData.activePagination;
+  else if (dataPage === 'right') dataPage = ++pageData.activePagination;
+  
+  if (+dataPage < 0) pageData.activePagination = 0;
+  else if (+dataPage >= pageData.elements.length) pageData.activePagination = pageData.elements.length-1;
+  else pageData.activePagination = +dataPage;
+
   renderElementsByPagination();
 }
 
@@ -96,16 +110,12 @@ function renderPosts(allPostsData) {
     ""
   );
 
-  replacePostsIntoContainer(allPostsHTML);
+  replaceElementsIntoContainer(postsContainer, allPostsHTML);
   updateAllElements();
 }
 
-function replacePostsIntoContainer(postsHTML) {
-  postsContainer.innerHTML = postsHTML;
-}
-
-function replacePaginationIntoContainer(paginationHTML) {
-  paginationContainer.innerHTML = paginationHTML;
+function replaceElementsIntoContainer(container, html) {
+  container.innerHTML = html;
 }
 
 function returnHTMLPost(post) {
@@ -115,7 +125,7 @@ function returnHTMLPost(post) {
   </div>
   <div class="cases__item__info">
       <div class="text-content">
-          <h3 class="title-h3">${post.id} • ${post.title}</h3>
+          <h3 class="title-h3">${post.title}</h3>
           <p class="description">${post.description}</p>
       </div>
       <div class="links">
@@ -132,6 +142,14 @@ function returnHTMLPost(post) {
 
 function returnPaginationButton(page) {
   return `<a href="#" data-page="${page}">
-  <div class="pagination__item ${page === pageData.activePagination ? 'page-active' : ''}">${page+1}</div>
-</a>`;
+            <div class="pagination__item ${page === pageData.activePagination ? "page-active" : ""}">${page + 1}</div>
+          </a>`;
+}
+
+function returnPaginationArrowButtons(dir) {
+  return `<a href="#" data-page="${dir}">
+            <div class="pagination__item ${dir}-arrow">
+                <i class="fa fa-chevron-${dir}"></i>
+            </div>
+          </a>`;
 }
