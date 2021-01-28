@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 module.exports = (env, argv) => ({
   entry: {
@@ -33,7 +34,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.scss$/,
@@ -93,6 +94,17 @@ module.exports = (env, argv) => ({
       filename: "css/style.css",
     }),
     new webpack.SourceMapDevToolPlugin(),
+    new FaviconsWebpackPlugin({
+        path: "/",   
+        logo: './src/img/favicon.png',
+        background: "#76c7c0",
+        theme_color: "#76c7c0",
+        icons: {
+          favicons: true,
+          android: true,
+          appleIcon: true,
+        }
+    })
   ],
   devServer: {
     contentBase: path.join(__dirname, "public"),
