@@ -20,7 +20,7 @@ multiSlider.init(function () {
 
 function slideChanged(index) {
   checkButtonsDisabling(index);
-  setRangeValue(index);
+  setRangeValueBySlideIndex(index);
 }
 
 function setRangeAttributes() {
@@ -41,10 +41,10 @@ sliderRange.addEventListener("change", function () {
   const nextSliderId = multiSlider.nextSlideIndexByPosition;
   multiSlider.activeTransition(true);
   multiSlider.setSlide(nextSliderId);
-  setRangeValue(nextSliderId);
+  setRangeValueBySlideIndex(nextSliderId);
 });
 
-function setRangeValue(index) {
+function setRangeValueBySlideIndex(index) {
   sliderRange.value = multiSlider.elements[index].position;
 }
 
