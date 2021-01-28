@@ -95,16 +95,21 @@ module.exports = (env, argv) => ({
     }),
     new webpack.SourceMapDevToolPlugin(),
     new FaviconsWebpackPlugin({
-        path: "/",   
-        logo: './src/img/favicon.png',
-        background: "#76c7c0",
-        theme_color: "#76c7c0",
-        icons: {
-          favicons: true,
-          android: true,
-          appleIcon: true,
-        }
-    })
+      publicPath: "../public/",
+      logo: "./src/img/favicon.png",
+      background: "#76c7c0",
+      theme_color: "#76c7c0",
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        windows: false,
+        yandex: false,
+      },
+    }),
   ],
   devServer: {
     contentBase: path.join(__dirname, "public"),

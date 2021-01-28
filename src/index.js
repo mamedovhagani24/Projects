@@ -11,3 +11,5 @@ import "./img/ruller_bottom.png";
 import "./img/Path.png";
 import "./img/mask.png";
 import "./img/bigmask.png";
+
+import "./img/favicon.png";
