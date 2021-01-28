@@ -31,6 +31,10 @@
       position: relative;
       top: -100%;
       display: flex;
+      padding: {
+        left: 20px;
+        right: 20px;
+      }
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -47,7 +51,7 @@
       font-weight: 900;
       padding: 0 0.3em 0.07em;
       margin-bottom: 10px;
-  
+
       @media screen and (max-width: $media-window--tablet) {
         font-size: 3em;
       }
@@ -64,7 +68,7 @@
       line-height: 1.7;
       color: #fff;
       max-width: 500px;
-  
+
       @media screen and (max-width: $media-window--tablet) {
         font-size: 1em;
       }
